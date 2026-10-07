@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Accessibility - SkillCircle</title>
+
+    <style>
+
+        :root {
+            --green-950: #14382f;
+            --green-900: #173f35;
+            --green-800: #205646;
+            --green-700: #2f7259;
+            --green-50: #f4f8f3;
+            --cream: #fbfaf5;
+            --orange: #e9a65d;
+
+            --radius: 18px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: var(--cream);
+            color: #26352f;
+            line-height: 1.7;
+        }
+
+        header {
+            background: var(--green-950);
+            color: white;
+            padding: 20px;
+        }
+
+        .header-content {
+            max-width: 1000px;
+            margin: auto;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .back-button {
+            text-decoration: none;
+            color: white;
+            background: var(--green-700);
+            padding: 10px 18px;
+            border-radius: 10px;
+        }
+
+        .back-button:hover {
+            background: var(--green-800);
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        h1 {
+            color: var(--green-950);
+            margin-bottom: 8px;
+        }
+
+        .updated {
+            color: #68756f;
+            margin-bottom: 25px;
+        }
+
+        .content {
+            background: white;
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: 0 5px 20px rgba(20, 56, 47, 0.08);
+        }
+
+        h2 {
+            color: var(--green-800);
+            margin-top: 28px;
+            margin-bottom: 10px;
+        }
+
+        h2:first-child {
+            margin-top: 0;
+        }
+
+        p {
+            margin-bottom: 12px;
+        }
+
+        ul {
+            margin: 10px 0 15px 25px;
+        }
+
+        li {
+            margin-bottom: 7px;
+        }
+
+        a {
+            color: var(--green-700);
+        }
+
+        footer {
+            background: var(--green-950);
+            color: white;
+            padding: 25px 20px;
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            max-width: 1000px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .footer-links {
+            margin-top: 12px;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 8px;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .footer-links a {
+                display: inline-block;
+                margin: 5px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <header>
+
+        <div class="header-content">
+
+            <div class="logo">
+                SkillCircle
+            </div>
+
+            <a
+                href="{{ url_for('home') }}"
+                class="back-button"
+            >
+                Back to Home
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <main>
+
+        <h1>Accessibility</h1>
+
+        <p class="updated">
+            Last updated: October 2026
+        </p>
+
+
+        <div class="content">
+
+            <h2>1. Our Accessibility Commitment</h2>
+
+            <p>
+                SkillCircle aims to make its platform accessible and
+                usable for as many people as possible, including people
+                who use assistive technologies.
+            </p>
+
+            <p>
+                We aim to follow widely accepted accessibility practices
+                and accessibility principles, including the principles
+                of the Web Content Accessibility Guidelines (WCAG),
+                where reasonably possible.
+            </p>
+
+
+            <h2>2. Accessible Design</h2>
+
+            <p>
+                We try to design SkillCircle pages so that information,
+                navigation and important actions are easy to understand
+                and use.
+            </p>
+
+            <p>
+                This includes clear headings, readable text, simple
+                navigation, visible buttons and responsive layouts.
+            </p>
+
+
+            <h2>3. Keyboard Navigation</h2>
+
+            <p>
+                Users should be able to navigate important parts of the
+                website using a keyboard without depending only on a mouse.
+            </p>
+
+            <p>
+                We aim to keep interactive elements such as links,
+                buttons and form fields accessible through normal keyboard
+                navigation.
+            </p>
+
+
+            <h2>4. Screen Readers and Assistive Technologies</h2>
+
+            <p>
+                We aim to use meaningful headings, labels and page
+                structures so that screen readers and other assistive
+                technologies can understand the content more easily.
+            </p>
+
+
+            <h2>5. Text, Colour and Contrast</h2>
+
+            <p>
+                SkillCircle uses readable text sizes and sufficient
+                contrast between text and backgrounds wherever possible.
+            </p>
+
+            <p>
+                Important information should not depend only on colour
+                to communicate its meaning.
+            </p>
+
+
+            <h2>6. Images and Alternative Text</h2>
+
+            <p>
+                Meaningful images should have appropriate alternative text
+                so that users who cannot see the image can understand its
+                purpose.
+            </p>
+
+            <p>
+                Decorative images may not require alternative text.
+            </p>
+
+
+            <h2>7. Forms and Labels</h2>
+
+            <p>
+                Forms such as registration, login, profile and skill
+                sharing forms should provide clear labels and instructions.
+            </p>
+
+            <p>
+                Error messages should provide understandable information
+                so users can identify and correct problems.
+            </p>
+
+
+            <h2>8. Mobile Accessibility</h2>
+
+            <p>
+                SkillCircle is designed to work on different screen sizes,
+                including desktop computers, tablets and mobile devices.
+            </p>
+
+            <p>
+                Users should be able to access important content and
+                controls without unnecessary horizontal scrolling.
+            </p>
+
+
+            <h2>9. Videos and Multimedia</h2>
+
+            <p>
+                If SkillCircle provides videos or other multimedia content,
+                we aim to provide accessible controls and suitable
+                alternatives where reasonably possible.
+            </p>
+
+
+            <h2>10. Third-Party Content</h2>
+
+            <p>
+                Some content or services may be provided by third parties.
+                SkillCircle cannot always control the accessibility of
+                third-party websites, tools or services.
+            </p>
+
+            <p>
+                We encourage users to contact the relevant third-party
+                provider when an accessibility problem is caused by an
+                external service.
+            </p>
+
+
+            <h2>11. Known Limitations</h2>
+
+            <p>
+                SkillCircle is a developing platform. Some pages,
+                features or third-party components may not yet provide
+                a fully accessible experience.
+            </p>
+
+            <p>
+                We may improve accessibility as the platform develops and
+                as accessibility issues are identified.
+            </p>
+
+
+            <h2>12. Report an Accessibility Problem</h2>
+
+            <p>
+                If you experience an accessibility problem while using
+                SkillCircle, please report it to us.
+            </p>
+
+            <p>
+                When reporting an issue, please provide:
+            </p>
+
+            <ul>
+                <li>The page or feature where the problem occurred.</li>
+                <li>A description of the accessibility problem.</li>
+                <li>The device or browser being used, if relevant.</li>
+                <li>Any assistive technology involved, if relevant.</li>
+            </ul>
+
+
+            <h2>13. Alternative Access</h2>
+
+            <p>
+                If you are unable to access important information or use
+                an important feature because of an accessibility problem,
+                please contact SkillCircle. We will try to provide a
+                reasonable alternative where possible.
+            </p>
+
+
+            <h2>14. Changes to This Accessibility Statement</h2>
+
+            <p>
+                We may update this Accessibility Statement when the
+                platform, accessibility practices or available features
+                change.
+            </p>
+
+            <p>
+                The updated date at the top of this page will show when
+                the statement was last changed.
+            </p>
+
+
+            <h2>15. Contact</h2>
+
+            <p>
+                If you have an accessibility question, request or
+                complaint, please contact the SkillCircle team through
+                the available contact method on the platform.
+            </p>
+
+        </div>
+
+    </main>
+
+
+    <footer>
+
+        <div class="footer-content">
+
+            <p>
+                &copy; 2026 SkillCircle. All rights reserved.
+            </p>
+
+            <div class="footer-links">
+
+                <a href="{{ url_for('terms') }}">
+                    Terms &amp; Conditions
+                </a>
+
+                <a href="{{ url_for('privacy') }}">
+                    Privacy Policy
+                </a>
+
+                <a href="{{ url_for('community_guidelines') }}">
+                    Community Guidelines
+                </a>
+
+                <a href="{{ url_for('safety_tips') }}">
+                    Safety Tips
+                </a>
+
+                <a href="{{ url_for('cookie_policy') }}">
+                    Cookie Policy
+                </a>
+
+                <a href="{{ url_for('accessibility') }}">
+                    Accessibility
+                </a>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+</body>
+
+</html>

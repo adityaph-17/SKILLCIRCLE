@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Community Guidelines - SkillCircle</title>
+<style>
+    :root {
+        --green-950: #14382f;
+        --green-900: #173f35;
+        --green-800: #205646;
+        --green-700: #2f7259;
+        --green-50: #f4f8f3;
+        --cream: #fbfaf5;
+        --text: #26352f;
+        --muted: #68756f;
+        --border: #dce5df;
+        --radius: 18px;
+    }
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    body {
+        font-family: Arial, sans-serif;
+        background: var(--cream);
+        color: var(--text);
+        line-height: 1.7;
+    }
+    .container {
+        width: 90%;
+        max-width: 1000px;
+        margin: auto;
+    }
+    header {
+        background: var(--green-900);
+        color: white;
+        padding: 22px 0;
+    }
+    .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+    }
+    .logo {
+        font-size: 24px;
+        font-weight: bold;
+    }
+    .back-link {
+        color: white;
+        text-decoration: none;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        padding: 8px 16px;
+        border-radius: 8px;
+    }
+    .back-link:hover {
+        background: var(--green-800);
+    }
+    main {
+        padding: 50px 0;
+    }
+    .page-header {
+        margin-bottom: 35px;
+    }
+    .page-header h1 {
+        color: var(--green-950);
+        font-size: 36px;
+        margin-bottom: 10px;
+    }
+    .page-header p {
+        color: var(--muted);
+    }
+    .updated {
+        font-size: 14px;
+        margin-top: 5px;
+    }
+    .content {
+        background: white;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 35px;
+        box-shadow: 0 4px 15px rgba(20, 56, 47, 0.05);
+    }
+    section {
+        margin-bottom: 32px;
+    }
+    section:last-child {
+        margin-bottom: 0;
+    }
+    h2 {
+        color: var(--green-800);
+        font-size: 21px;
+        margin-bottom: 10px;
+    }
+    p {
+        margin-bottom: 10px;
+    }
+    ul {
+        margin: 10px 0 10px 25px;
+    }
+    li {
+        margin-bottom: 7px;
+    }
+    .notice {
+        background: var(--green-50);
+        border-left: 4px solid var(--green-700);
+        padding: 15px 18px;
+        margin: 20px 0;
+        border-radius: 8px;
+    }
+    footer {
+        background: var(--green-950);
+        color: white;
+        padding: 25px 0;
+        margin-top: 20px;
+        text-align: center;
+    }
+    footer a {
+        color: white;
+        text-decoration: none;
+        margin: 0 8px;
+    }
+    footer a:hover {
+        text-decoration: underline;
+    }
+    .copyright {
+        margin-top: 12px;
+        font-size: 14px;
+        opacity: 0.8;
+    }
+    @media (max-width: 700px) {
+        .header-content {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .page-header h1 {
+            font-size: 30px;
+        }
+        .content {
+            padding: 22px;
+        }
+        main {
+            padding: 35px 0;
+        }
+    }
+</style>
+</head>
+<body>
+<header>
+    <div class="container header-content">
+        <div class="logo">
+            SkillCircle
+        </div>
+        <a href="{{ url_for('home') }}" class="back-link">
+            Back to Home
+        </a>
+    </div>
+</header>
+<main>
+    <div class="container">
+        <div class="page-header">
+            <h1>Community Guidelines</h1>
+            <p>
+                Guidelines for creating a respectful, helpful, and safe
+                SkillCircle community.
+            </p>
+            <p class="updated">
+                Last updated: October 2026
+            </p>
+        </div>
+        <div class="content">
+            <section>
+                <h2>1. Our Community</h2>
+                <p>
+                    SkillCircle is built around people sharing knowledge,
+                    learning new skills, and helping others in their community.
+                </p>
+                <p>
+                    Every member is expected to treat other users with
+                    respect and behave responsibly.
+                </p>
+            </section>
+            <section>
+                <h2>2. Be Respectful</h2>
+                <p>
+                    Communicate with other members politely and respectfully.
+                </p>
+                <ul>
+                    <li>Respect different opinions and skill levels.</li>
+                    <li>Do not insult or humiliate other users.</li>
+                    <li>Do not threaten or intimidate anyone.</li>
+                    <li>Do not use abusive or hateful language.</li>
+                    <li>Respect personal boundaries.</li>
+                </ul>
+            </section>
+            <section>
+                <h2>3. Be Honest</h2>
+                <p>
+                    Users should provide truthful information about themselves
+                    and the skills they offer.
+                </p>
+                <ul>
+                    <li>Do not pretend to have skills or qualifications you do not have.</li>
+                    <li>Do not impersonate another person.</li>
+                    <li>Do not create fake profiles.</li>
+                    <li>Do not provide deliberately misleading information.</li>
+                </ul>
+            </section>
+            <section>
+                <h2>4. Share Skills Responsibly</h2>
+                <p>
+                    When teaching or sharing a skill, provide information
+                    honestly and responsibly.
+                </p>
+                <p>
+                    If a skill requires professional qualifications,
+                    certification, supervision, or specialist knowledge,
+                    users should clearly communicate their level of experience.
+                </p>
+                <div class="notice">
+                    SkillCircle does not verify every user's professional
+                    qualifications. Users should independently verify
+                    qualifications when they matter.
+                </div>
+            </section>
+            <section>
+                <h2>5. Keep Communication Appropriate</h2>
+                <p>
+                    Communication on SkillCircle should remain relevant
+                    to learning, teaching, skill sharing, and community
+                    interaction.
+                </p>
+                <ul>
+                    <li>Do not send unwanted messages repeatedly.</li>
+                    <li>Do not pressure another user to respond.</li>
+                    <li>Do not send sexually inappropriate messages.</li>
+                    <li>Do not send threatening messages.</li>
+                    <li>Do not repeatedly contact someone after they ask you to stop.</li>
+                </ul>
+            </section>
+            <section>
+                <h2>6. No Harassment or Bullying</h2>
+                <p>
+                    Harassment, bullying, stalking, threats, and intimidation
+                    are not allowed.
+                </p>
+                <p>
+                    This includes behaviour that happens through messages,
+                    profiles, comments, requests, or offline interactions
+                    that started through SkillCircle.
+                </p>
+            </section>
+            <section>
+                <h2>7. No Hate or Discrimination</h2>
+                <p>
+                    SkillCircle does not allow content or behaviour that
+                    promotes hatred, discrimination, or violence against
+                    people or groups.
+                </p>
+                <p>
+                    Users should not target others based on personal
+                    characteristics or background.
+                </p>
+            </section>
+            <section>
+                <h2>8. No Scams or Fraud</h2>
+                <p>
+                    SkillCircle must not be used to deceive or financially
+                    exploit other users.
+                </p>
+                <ul>
+                    <li>Do not request money through fraudulent claims.</li>
+                    <li>Do not create fake opportunities.</li>
+                    <li>Do not use another person's identity.</li>
+                    <li>Do not share misleading links intended to steal information.</li>
+                    <li>Do not attempt to obtain passwords or account details.</li>
+                </ul>
+            </section>
+            <section>
+                <h2>9. Protect Personal Information</h2>
+                <p>
+                    Respect the privacy of other members.
+                </p>
+                <ul>
+                    <li>Do not publish another person's private information.</li>
+                    <li>Do not share private messages without appropriate permission.</li>
+                    <li>Do not ask users for unnecessary sensitive information.</li>
+                    <li>Do not attempt to collect personal information from users.</li>
+                </ul>
+            </section>
+            <section>
+                <h2>10. Appropriate Content</h2>
+                <p>
+                    Content shared on SkillCircle should be suitable for
+                    a community learning platform.
+                </p>
+                <p>
+                    Do not upload or share:
+                </p>
+                <ul>
+                    <li>Illegal content.</li>
+                    <li>Malware or harmful files.</li>
+                    <li>Explicit sexual content.</li>
+                    <li>Content promoting violence or serious harm.</li>
+                    <li>Content intended to harass or threaten others.</li>
+                    <li>Copyrighted material that you do not have permission to share.</li>
+                    <li>Spam or misleading promotional content.</li>
+                </ul>
+            </section>
+            <section>
+                <h2>11. Advertising and Promotion</h2>
+                <p>
+                    SkillCircle should not be used for excessive advertising,
+                    spam, or unsolicited commercial promotion.
+                </p>
+                <p>
+                    If promotional features are introduced in the future,
+                    they may be subject to separate rules.
+                </p>
+            </section>
+            <section>
+                <h2>12. Respect Boundaries</h2>
+                <p>
+                    Every user has the right to decide who they communicate
+                    or interact with.
+                </p>
+                <p>
+                    If another user declines a request or asks you to stop
+                    contacting them, respect that decision.
+                </p>
+            </section>
+            <section>
+                <h2>13. Reporting Problems</h2>
+                <p>
+                    If you see behaviour or content that violates these
+                    guidelines, report it through the available reporting
+                    feature or contact the SkillCircle administration.
+                </p>
+                <p>
+                    When making a report, provide accurate information and
+                    enough details for the issue to be reviewed.
+                </p>
+            </section>
+            <section>
+                <h2>14. Moderation</h2>
+                <p>
+                    SkillCircle may review reports and take appropriate
+                    action when these guidelines are violated.
+                </p>
+                <p>
+                    Actions may include:
+                </p>
+                <ul>
+                    <li>Removing inappropriate content.</li>
+                    <li>Restricting certain account features.</li>
+                    <li>Issuing warnings.</li>
+                    <li>Temporarily suspending an account.</li>
+                    <li>Permanently terminating an account.</li>
+                </ul>
+            </section>
+            <section>
+                <h2>15. False Reports</h2>
+                <p>
+                    Reporting a genuine concern is encouraged. However,
+                    users should not intentionally submit false reports
+                    to harass, punish, or target another member.
+                </p>
+            </section>
+            <section>
+                <h2>16. Safety Comes First</h2>
+                <p>
+                    SkillCircle encourages users to take reasonable
+                    precautions when communicating or meeting people
+                    they do not know.
+                </p>
+                <p>
+                    Please read our
+                    <a href="{{ url_for('safety_tips') }}"><strong>Safety Tips</strong></a>
+                    before arranging an offline meeting with another user.
+                </p>
+            </section>
+            <section>
+                <h2>17. Updates to These Guidelines</h2>
+                <p>
+                    These Community Guidelines may be updated as SkillCircle
+                    develops and new safety or community requirements arise.
+                </p>
+                <p>
+                    The latest version will always be available on this page.
+                </p>
+            </section>
+            <section>
+                <h2>18. Contact</h2>
+                <p>
+                    If you have questions about these guidelines or need
+                    to report a serious community issue, contact the
+                    SkillCircle administration through the contact method
+                    provided on the platform.
+                </p>
+            </section>
+        </div>
+    </div>
+</main>
+<footer>
+    <div class="container">
+        <div>
+            <a href="{{ url_for('terms') }}">
+                Terms & Conditions
+            </a>
+            <a href="{{ url_for('privacy') }}">
+                Privacy Policy
+            </a>
+            <a href="{{ url_for('community_guidelines') }}">
+                Community Guidelines
+            </a>
+            <a href="{{ url_for('safety_tips') }}">
+                Safety Tips
+            </a>
+            <a href="{{ url_for('cookie_policy') }}">
+                Cookie Policy
+            </a>
+            <a href="{{ url_for('accessibility') }}">
+                Accessibility
+            </a>
+        </div>
+        <div class="copyright">
+            © 2026 SkillCircle. All rights reserved.
+        </div>
+    </div>
+</footer>
+</body>
+</html>

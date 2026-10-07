@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Community | SkillCircle
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='user/community.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         NAVBAR
+    ====================================================== -->
+
+    {% include 'user/navbar.html' %}
+
+
+
+    <main class="community-page">
+
+
+        <!-- =================================================
+             HERO
+        ================================================== -->
+
+        <section class="community-hero">
+
+            <div class="community-hero-content">
+
+                <span class="community-label">
+                    COMMUNITY
+                </span>
+
+                <h1>
+                    Find people. Learn skills. Share what you know.
+                </h1>
+
+                <p>
+                    Discover people in the SkillCircle community
+                    who can teach you useful skills and learn from
+                    people around you.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             FLASH MESSAGES
+        ================================================== -->
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+
+            {% if messages %}
+
+                <div class="community-flash-container">
+
+                    {% for category, message in messages %}
+
+                        <div class="community-flash {{ category }}">
+                            {{ message }}
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% endif %}
+
+        {% endwith %}
+
+
+
+        <!-- =================================================
+             SEARCH AND FILTERS
+        ================================================== -->
+
+        <section class="community-search-section">
+
+            <form
+                method="GET"
+                action="{{ url_for('community') }}"
+                class="community-search-form"
+            >
+
+
+                <!-- LOCATION -->
+
+                <div class="search-field">
+
+                    <label for="location_scope">
+                        Location
+                    </label>
+
+                    <select
+                        id="location_scope"
+                        name="location_scope"
+                    >
+
+                        <option
+                            value="community"
+                            {% if selected_location_scope == "community" %}
+                                selected
+                            {% endif %}
+                        >
+                            My Community
+                            {% if current_city %}
+                                — {{ current_city }}
+                            {% endif %}
+                        </option>
+
+
+                        <option
+                            value="all"
+                            {% if selected_location_scope == "all" %}
+                                selected
+                            {% endif %}
+                        >
+                            All Users
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- SEARCH -->
+
+                <div class="search-field">
+
+                    <label for="search">
+                        Search
+                    </label>
+
+                    <input
+                        type="text"
+                        id="search"
+                        name="search"
+                        value="{{ search }}"
+                        placeholder="Search for a skill or person..."
+                    >
+
+                </div>
+
+
+
+                <!-- CATEGORY -->
+
+                <div class="search-field">
+
+                    <label for="category">
+                        Category
+                    </label>
+
+                    <select
+                        id="category"
+                        name="category"
+                    >
+
+                        <option value="">
+                            All categories
+                        </option>
+
+
+                        {% for item in categories %}
+
+                            <option
+                                value="{{ item.category }}"
+                                {% if selected_category == item.category %}
+                                    selected
+                                {% endif %}
+                            >
+                                {{ item.category }}
+                            </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- LEARNING MODE -->
+
+                <div class="search-field">
+
+                    <label for="learning_mode">
+                        Learning mode
+                    </label>
+
+                    <select
+                        id="learning_mode"
+                        name="learning_mode"
+                    >
+
+                        <option value="">
+                            All modes
+                        </option>
+
+
+                        <option
+                            value="Online"
+                            {% if selected_learning_mode == "Online" %}
+                                selected
+                            {% endif %}
+                        >
+                            Online
+                        </option>
+
+
+                        <option
+                            value="Offline"
+                            {% if selected_learning_mode == "Offline" %}
+                                selected
+                            {% endif %}
+                        >
+                            Offline
+                        </option>
+
+
+                        <option
+                            value="Both"
+                            {% if selected_learning_mode == "Both" %}
+                                selected
+                            {% endif %}
+                        >
+                            Online & Offline
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <div class="search-button-wrapper">
+
+                    <button
+                        type="submit"
+                        class="community-search-button"
+                    >
+                        Search
+                    </button>
+
+                </div>
+
+            </form>
+
+
+            <!-- CURRENT LOCATION MESSAGE -->
+
+            {% if selected_location_scope == "community" %}
+
+                {% if current_city %}
+
+                    <p class="community-filter-note">
+                        Showing people and skills from
+                        <strong>{{ current_city }}</strong>.
+                    </p>
+
+                {% else %}
+
+                    <p class="community-filter-note community-filter-warning">
+                        Add your city to your profile to discover
+                        people in your community.
+                    </p>
+
+                {% endif %}
+
+            {% else %}
+
+                <p class="community-filter-note">
+                    Showing people and skills from all communities.
+                </p>
+
+            {% endif %}
+
+        </section>
+
+
+
+        <!-- =================================================
+             AVAILABLE SKILLS
+        ================================================== -->
+
+        <section class="community-section">
+
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        DISCOVER SKILLS
+                    </span>
+
+                    <h2>
+                        Skills available in the community
+                    </h2>
+
+                </div>
+
+
+                <span class="result-count">
+
+                    {{ available_skills|length }}
+
+                    {% if available_skills|length == 1 %}
+                        skill
+                    {% else %}
+                        skills
+                    {% endif %}
+
+                </span>
+
+            </div>
+
+
+
+            {% if available_skills %}
+
+                <div class="skill-discovery-grid">
+
+
+                    {% for skill in available_skills %}
+
+                        <a
+                            href="{{ url_for(
+                                'community',
+                                search=skill.skill_name,
+                                location_scope=selected_location_scope
+                            ) }}"
+                            class="skill-discovery-card"
+                        >
+
+
+                            <div class="skill-card-top">
+
+                                <span class="skill-category">
+                                    {{ skill.category }}
+                                </span>
+
+                                <span class="skill-arrow">
+                                    →
+                                </span>
+
+                            </div>
+
+
+                            <h3>
+                                {{ skill.skill_name }}
+                            </h3>
+
+
+                            <p>
+
+                                {% if skill.description %}
+
+                                    {{ skill.description }}
+
+                                {% else %}
+
+                                    Learn this skill from people
+                                    in the community.
+
+                                {% endif %}
+
+                            </p>
+
+
+                            <div class="teacher-count">
+
+                                {{ skill.teacher_count }}
+
+                                {% if skill.teacher_count == 1 %}
+
+                                    person teaches this
+
+                                {% else %}
+
+                                    people teach this
+
+                                {% endif %}
+
+                            </div>
+
+
+                        </a>
+
+                    {% endfor %}
+
+
+                </div>
+
+
+            {% else %}
+
+
+                <div class="empty-community">
+
+                    <div class="empty-icon">
+                        ◌
+                    </div>
+
+                    <h3>
+                        No skills found
+                    </h3>
+
+                    <p>
+                        There are currently no skills that
+                        match your search and location filters.
+                    </p>
+
+                </div>
+
+
+            {% endif %}
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             PEOPLE
+        ================================================== -->
+
+        <section class="community-section">
+
+
+            <div class="section-heading">
+
+
+                <div>
+
+                    <span class="section-label">
+                        FIND PEOPLE
+                    </span>
+
+                    <h2>
+                        People you can learn from
+                    </h2>
+
+                </div>
+
+
+                <span class="result-count">
+
+                    {{ people|length }}
+
+                    {% if people|length == 1 %}
+                        result
+                    {% else %}
+                        results
+                    {% endif %}
+
+                </span>
+
+
+            </div>
+
+
+
+            {% if people %}
+
+
+                <div class="people-grid">
+
+
+                    {% for person in people %}
+
+
+                        <article class="person-card">
+
+
+                            <!-- PERSON HEADER -->
+
+                            <div class="person-card-header">
+
+
+                                <div class="person-avatar">
+                                    {{ person.full_name[0]|upper }}
+                                </div>
+
+
+                                <div>
+
+                                    <h3>
+                                        {{ person.full_name }}
+                                    </h3>
+
+
+                                    {% if person.location_area %}
+
+                                        <p class="person-location">
+                                            {{ person.location_area }}
+                                            {% if person.city %}
+                                                · {{ person.city }}
+                                            {% endif %}
+                                        </p>
+
+                                    {% elif person.city %}
+
+                                        <p class="person-location">
+                                            {{ person.city }}
+                                        </p>
+
+                                    {% else %}
+
+                                        <p class="person-location">
+                                            Location not added
+                                        </p>
+
+                                    {% endif %}
+
+                                </div>
+
+
+                            </div>
+
+
+
+                            <!-- SKILL COUNT -->
+
+                            <div class="person-skills-summary">
+
+
+                                <div>
+
+                                    <span class="person-skills-label">
+                                        CAN TEACH
+                                    </span>
+
+                                    <strong>
+                                        {{ person.teaching_skill_count }}
+
+                                        {% if person.teaching_skill_count == 1 %}
+                                            skill
+                                        {% else %}
+                                            skills
+                                        {% endif %}
+                                    </strong>
+
+                                </div>
+
+
+                                <span class="skill-summary-arrow">
+                                    →
+                                </span>
+
+
+                            </div>
+
+
+
+                            <!-- PERSON DETAILS -->
+
+                            <div class="person-details">
+
+
+                                <div class="detail-item">
+
+                                    <span class="detail-label">
+                                        Mode
+                                    </span>
+
+
+                                    <span class="detail-value">
+
+                                        {% if person.learning_mode %}
+
+                                            {{ person.learning_mode }}
+
+                                        {% else %}
+
+                                            Not specified
+
+                                        {% endif %}
+
+                                    </span>
+
+                                </div>
+
+
+
+                                <div class="detail-item">
+
+                                    <span class="detail-label">
+                                        Availability
+                                    </span>
+
+
+                                    <span class="detail-value">
+
+                                        {% if person.availability %}
+
+                                            {{ person.availability }}
+
+                                        {% else %}
+
+                                            Not specified
+
+                                        {% endif %}
+
+                                    </span>
+
+                                </div>
+
+
+                            </div>
+
+
+
+                            <!-- VIEW PROFILE -->
+
+                            <a
+                                href="{{ url_for(
+                                    'public_profile',
+                                    user_id=person.user_id
+                                ) }}"
+                                class="view-profile-button"
+                            >
+                                View Profile
+                            </a>
+
+
+                        </article>
+
+
+                    {% endfor %}
+
+
+                </div>
+
+
+            {% else %}
+
+
+                <div class="empty-community">
+
+                    <div class="empty-icon">
+                        ◌
+                    </div>
+
+                    <h3>
+                        No people found
+                    </h3>
+
+                    <p>
+                        Try changing your search, location,
+                        or learning mode.
+                    </p>
+
+                </div>
+
+
+            {% endif %}
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="community-footer">
+
+        <p>
+            SkillCircle · Learn together. Grow together.
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>

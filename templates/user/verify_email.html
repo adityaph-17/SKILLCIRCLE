@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Verify Email | SkillCircle</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='user/register.css') }}">
+</head>
+
+<body>
+
+    <main class="register-page">
+
+        <section class="register-form-section">
+
+            <div class="register-form-card">
+
+                <div class="form-heading">
+
+                    <p class="form-step">
+                        EMAIL VERIFICATION
+                    </p>
+
+                    <h2>Verify your email</h2>
+
+                    <p>
+                        We sent a 6-digit verification code to your email address.
+                        Enter it below to verify your account.
+                    </p>
+
+                </div>
+
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <div class="flash-messages">
+                            {% for category, message in messages %}
+                                <div class="flash-message {{ category }}">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+
+                <form method="POST" class="register-form">
+
+                    <div class="form-group">
+
+                        <label for="otp">
+                            Verification Code
+                        </label>
+
+                        <input
+                            type="text"
+                            id="otp"
+                            name="otp"
+                            placeholder="Enter 6-digit code"
+                            inputmode="numeric"
+                            maxlength="6"
+                            autocomplete="one-time-code"
+                            required
+                        >
+
+                    </div>
+
+                    <button type="submit" class="register-btn">
+                        Verify Email
+                        <span class="button-arrow">→</span>
+                    </button>
+
+                </form>
+
+                <a href="{{ url_for('register') }}"
+                   class="login-btn"
+                   style="margin-top: 15px;">
+                    Back to Registration
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+</html>

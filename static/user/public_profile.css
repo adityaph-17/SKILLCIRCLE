@@ -1,0 +1,773 @@
+/* =========================================================
+   SKILLCIRCLE - PUBLIC PROFILE
+   Same visual language as the main SkillCircle website
+   ========================================================= */
+
+:root {
+    --green-950: #14382f;
+    --green-900: #173f35;
+    --green-800: #205646;
+    --green-700: #2f7259;
+    --green-100: #e6f2e9;
+    --green-50: #f4f8f3;
+
+    --cream: #fbfaf5;
+    --ink: #20302b;
+    --muted: #66736d;
+    --line: #e1e8e1;
+    --white: #ffffff;
+
+    --orange: #e9a65d;
+
+    --radius: 18px;
+    --shadow: 0 18px 48px rgba(24, 56, 44, .10);
+}
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+
+    background: var(--cream);
+    color: var(--ink);
+
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    -webkit-font-smoothing: antialiased;
+}
+
+
+/* =========================================================
+   NAVBAR
+   ========================================================= */
+
+.public-profile-navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    background: rgba(255, 255, 255, .94);
+
+    border-bottom: 1px solid var(--line);
+
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+
+.public-profile-nav-container {
+    max-width: 1180px;
+
+    min-height: 76px;
+
+    margin: 0 auto;
+    padding: 0 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 30px;
+}
+
+
+/* Brand */
+
+.public-profile-brand {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    color: var(--green-950);
+
+    text-decoration: none;
+
+    font-size: 20px;
+    font-weight: 750;
+}
+
+.public-profile-brand-mark {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: var(--green-900);
+    color: var(--white);
+
+    font-size: 19px;
+    font-weight: 700;
+}
+
+
+/* Navigation */
+
+.public-profile-nav-links {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+}
+
+.public-profile-nav-links a {
+    padding: 10px 13px;
+
+    border-radius: 10px;
+
+    color: var(--muted);
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    transition:
+        background .2s ease,
+        color .2s ease;
+}
+
+.public-profile-nav-links a:hover {
+    background: var(--green-50);
+    color: var(--green-800);
+}
+
+
+/* =========================================================
+   MAIN PAGE
+   ========================================================= */
+
+.public-profile-page {
+    max-width: 1080px;
+
+    margin: 0 auto;
+
+    padding: 46px 24px 80px;
+}
+
+
+/* =========================================================
+   PROFILE HERO
+   ========================================================= */
+
+.public-profile-header {
+    position: relative;
+
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+
+    gap: 26px;
+
+    padding: 42px 44px;
+
+    border-radius: 26px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--green-950),
+            var(--green-800)
+        );
+
+    color: var(--white);
+
+    box-shadow: var(--shadow);
+}
+
+
+/* Soft decorative circle */
+
+.public-profile-header::after {
+    content: "";
+
+    position: absolute;
+
+    width: 240px;
+    height: 240px;
+
+    right: -90px;
+    top: -110px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, .06);
+}
+
+
+/* Avatar */
+
+.public-profile-avatar {
+    position: relative;
+    z-index: 1;
+
+    width: 92px;
+    height: 92px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 27px;
+
+    background: rgba(255, 255, 255, .14);
+
+    border: 1px solid rgba(255, 255, 255, .20);
+
+    color: var(--white);
+
+    font-size: 36px;
+    font-weight: 800;
+
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, .10);
+}
+
+
+/* Header content */
+
+.public-profile-main-info {
+    position: relative;
+    z-index: 1;
+}
+
+.public-profile-label {
+    display: inline-block;
+
+    margin-bottom: 9px;
+
+    color: #d6e9dc;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+.public-profile-main-info h1 {
+    margin: 0;
+
+    color: var(--white);
+
+    font-size: clamp(30px, 4vw, 42px);
+
+    line-height: 1.1;
+
+    letter-spacing: -1px;
+}
+
+.public-profile-location {
+    margin: 10px 0 0;
+
+    color: #dce9e1;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   CONTENT INTRO
+   ========================================================= */
+
+.public-profile-content {
+    margin-top: 26px;
+
+    display: grid;
+
+    grid-template-columns: 1.5fr 1fr;
+
+    gap: 20px;
+}
+
+
+/* About */
+
+.public-profile-about,
+.profile-detail-card {
+    background: var(--white);
+
+    border: 1px solid var(--line);
+
+    border-radius: var(--radius);
+
+    box-shadow:
+        0 8px 26px rgba(24, 56, 44, .06);
+}
+
+.public-profile-about {
+    padding: 28px;
+}
+
+
+/* Section heading */
+
+.profile-section-heading {
+    margin-bottom: 20px;
+}
+
+.profile-section-heading > span {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: var(--green-700);
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 1.4px;
+}
+
+.profile-section-heading h2 {
+    margin: 0;
+
+    color: var(--green-950);
+
+    font-size: 25px;
+
+    line-height: 1.2;
+
+    letter-spacing: -.5px;
+}
+
+.profile-bio {
+    margin: 0;
+
+    color: var(--muted);
+
+    font-size: 14px;
+
+    line-height: 1.75;
+}
+
+.profile-empty-text {
+    margin: 0;
+
+    color: var(--muted);
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   PROFILE DETAILS
+   ========================================================= */
+
+.public-profile-details {
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 20px;
+}
+
+.profile-detail-card {
+    padding: 24px;
+}
+
+.profile-detail-card span {
+    display: block;
+
+    margin-bottom: 9px;
+
+    color: var(--muted);
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.profile-detail-card strong {
+    color: var(--green-900);
+
+    font-size: 16px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   SKILL SECTIONS
+   ========================================================= */
+
+.public-profile-section {
+    margin-top: 54px;
+}
+
+.public-profile-section > .profile-section-heading {
+    margin-bottom: 23px;
+}
+
+
+/* =========================================================
+   SKILL GRID
+   ========================================================= */
+
+.public-skill-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 20px;
+}
+
+
+/* =========================================================
+   SKILL CARD
+   ========================================================= */
+
+.public-skill-card {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    min-height: 280px;
+
+    padding: 24px;
+
+    background: var(--white);
+
+    border: 1px solid var(--line);
+
+    border-radius: var(--radius);
+
+    box-shadow:
+        0 8px 26px rgba(24, 56, 44, .06);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        border-color .2s ease;
+}
+
+.public-skill-card:hover {
+    transform: translateY(-3px);
+
+    border-color: #c9d9ce;
+
+    box-shadow: var(--shadow);
+}
+
+
+/* Category */
+
+.public-skill-category {
+    display: inline-flex;
+    align-self: flex-start;
+
+    padding: 6px 10px;
+
+    border-radius: 8px;
+
+    background: var(--green-100);
+    color: var(--green-800);
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: .6px;
+    text-transform: uppercase;
+}
+
+
+/* Skill name */
+
+.public-skill-card h3 {
+    margin: 17px 0 9px;
+
+    color: var(--green-950);
+
+    font-size: 21px;
+
+    line-height: 1.2;
+}
+
+
+/* Description */
+
+.public-skill-card > p {
+    margin: 0;
+
+    color: var(--muted);
+
+    font-size: 13px;
+
+    line-height: 1.65;
+}
+
+
+/* =========================================================
+   SKILL LEVEL
+   ========================================================= */
+
+.public-skill-level {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
+
+    margin-top: auto;
+    padding-top: 20px;
+}
+
+.public-skill-level span {
+    color: var(--muted);
+
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.public-skill-level strong {
+    padding: 6px 10px;
+
+    border-radius: 8px;
+
+    background: var(--green-50);
+
+    color: var(--green-800);
+
+    font-size: 11px;
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   REQUEST BUTTON
+   ========================================================= */
+
+.request-learn-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    min-height: 44px;
+
+    margin-top: 17px;
+
+    border-radius: 11px;
+
+    background: var(--green-900);
+    color: var(--white);
+
+    text-decoration: none;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    transition:
+        background .2s ease,
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+.request-learn-button:hover {
+    background: var(--green-700);
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 8px 18px rgba(24, 56, 44, .14);
+}
+
+
+/* =========================================================
+   LEARNING SKILL CARD
+   ========================================================= */
+
+.learning-card {
+    min-height: 245px;
+}
+
+.learning-card .public-skill-level {
+    padding-top: 25px;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+
+.public-empty-card {
+    padding: 45px 25px;
+
+    text-align: center;
+
+    background: var(--white);
+
+    border: 1px solid var(--line);
+
+    border-radius: var(--radius);
+
+    box-shadow:
+        0 8px 26px rgba(24, 56, 44, .05);
+}
+
+.public-empty-card h3 {
+    margin: 0;
+
+    color: var(--green-950);
+
+    font-size: 18px;
+}
+
+.public-empty-card p {
+    max-width: 450px;
+
+    margin: 9px auto 0;
+
+    color: var(--muted);
+
+    font-size: 13px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.public-profile-footer {
+    padding: 25px;
+
+    border-top: 1px solid var(--line);
+
+    background: var(--white);
+
+    text-align: center;
+}
+
+.public-profile-footer p {
+    margin: 0;
+
+    color: var(--muted);
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .public-profile-content {
+        grid-template-columns: 1fr;
+    }
+
+    .public-skill-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+@media (max-width: 720px) {
+
+    .public-profile-nav-container {
+        min-height: auto;
+
+        padding-top: 14px;
+        padding-bottom: 14px;
+
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .public-profile-nav-links {
+        flex-wrap: wrap;
+    }
+
+    .public-profile-nav-links a {
+        flex: 1;
+
+        text-align: center;
+    }
+
+    .public-profile-page {
+        padding: 30px 16px 60px;
+    }
+
+    .public-profile-header {
+        padding: 32px 25px;
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        border-radius: 22px;
+    }
+
+    .public-profile-avatar {
+        width: 76px;
+        height: 76px;
+
+        border-radius: 22px;
+
+        font-size: 30px;
+    }
+
+    .public-profile-main-info h1 {
+        font-size: 32px;
+    }
+
+    .public-skill-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+    .public-profile-nav-links {
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .public-profile-about {
+        padding: 22px;
+    }
+
+    .profile-detail-card {
+        padding: 21px;
+    }
+
+    .public-skill-card {
+        padding: 21px;
+    }
+
+}

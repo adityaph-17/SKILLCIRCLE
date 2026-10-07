@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Share what you know, learn something new, and connect with people in your neighbourhood.">
+  <meta name="theme-color" content="#173f35">
+  <title>SkillCircle — Share Skills, Grow Together</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="navbar container" aria-label="Main navigation">
+      <a class="brand" href="#home" aria-label="SkillCircle home">
+        <span class="brand-mark" aria-hidden="true">S</span>
+        <span>Skill<span class="brand-accent">Circle</span></span>
+      </a>
+
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links"
+        aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+
+      <div class="nav-links" id="nav-links">
+        <a href="#home">Home</a>
+        <a href="#explore">Explore skills</a>
+        <a href="#how-it-works">How it works</a>
+        <a href="#about">About</a>
+      </div>
+      <div class="nav-actions">
+        <a class="login-link" href="{{ url_for('login') }}">Log in</a>
+        <a class="button button-small" href="{{ url_for('register') }}">Join the community</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero section" id="home">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="eyebrow-dot"></span> Learn locally. Share freely.</p>
+          <h1>Everyone knows something.<br><span>Everyone can learn.</span></h1>
+          <p class="hero-description">
+            SkillCircle helps neighbours teach what they know and learn what they want.
+            Find people nearby, exchange knowledge, and grow together—one skill at a time.
+          </p>
+
+          <form class="search-bar" action="#explore" method="get" role="search">
+            <span class="search-icon" aria-hidden="true">⌕</span>
+            <label class="visually-hidden" for="skill-search">What would you like to learn?</label>
+            <input id="skill-search" name="skill" type="search" placeholder="What would you like to learn?">
+            <button class="button" type="submit">Explore skills <span aria-hidden="true">→</span></button>
+          </form>
+          <p class="search-note">From coding and languages to music, cooking, and everyday skills.</p>
+
+          <div class="hero-trust">
+            <div class="avatar-stack" aria-hidden="true"><span>A</span><span>M</span><span>R</span><span>+</span></div>
+            <p><strong>Built around community</strong><br><span>Teach a skill. Learn a skill. Meet your people.</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-label="Illustration of community members sharing skills">
+          <div class="visual-orbit orbit-one"></div>
+          <div class="visual-orbit orbit-two"></div>
+          <div class="visual-card card-code">
+            <span class="visual-icon">⌘</span><span><strong>Web development</strong><small>Learn by doing</small></span>
+          </div>
+          <div class="visual-card card-music">
+            <span class="visual-icon">♫</span><span><strong>Music & arts</strong><small>Share your talent</small></span>
+          </div>
+          <div class="visual-card card-language">
+            <span class="visual-icon">Aa</span><span><strong>Languages</strong><small>Practice together</small></span>
+          </div>
+          <div class="people-illustration">
+            <div class="sun-shape"></div>
+            <div class="person person-left"><span class="head"></span><span class="body"></span><span
+                class="arm"></span></div>
+            <div class="person person-right"><span class="head"></span><span class="body"></span><span
+                class="arm"></span></div>
+            <div class="book book-one"></div>
+            <div class="book book-two"></div>
+            <div class="plant"><i></i><i></i><i></i><b></b></div>
+            <div class="spark spark-one">✦</div>
+            <div class="spark spark-two">✦</div>
+          </div>
+          <div class="floating-note"><span>✳</span> Knowledge grows when shared</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="benefits-strip" aria-label="Platform benefits">
+      <div class="container benefits-grid">
+        <div><span class="benefit-icon">◎</span><span><strong>Community-first</strong><small>Learn with people around
+              you</small></span></div>
+        <div><span class="benefit-icon">↔</span><span><strong>Give and receive</strong><small>Be a learner and a
+              teacher</small></span></div>
+        <div><span class="benefit-icon">✦</span><span><strong>P2P-support</strong><small>Peer Support
+              learning</small></span></div>
+      </div>
+    </section>
+
+    <section class="section" id="how-it-works">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Simple by design</p>
+          <h2>Turn what you know into something shared.</h2>
+          <p>Start with one skill and let the community help you take the next step.</p>
+        </div>
+        <div class="steps-grid">
+          <article class="step-card">
+            <div class="step-number">01</div>
+            <div class="step-icon icon-profile">☺</div>
+            <h3>Create your profile</h3>
+            <p>Tell the community about yourself, the skills you can teach, and what you want to learn.</p>
+          </article>
+          <article class="step-card">
+            <div class="step-number">02</div>
+            <div class="step-icon icon-search">⌕</div>
+            <h3>Find your match</h3>
+            <p>Explore skills and people. Use available filters to find a learning partner who suits your goals.</p>
+          </article>
+          <article class="step-card">
+            <div class="step-number">03</div>
+            <div class="step-icon icon-grow">↗</div>
+            <h3>Learn and share</h3>
+            <p>Send a learning request, agree on a session, practise together, and track your progress.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-soft" id="explore">
+      <div class="container">
+        <div class="section-heading heading-row">
+          <div>
+            <p class="eyebrow">Find your next skill</p>
+            <h2>There is always something to learn.</h2>
+            <p>Explore a few examples of skills the community can share.</p>
+          </div>
+          <a class="text-link" href="explore.html">Explore all skills <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="skills-grid">
+          <a class="skill-card" href="explore.html?category=technology"><span class="skill-art art-tech">⌘</span><span
+              class="skill-card-body"><small>TECHNOLOGY</small><strong>Programming & web</strong><span>Python, C++, web
+                design, and more</span></span><span class="skill-arrow">↗</span></a>
+          <a class="skill-card" href="explore.html?category=languages"><span
+              class="skill-art art-language">Aa</span><span
+              class="skill-card-body"><small>LANGUAGES</small><strong>Speak with confidence</strong><span>English,
+                Hindi, and other languages</span></span><span class="skill-arrow">↗</span></a>
+          <a class="skill-card" href="explore.html?category=creative"><span class="skill-art art-creative">✎</span><span
+              class="skill-card-body"><small>CREATIVE</small><strong>Art, music & design</strong><span>Drawing,
+                instruments, and creativity</span></span><span class="skill-arrow">↗</span></a>
+          <a class="skill-card" href="explore.html?category=academic"><span class="skill-art art-academic">∑</span><span
+              class="skill-card-body"><small>ACADEMIC</small><strong>Study together</strong><span>Mathematics, science,
+                and subjects</span></span><span class="skill-arrow">↗</span></a>
+          <a class="skill-card" href="explore.html?category=lifestyle"><span class="skill-art art-life">✿</span><span
+              class="skill-card-body"><small>EVERYDAY LIFE</small><strong>Useful everyday skills</strong><span>Cooking,
+                gardening, and repair basics</span></span><span class="skill-arrow">↗</span></a>
+          <a class="skill-card" href="explore.html?category=career"><span class="skill-art art-career">↗</span><span
+              class="skill-card-body"><small>CAREER</small><strong>Career development</strong><span>Interview practice,
+                CVs, and more</span></span><span class="skill-arrow">↗</span></a>
+        </div>
+        <p class="section-footnote">These are examples. Skills and availability will depend on the community using the
+          platform.</p>
+      </div>
+    </section>
+
+
+    <section class="section section-soft" id="about">
+      <div class="container about-grid">
+        <div class="about-visual">
+          <div class="about-circle"><span>Skills<br>grow here.</span></div>
+          <div class="about-tag tag-one">Learn together</div>
+          <div class="about-tag tag-two">Share knowledge</div>
+        </div>
+        <div class="about-copy">
+          <p class="eyebrow">About SkillCircle</p>
+          <h2>A community where learning goes both ways.</h2>
+          <p>SkillCircle is a neighbourhood skill-sharing platform designed to help people exchange knowledge. Instead
+            of treating teaching and learning as separate roles, one profile lets a member list both skills they can
+            teach and skills they want to learn.</p>
+          <p>The goal is to make practical learning easier to discover, more social, and accessible to people in the
+            community. Members can explore profiles, send learning requests, and arrange sessions based on availability.
+          </p>
+          <div class="about-values">
+            <div><strong>01</strong><span>Knowledge exchange</span></div>
+            <div><strong>02</strong><span>Community learning</span></div>
+            <div><strong>03</strong><span>Learning at your pace</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section safety-section">
+      <div class="container safety-grid">
+        <div>
+          <p class="eyebrow">Respect and safety</p>
+          <h2>Good learning starts with trust.</h2>
+          <p>SkillCircle can provide tools to report or block users and give admins a way to review concerns. These
+            tools can help, but they cannot guarantee every member or interaction is safe.</p>
+        </div>
+        <div class="safety-points">
+          <div><span>✓</span>
+            <p><strong>Protect your details</strong><small>Use approximate location. Do not publish your home address or
+                private information.</small></p>
+          </div>
+          <div><span>✓</span>
+            <p><strong>Choose a suitable meeting format</strong><small>Meet online or in a public place when possible,
+                and tell someone you trust about offline plans.</small></p>
+          </div>
+          <div><span>✓</span>
+            <p><strong>Report concerning behaviour</strong><small>Use reporting and blocking tools where available.
+                Contact local emergency services if you are in immediate danger.</small></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section cta-section">
+      <div class="container cta-panel">
+        <div>
+          <p class="eyebrow eyebrow-light">Your next skill starts here</p>
+          <h2>What could you learn from your community?</h2>
+          <p>Join in, share what you know, and make room for someone else to grow.</p>
+        </div>
+        <a class="button button-light" href="{{ url_for('register') }}">Create your free profile <span
+            aria-hidden="true">→</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-main">
+      <div class="footer-brand-column">
+        <a class="brand brand-footer" href="#home"><span class="brand-mark" aria-hidden="true">S</span><span>Skill<span
+              class="brand-accent">Circle</span></span></a>
+        <p>A neighbourhood community for sharing skills, learning together, and making knowledge easier to access.</p>
+        <p class="footer-note">A student project. Platform features and availability may change during development.</p>
+      </div>
+      <div class="footer-column">
+        <h3>Explore</h3><a href="#explore">Browse skills</a><a href="#how-it-works">How it works</a><a href="#about">About us</a>
+      </div>
+      <div class="footer-column">
+        <h3>Your account</h3><a href="{{ url_for('register') }}">Create an account</a><a href="{{ url_for('login') }}">Log in</a><a
+          href="help.html">Help centre</a><a href="contact.html">Contact us</a>
+      </div>
+      <div class="footer-column">
+      <h3>Policies &amp; Safety</h3>
+      
+<a href="{{ url_for('terms') }}">
+    Terms and conditions
+</a>
+
+<a href="{{ url_for('privacy') }}">
+    Privacy policy
+</a>
+
+<a href="{{ url_for('community_guidelines') }}">
+    Community guidelines
+</a>
+
+<a href="{{ url_for('safety_tips') }}">
+    Safety tips
+</a>
+
+<a href="{{ url_for('cookie_policy') }}">
+    Cookie policy
+</a>
+
+<a href="{{ url_for('accessibility') }}">
+    Accessibility
+</a>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>© <span id="year">2026</span> SkillCircle. All rights reserved.</p>
+      <p>Built for community learning <span aria-hidden="true">♥</span></p>
+    </div>
+  </footer>
+
+  <script>
+    // Small progressive enhancement for the mobile navigation and footer year.
+    const menuButton = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    menuButton.addEventListener('click', () => {
+      const expanded = menuButton.getAttribute('aria-expanded') === 'true';
+      menuButton.setAttribute('aria-expanded', String(!expanded));
+      navLinks.classList.toggle('is-open', !expanded);
+    });
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('is-open');
+        menuButton.setAttribute('aria-expanded', 'false');
+      });
+    });
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+
+</html>

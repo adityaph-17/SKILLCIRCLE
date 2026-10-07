@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Create your SkillCircle account and join your local learning community.">
+
+    <title>Create Account | SkillCircle</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='user/register.css') }}">
+</head>
+
+<body>
+
+
+
+    <main class="register-page">
+
+        <div class="register-layout">
+
+            <!-- Left side -->
+            <section class="register-intro">
+
+                <a class="register-brand" href="/">
+                    <span class="register-brand-mark">S</span>
+                    <span>Skill<span>Circle</span></span>
+                </a>
+
+                <div class="intro-content">
+
+                    <p class="register-eyebrow">
+                        JOIN THE COMMUNITY
+                    </p>
+
+                    <h1>
+                        Learn something.
+                        <span>Share something.</span>
+                    </h1>
+
+                    <p class="register-description">
+                        Create your SkillCircle profile and connect with people
+                        who can teach what you want to learn — while sharing
+                        what you already know.
+                    </p>
+
+                    <div class="register-features">
+
+                        <div class="register-feature">
+                            <div class="feature-icon">↔</div>
+                            <div>
+                                <strong>Teach & learn</strong>
+                                <span>One profile lets you do both.</span>
+                            </div>
+                        </div>
+
+                        <div class="register-feature">
+                            <div class="feature-icon">⌕</div>
+                            <div>
+                                <strong>Find people nearby</strong>
+                                <span>Discover skills within your community.</span>
+                            </div>
+                        </div>
+
+                        <div class="register-feature">
+                            <div class="feature-icon">✦</div>
+                            <div>
+                                <strong>Learn by practicing</strong>
+                                <span>Collaborate with partners and learn hands-on.</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="register-left-footer">
+                    <span>SkillCircle</span>
+                    <span>•</span>
+                    <span>Learn together. Grow together.</span>
+                </div>
+
+            </section>
+
+
+            <!-- Right side -->
+            <section class="register-form-section">
+
+                <div class="register-form-card">
+
+                    <div class="form-heading">
+
+                        <div class="mobile-brand">
+                            <a href="/">
+                                <span>S</span> SkillCircle
+                            </a>
+                        </div>
+
+                        <p class="form-step">
+                            GET STARTED
+                        </p>
+
+                        <h2>Create your account</h2>
+
+                        <p>
+                            Start building your learning profile in a few simple steps.
+                        </p>
+
+                    </div>
+
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                    <div class="flash-messages">
+                        {% for category, message in messages %}
+                        <div class="flash-message {{ category }}">
+                            {{ message }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    {% endwith %}
+
+                    <form method="POST" action="/register" class="register-form">
+
+                        <div class="form-row">
+
+                            <div class="form-group">
+                                <label for="full_name">
+                                    Full Name
+                                </label>
+
+                                <input type="text" id="full_name" name="full_name" placeholder="Your full name"
+                                    autocomplete="name" required>
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="email">
+                                Email Address
+                            </label>
+
+                            <input type="email" id="email" name="email" placeholder="you@example.com"
+                                autocomplete="email" required>
+                        </div>
+
+
+                        <div class="form-row">
+
+                            <div class="form-group">
+                                <label for="password">
+                                    Password
+                                </label>
+
+                                <input type="password" id="password" name="password" placeholder="Create a password"
+                                    autocomplete="new-password" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="confirm_password">
+                                    Confirm Password
+                                </label>
+
+                                <input type="password" id="confirm_password" name="confirm_password"
+                                    placeholder="Repeat password" autocomplete="new-password" required>
+                            </div>
+
+                        </div>
+
+
+                        <p class="password-note">
+                            Use at least 8 characters with a mix of letters,
+                            numbers, and symbols.
+                        </p>
+
+
+                        <div class="terms-row">
+
+                            <input type="checkbox" id="terms" name="terms" required>
+
+                            <label for="terms">
+                                I agree to the
+                                <a href="{{ url_for('terms') }}" target="_blank">Terms</a>
+                                and
+                                <a href="{{ url_for('privacy') }}" target="_blank">Privacy Policy</a>.
+                            </label>
+
+                        </div>
+
+
+                        <button type="submit" class="register-btn">
+                            <span>Create my account</span>
+                            <span class="button-arrow">→</span>
+                        </button>
+
+                    </form>
+
+
+                    <div class="login-divider">
+                        <span>Already part of SkillCircle?</span>
+                    </div>
+
+                    <a href="/login" class="login-btn">
+                        Log in to your account
+                    </a>
+
+                </div>
+
+
+                <footer class="register-footer">
+
+                    <span>© 2026 SkillCircle</span>
+
+                    <div>
+                        <a href="{{ url_for('privacy') }}">Privacy</a>
+                        <a href="{{ url_for('terms') }}">Terms</a>
+                        <a href="#">Help</a>
+                    </div>
+
+                </footer>
+
+            </section>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {{ user.full_name }} | SkillCircle
+    </title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='user/public_profile.css') }}">
+
+</head>
+
+<body>
+
+    <!-- =====================================================
+         NAVBAR
+    ====================================================== -->
+
+    {% include 'user/navbar.html' %}
+
+
+    <main class="public-profile-page">
+
+        <!-- =================================================
+             PROFILE HEADER
+        ================================================== -->
+
+        <section class="public-profile-header">
+
+            <div class="public-profile-avatar">
+                {{ user.full_name[0]|upper }}
+            </div>
+
+            <div class="public-profile-main-info">
+
+                <span class="public-profile-label">
+                    SKILLCIRCLE MEMBER
+                </span>
+
+                <h1>
+                    {{ user.full_name }}
+                </h1>
+
+                {% if user.location_area %}
+
+                <p class="public-profile-location">
+                    {{ user.location_area }}
+                </p>
+
+                {% endif %}
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             BASIC INFORMATION
+        ================================================== -->
+
+        <section class="public-profile-content">
+
+            <div class="public-profile-about">
+
+                <div class="profile-section-heading">
+
+                    <span>
+                        ABOUT
+                    </span>
+
+                    <h2>
+                        About {{ user.full_name }}
+                    </h2>
+
+                </div>
+
+                {% if user.bio %}
+
+                <p class="profile-bio">
+                    {{ user.bio }}
+                </p>
+
+                {% else %}
+
+                <p class="profile-empty-text">
+                    This person has not added a bio yet.
+                </p>
+
+                {% endif %}
+
+            </div>
+
+
+            <div class="public-profile-details">
+
+                <div class="profile-detail-card">
+
+                    <span>
+                        LEARNING MODE
+                    </span>
+
+                    <strong>
+                        {{ user.learning_mode or "Not specified" }}
+                    </strong>
+
+                </div>
+
+
+                <div class="profile-detail-card">
+
+                    <span>
+                        AVAILABILITY
+                    </span>
+
+                    <strong>
+                        {{ user.availability or "Not specified" }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             SKILLS THEY TEACH
+        ================================================== -->
+
+        <section class="public-profile-section">
+
+            <div class="profile-section-heading">
+
+                <span>
+                    SKILLS I TEACH
+                </span>
+
+                <h2>
+                    What {{ user.full_name }} can teach
+                </h2>
+
+            </div>
+
+
+            {% if teaching_skills %}
+
+            <div class="public-skill-grid">
+
+                {% for skill in teaching_skills %}
+
+                <article class="public-skill-card">
+
+                    <div class="public-skill-category">
+                        {{ skill.category }}
+                    </div>
+
+                    <h3>
+                        {{ skill.skill_name }}
+                    </h3>
+
+                    {% if skill.description %}
+
+                    <p>
+                        {{ skill.description }}
+                    </p>
+
+                    {% endif %}
+
+                    <div class="public-skill-level">
+
+                        <span>
+                            Teaching level
+                        </span>
+
+                        <strong>
+                            {{ skill.skill_level }}
+                        </strong>
+
+                    </div>
+
+                    {% if skill.existing_request_status == 'Pending' %}
+
+                        <button type="button"
+                                class="request-learn-button disabled-request-button"
+                                disabled
+                                style="opacity: 0.65; cursor: not-allowed; pointer-events: none;"
+                                title="Request pending">
+                            Request Pending
+                        </button>
+
+                    {% elif skill.existing_request_status == 'Accepted' %}
+
+                        <button type="button"
+                                class="request-learn-button disabled-request-button"
+                                disabled
+                                style="opacity: 0.65; cursor: not-allowed; pointer-events: none;"
+                                title="Request accepted">
+                            Already Learning
+                        </button>
+
+                    {% else %}
+
+                        <a href="{{ url_for('request_to_learn', teacher_id=user.id, skill_id=skill.id) }}"
+                           class="request-learn-button">
+                            Request to Learn
+                        </a>
+
+                    {% endif %}
+
+                </article>
+
+                {% endfor %}
+
+            </div>
+
+            {% else %}
+
+            <div class="public-empty-card">
+
+                <h3>
+                    No teaching skills added
+                </h3>
+
+                <p>
+                    This person has not added any teaching
+                    skills yet.
+                </p>
+
+            </div>
+
+            {% endif %}
+
+        </section>
+
+
+        <!-- =================================================
+             SKILLS THEY WANT TO LEARN
+        ================================================== -->
+
+        <section class="public-profile-section">
+
+            <div class="profile-section-heading">
+
+                <span>
+                    SKILLS I WANT TO LEARN
+                </span>
+
+                <h2>
+                    What {{ user.full_name }} wants to learn
+                </h2>
+
+            </div>
+
+
+            {% if learning_skills %}
+
+            <div class="public-skill-grid">
+
+                {% for skill in learning_skills %}
+
+                <article class="public-skill-card learning-card">
+
+                    <div class="public-skill-category">
+                        {{ skill.category }}
+                    </div>
+
+                    <h3>
+                        {{ skill.skill_name }}
+                    </h3>
+
+                    {% if skill.description %}
+
+                    <p>
+                        {{ skill.description }}
+                    </p>
+
+                    {% endif %}
+
+                    <div class="public-skill-level">
+
+                        <span>
+                            Current level
+                        </span>
+
+                        <strong>
+                            {{ skill.skill_level }}
+                        </strong>
+
+                    </div>
+
+                </article>
+
+                {% endfor %}
+
+            </div>
+
+            {% else %}
+
+            <div class="public-empty-card">
+
+                <h3>
+                    No learning skills added
+                </h3>
+
+                <p>
+                    This person has not added any learning
+                    skills yet.
+                </p>
+
+            </div>
+
+            {% endif %}
+
+        </section>
+
+    </main>
+
+
+    <footer class="public-profile-footer">
+
+        <p>
+            SkillCircle · Learn together. Grow together.
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

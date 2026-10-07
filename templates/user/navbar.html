@@ -1,0 +1,62 @@
+<!-- =====================================================
+     COMMON USER NAVIGATION BAR (AUTHENTICATED)
+     ===================================================== -->
+<header class="app-header">
+    <div class="app-nav-container">
+        <a href="{{ url_for('dashboard') }}" class="app-brand" aria-label="SkillCircle Dashboard">
+            <span class="app-brand-mark" aria-hidden="true">S</span>
+            <span class="app-brand-text">Skill<span class="app-brand-accent">Circle</span></span>
+        </a>
+
+        <button class="app-menu-toggle" type="button" aria-expanded="false" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav class="app-nav-links" id="app-nav-menu" aria-label="User navigation">
+            <a href="{{ url_for('dashboard') }}"
+               class="app-nav-link {% if request.endpoint == 'dashboard' %}active{% endif %}">
+                Dashboard
+            </a>
+
+            <a href="{{ url_for('community') }}"
+               class="app-nav-link {% if request.endpoint == 'community' %}active{% endif %}">
+                Community
+            </a>
+
+            <a href="{{ url_for('learning_requests') }}"
+               class="app-nav-link {% if request.endpoint in ['learning_requests', 'schedule_session', 'request_to_learn'] %}active{% endif %}">
+                Learning Requests
+            </a>
+
+            <a href="{{ url_for('learning_sessions') }}"
+               class="app-nav-link {% if request.endpoint == 'learning_sessions' %}active{% endif %}">
+                Sessions
+            </a>
+
+            <a href="{{ url_for('profile') }}"
+               class="app-nav-link {% if request.endpoint in ['profile', 'public_profile'] %}active{% endif %}">
+                My Profile
+            </a>
+
+            <a href="{{ url_for('logout') }}"
+               class="app-nav-link app-nav-logout">
+                Log out
+            </a>
+        </nav>
+    </div>
+</header>
+
+<script>
+    (function() {
+        const toggle = document.querySelector('.app-menu-toggle');
+        const menu = document.querySelector('#app-nav-menu');
+        if (toggle && menu) {
+            toggle.onclick = function() {
+                const isOpen = menu.classList.toggle('nav-open');
+                toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            };
+        }
+    })();
+</script>

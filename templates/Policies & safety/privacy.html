@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy - SkillCircle</title>
+<style>
+    :root {
+        --green-950: #14382f;
+        --green-900: #173f35;
+        --green-800: #205646;
+        --green-700: #2f7259;
+        --green-50: #f4f8f3;
+        --cream: #fbfaf5;
+        --text: #26352f;
+        --muted: #68756f;
+        --border: #dce5df;
+        --radius: 18px;
+    }
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    body {
+        font-family: Arial, sans-serif;
+        background: var(--cream);
+        color: var(--text);
+        line-height: 1.7;
+    }
+    .container {
+        width: 90%;
+        max-width: 1000px;
+        margin: auto;
+    }
+    header {
+        background: var(--green-900);
+        color: white;
+        padding: 22px 0;
+    }
+    .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+    }
+    .logo {
+        font-size: 24px;
+        font-weight: bold;
+    }
+    .back-link {
+        color: white;
+        text-decoration: none;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        padding: 8px 16px;
+        border-radius: 8px;
+    }
+    .back-link:hover {
+        background: var(--green-800);
+    }
+    main {
+        padding: 50px 0;
+    }
+    .page-header {
+        margin-bottom: 35px;
+    }
+    .page-header h1 {
+        color: var(--green-950);
+        font-size: 36px;
+        margin-bottom: 10px;
+    }
+    .page-header p {
+        color: var(--muted);
+    }
+    .updated {
+        font-size: 14px;
+        margin-top: 5px;
+    }
+    .content {
+        background: white;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 35px;
+        box-shadow: 0 4px 15px rgba(20, 56, 47, 0.05);
+    }
+    section {
+        margin-bottom: 32px;
+    }
+    section:last-child {
+        margin-bottom: 0;
+    }
+    h2 {
+        color: var(--green-800);
+        font-size: 21px;
+        margin-bottom: 10px;
+    }
+    h3 {
+        color: var(--green-900);
+        font-size: 17px;
+        margin: 18px 0 8px;
+    }
+    p {
+        margin-bottom: 10px;
+    }
+    ul {
+        margin: 10px 0 10px 25px;
+    }
+    li {
+        margin-bottom: 7px;
+    }
+    .notice {
+        background: var(--green-50);
+        border-left: 4px solid var(--green-700);
+        padding: 15px 18px;
+        margin: 20px 0;
+        border-radius: 8px;
+    }
+    footer {
+        background: var(--green-950);
+        color: white;
+        padding: 25px 0;
+        margin-top: 20px;
+        text-align: center;
+    }
+    footer a {
+        color: white;
+        text-decoration: none;
+        margin: 0 8px;
+    }
+    footer a:hover {
+        text-decoration: underline;
+    }
+    .copyright {
+        margin-top: 12px;
+        font-size: 14px;
+        opacity: 0.8;
+    }
+    @media (max-width: 700px) {
+        .header-content {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .page-header h1 {
+            font-size: 30px;
+        }
+        .content {
+            padding: 22px;
+        }
+        main {
+            padding: 35px 0;
+        }
+    }
+</style>
+</head>
+<body>
+<header>
+    <div class="container header-content">
+
+        <div class="logo">
+            SkillCircle
+        </div>
+
+        <a href="{{ url_for('home') }}" class="back-link">
+            Back to Home
+        </a>
+
+    </div>
+</header>
+
+
+<main>
+
+    <div class="container">
+
+        <div class="page-header">
+
+            <h1>Privacy Policy</h1>
+
+            <p>
+                This policy explains how SkillCircle collects, uses,
+                stores, and protects user information.
+            </p>
+
+            <p class="updated">
+                Last updated: October 2026
+            </p>
+
+        </div>
+
+
+        <div class="content">
+
+            <section>
+
+                <h2>1. Introduction</h2>
+
+                <p>
+                    SkillCircle respects your privacy and aims to handle
+                    your personal information responsibly.
+                </p>
+
+                <p>
+                    This Privacy Policy explains what information may be
+                    collected when you use SkillCircle and how that
+                    information may be used.
+                </p>
+
+            </section>
+
+
+            <section>
+
+                <h2>2. Information We Collect</h2>
+
+                <p>
+                    Depending on how you use the platform, SkillCircle
+                    may collect the following information:
+                </p>
+
+                <ul>
+                    <li>Name or display name.</li>
+                    <li>Email address.</li>
+                    <li>Account login information.</li>
+                    <li>Profile information.</li>
+                    <li>Skills you want to learn.</li>
+                    <li>Skills you want to teach or share.</li>
+                    <li>Location or general location information provided by you.</li>
+                    <li>Profile pictures or other uploaded content.</li>
+                    <li>Messages or requests sent through the platform.</li>
+                    <li>Reports and feedback submitted by users.</li>
+                </ul>
+
+            </section>
+
+
+            <section>
+
+                <h2>3. Information Collected Automatically</h2>
+
+                <p>
+                    Some technical information may be collected
+                    automatically when you use the website.
+                </p>
+
+                <ul>
+                    <li>IP address.</li>
+                    <li>Browser type.</li>
+                    <li>Device information.</li>
+                    <li>Operating system.</li>
+                    <li>Pages visited.</li>
+                    <li>Basic usage and error information.</li>
+                </ul>
+
+                <p>
+                    This information may be used to maintain security,
+                    improve performance, and troubleshoot technical
+                    problems.
+                </p>
+
+            </section>
+
+
+            <section>
+
+                <h2>4. How We Use Your Information</h2>
+
+                <p>
+                    SkillCircle may use collected information to:
+                </p>
+
+                <ul>
+                    <li>Create and manage your account.</li>
+                    <li>Provide SkillCircle features.</li>
+                    <li>Help users discover relevant skills and people.</li>
+                    <li>Process learning or teaching requests.</li>
+                    <li>Send important account-related communications.</li>
+                    <li>Improve the platform.</li>
+                    <li>Detect and prevent misuse or fraudulent activity.</li>
+                    <li>Respond to support requests.</li>
+                    <li>Investigate reports and violations.</li>
+                    <li>Maintain platform security.</li>
+                    <li>Comply with applicable legal requirements.</li>
+                </ul>
+
+            </section>
+
+
+            <section>
+
+                <h2>5. Profile Information</h2>
+
+                <p>
+                    Some information in your profile may be visible to
+                    other SkillCircle users.
+                </p>
+
+                <p>
+                    This may include your name, profile information,
+                    skills, learning interests, and general location,
+                    depending on the features you use.
+                </p>
+
+                <div class="notice">
+                    Do not publish sensitive personal information such as
+                    passwords, financial information, government identity
+                    numbers, or your exact home address in your public profile.
+                </div>
+
+            </section>
+
+
+            <section>
+
+                <h2>6. Location Information</h2>
+
+                <p>
+                    SkillCircle may use location information to help users
+                    find relevant skill-sharing opportunities in their area.
+                </p>
+
+                <p>
+                    Users should avoid sharing their exact home address
+                    publicly. Only provide location information that is
+                    necessary for using the platform.
+                </p>
+
+            </section>
+
+
+            <section>
+
+                <h2>7. How We Share Information</h2>
+
+                <p>
+                    SkillCircle does not intend to sell personal information
+                    to third parties.
+                </p>
+
+                <p>
+                    Information may be shared when necessary to:
+                </p>
+
+                <ul>
+                    <li>Provide platform functionality.</li>
+                    <li>Operate hosting and technical services.</li>
+                    <li>Send emails or other required communications.</li>
+                    <li>Protect the security of SkillCircle and its users.</li>
+                    <li>Investigate violations or abuse.</li>
+                    <li>Comply with legal obligations.</li>
+                </ul>
+
+            </section>
+
+
+            <section>
+
+                <h2>8. Third-Party Services</h2>
+
+                <p>
+                    SkillCircle may use third-party services for hosting,
+                    email delivery, analytics, maps, authentication, or
+                    other technical functions.
+                </p>
+
+                <p>
+                    These services may process information according to
+                    their own privacy policies and terms.
+                </p>
+
+            </section>
+
+
+            <section>
+
+                <h2>9. Data Security</h2>
+
+                <p>
+                    SkillCircle uses reasonable technical and organizational
+                    measures to protect user information.
+                </p>
+
+                <p>
+                    However, no online service can guarantee complete
+                    security. Users should also protect their accounts by
+                    using strong passwords and keeping login information private.
+                </p>
+
+            </section>
+
+
+            <section>
+
+                <h2>10. Passwords and Account Security</h2>
+
+                <p>
+                    Passwords should be kept confidential and should not
+                    be shared with other people.
+                </p>
+
+                <p>
+                    SkillCircle should store passwords using appropriate
+                    password-hashing methods rather than storing passwords
+                    as readable text.
+                </p>
+
+            </section>
+
+
+            <section>
+
+                <h2>11. Data Retention</h2>
+
+                <p>
+                    We may retain account and other information for as long
+                    as reasonably necessary to provide the service, maintain
+                    security, resolve disputes, meet legal requirements,
+                    or protect legitimate platform interests.
+                </p>
+
+                <p>
+                    When information is no longer required, it may be deleted
+                    or securely disposed of where appropriate.
+                </p>
+
+            </section>
+
+
+            <section>
+
+                <h2>12. Your Privacy Choices</h2>
+
+                <p>
+                    Depending on the features available on SkillCircle,
+                    users may be able to:
+                </p>
+
+                <ul>
+                    <li>View and update account information.</li>
+                    <li>Change profile information.</li>
+                    <li>Control information displayed on their profile.</li>
+                    <li>Request account deletion.</li>
+                    <li>Contact SkillCircle about privacy concerns.</li>
+                </ul>
+
+            </section>
+
+
+            <section>
+
+                <h2>13. Account Deletion</h2>
+
+                <p>
+                    You may request deletion of your SkillCircle account
+                    using the account deletion feature, if available.
+                </p>
+
+                <p>
+                    Some information may need to be retained when required
+                    for legal, security, fraud-prevention, or legitimate
+                    business purposes.
+                </p>
+
+            </section>
+
+
+            <section>
+
+                <h2>14. Children's Privacy</h2>
+
+                <p>
+                    SkillCircle is intended for users who are legally
+                    permitted to use the platform.
+                </p>
+
+                <p>
+                    We do not knowingly collect personal information from
+                    children in violation of applicable laws.
+                </p>
+
+            </section>
+
+
+            <section>
+
+                <h2>15. Cookies</h2>
+
+                <p>
+                    SkillCircle may use cookies or similar technologies
+                    to maintain login sessions, remember preferences,
+                    improve functionality, and understand website usage.
+                </p>
+
+                <p>
+                    For more information, please see our
+                    <a href="{{ url_for('cookie_policy') }}"><strong>Cookie Policy</strong></a>.
+                </p>
+
+            </section>
+
+
+            <section>
+
+                <h2>16. Changes to This Privacy Policy</h2>
+
+                <p>
+                    This Privacy Policy may be updated when the platform,
+                    features, technologies, or legal requirements change.
+                </p>
+
+                <p>
+                    The latest version will be published on this page with
+                    an updated date.
+                </p>
+
+            </section>
+
+
+            <section>
+
+                <h2>17. Contact Us</h2>
+
+                <p>
+                    If you have questions, concerns, or requests related
+                    to privacy, please contact the SkillCircle administration
+                    through the contact method provided on the platform.
+                </p>
+
+            </section>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<footer>
+
+    <div class="container">
+
+        <div>
+
+            <a href="{{ url_for('terms') }}">
+                Terms & Conditions
+            </a>
+
+            <a href="{{ url_for('privacy') }}">
+                Privacy Policy
+            </a>
+
+            <a href="{{ url_for('community_guidelines') }}">
+                Community Guidelines
+            </a>
+
+            <a href="{{ url_for('safety_tips') }}">
+                Safety Tips
+            </a>
+
+            <a href="{{ url_for('cookie_policy') }}">
+                Cookie Policy
+            </a>
+
+            <a href="{{ url_for('accessibility') }}">
+                Accessibility
+            </a>
+
+        </div>
+
+        <div class="copyright">
+            © 2026 SkillCircle. All rights reserved.
+        </div>
+
+    </div>
+
+</footer>
+</body>
+</html>

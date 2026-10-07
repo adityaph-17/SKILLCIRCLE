@@ -1,0 +1,655 @@
+/* =========================================================
+   LEARNING SESSIONS
+========================================================= */
+
+.sessions-navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    background: rgba(255, 255, 255, 0.94);
+
+    border-bottom: 1px solid var(--line);
+
+    backdrop-filter: blur(12px);
+}
+
+.sessions-nav-container {
+    width: min(1180px, 92%);
+    margin: 0 auto;
+
+    min-height: 76px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 30px;
+}
+
+.sessions-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    color: var(--green-950);
+
+    font-size: 20px;
+    font-weight: 800;
+
+    text-decoration: none;
+}
+
+.sessions-brand-mark {
+    width: 38px;
+    height: 38px;
+
+    display: grid;
+    place-items: center;
+
+    background: var(--green-900);
+    color: var(--white);
+
+    border-radius: 12px;
+
+    font-weight: 800;
+}
+
+.sessions-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.sessions-nav-links a {
+    color: var(--muted);
+
+    font-size: 14px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition: color 0.2s ease;
+}
+
+.sessions-nav-links a:hover,
+.sessions-nav-links a.active {
+    color: var(--green-800);
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.sessions-page {
+    min-height: calc(100vh - 150px);
+
+    padding: 70px 0;
+
+    background: var(--cream);
+}
+
+.sessions-container {
+    width: min(1050px, 92%);
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+.sessions-intro {
+    margin-bottom: 32px;
+}
+
+.sessions-label,
+.section-label {
+    display: inline-block;
+
+    margin-bottom: 10px;
+
+    color: var(--green-700);
+
+    font-size: 12px;
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+.sessions-intro h1 {
+    margin: 0 0 10px;
+
+    color: var(--green-950);
+
+    font-size: clamp(32px, 5vw, 46px);
+
+    line-height: 1.1;
+}
+
+.sessions-intro p {
+    margin: 0;
+
+    color: var(--muted);
+
+    font-size: 16px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   FLASH
+========================================================= */
+
+.flash-messages {
+    display: grid;
+    gap: 10px;
+
+    margin-bottom: 28px;
+}
+
+.flash-message {
+    padding: 13px 16px;
+
+    border: 1px solid var(--line);
+    border-radius: 12px;
+
+    font-size: 14px;
+}
+
+.flash-message.success {
+    background: var(--green-100);
+    color: var(--green-900);
+}
+
+.flash-message.error {
+    background: #fff1ef;
+    color: #9b3b32;
+}
+
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+.sessions-section {
+    margin-top: 38px;
+}
+
+.section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 18px;
+}
+
+.section-heading h2 {
+    margin: 0;
+
+    color: var(--green-950);
+
+    font-size: 25px;
+}
+
+.session-count {
+    min-width: 34px;
+    height: 34px;
+
+    display: grid;
+    place-items: center;
+
+    background: var(--green-100);
+    color: var(--green-900);
+
+    border-radius: 50%;
+
+    font-size: 13px;
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   SESSION LIST
+========================================================= */
+
+.session-list {
+    display: grid;
+    gap: 20px;
+}
+
+
+/* =========================================================
+   SESSION CARD
+========================================================= */
+
+.session-card {
+    padding: 28px;
+
+    background: var(--white);
+
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+
+    box-shadow: var(--shadow);
+}
+
+.previous-card {
+    box-shadow: 0 10px 30px rgba(24, 56, 44, .06);
+}
+
+.session-card-top {
+    display: flex;
+    align-items: center;
+
+    gap: 16px;
+
+    padding-bottom: 22px;
+    margin-bottom: 22px;
+
+    border-bottom: 1px solid var(--line);
+}
+
+.session-icon {
+    width: 48px;
+    height: 48px;
+
+    flex-shrink: 0;
+
+    display: grid;
+    place-items: center;
+
+    background: var(--green-100);
+    color: var(--green-900);
+
+    border-radius: 14px;
+
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.session-title {
+    flex: 1;
+}
+
+.session-role {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: var(--green-700);
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 1.1px;
+}
+
+.session-title h3 {
+    margin: 0 0 5px;
+
+    color: var(--green-950);
+
+    font-size: 22px;
+}
+
+.session-title p {
+    margin: 0;
+
+    color: var(--muted);
+
+    font-size: 14px;
+}
+
+.session-title strong {
+    color: var(--ink);
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.session-status {
+    padding: 7px 12px;
+
+    background: var(--green-100);
+    color: var(--green-900);
+
+    border-radius: 999px;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.status-completed {
+    background: #e9f1f7;
+    color: #315b76;
+}
+
+.status-cancelled {
+    background: #fff1ef;
+    color: #9b3b32;
+}
+
+
+/* =========================================================
+   INFORMATION
+========================================================= */
+
+.session-info-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 14px;
+}
+
+.session-info-item {
+    padding: 15px;
+
+    background: var(--green-50);
+
+    border: 1px solid var(--line);
+    border-radius: 12px;
+}
+
+.session-info-item span,
+.meeting-details span {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: var(--muted);
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+.session-info-item strong {
+    color: var(--ink);
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   MEETING DETAILS
+========================================================= */
+
+.meeting-details {
+    margin-top: 18px;
+
+    padding: 16px;
+
+    background: var(--green-50);
+
+    border-left: 3px solid var(--green-700);
+
+    border-radius: 10px;
+}
+
+.meeting-details p {
+    margin: 0;
+
+    color: var(--ink);
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+    white-space: pre-wrap;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   SESSION ACTIONS
+========================================================= */
+
+.session-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-top: 22px;
+}
+
+.session-actions form {
+    margin: 0;
+}
+
+.session-actions button {
+    min-height: 42px;
+
+    padding: 0 16px;
+
+    border-radius: 10px;
+
+    font-family: inherit;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.cancel-button {
+    background: var(--white);
+    color: #9b3b32;
+
+    border: 1px solid #e7c7c3;
+}
+
+.cancel-button:hover {
+    background: #fff1ef;
+    border-color: #dca9a4;
+}
+
+.complete-button {
+    background: var(--green-900);
+    color: var(--white);
+
+    border: 1px solid var(--green-900);
+}
+
+.complete-button:hover {
+    background: var(--green-800);
+    border-color: var(--green-800);
+}
+
+.completion-note {
+    margin: 10px 0 0;
+
+    color: var(--muted);
+
+    font-size: 12px;
+
+    text-align: right;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.empty-session-state {
+    padding: 50px 30px;
+
+    background: var(--white);
+
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+
+    box-shadow: var(--shadow);
+
+    text-align: center;
+}
+
+.empty-session-icon {
+    width: 58px;
+    height: 58px;
+
+    margin: 0 auto 18px;
+
+    display: grid;
+    place-items: center;
+
+    background: var(--green-100);
+    color: var(--green-900);
+
+    border-radius: 16px;
+
+    font-weight: 800;
+}
+
+.empty-session-state h3 {
+    margin: 0 0 8px;
+
+    color: var(--green-950);
+
+    font-size: 22px;
+}
+
+.empty-session-state p {
+    margin: 0;
+
+    color: var(--muted);
+
+    font-size: 14px;
+}
+
+.empty-history {
+    padding: 24px;
+
+    background: var(--white);
+
+    border: 1px solid var(--line);
+    border-radius: 14px;
+
+    color: var(--muted);
+
+    font-size: 14px;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.sessions-footer {
+    padding: 24px 20px;
+
+    background: var(--white);
+
+    border-top: 1px solid var(--line);
+
+    text-align: center;
+}
+
+.sessions-footer p {
+    margin: 0;
+
+    color: var(--muted);
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 800px) {
+
+    .sessions-nav-container {
+        min-height: auto;
+
+        padding: 16px 0;
+
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .sessions-nav-links {
+        width: 100%;
+
+        overflow-x: auto;
+
+        padding-bottom: 4px;
+
+        gap: 18px;
+    }
+
+    .sessions-page {
+        padding: 45px 0;
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .session-info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .session-card-top {
+        align-items: flex-start;
+    }
+
+    .session-status {
+        margin-left: auto;
+    }
+
+    .session-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .session-actions form,
+    .session-actions button {
+        width: 100%;
+    }
+
+    .completion-note {
+        text-align: left;
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+    .session-card {
+        padding: 22px 18px;
+    }
+
+    .session-card-top {
+        flex-wrap: wrap;
+    }
+
+    .session-title {
+        min-width: calc(100% - 64px);
+    }
+
+    .session-status {
+        margin-left: 0;
+    }
+
+}

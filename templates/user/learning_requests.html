@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Learning Requests | SkillCircle</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='user/learning_requests.css') }}">
+</head>
+
+<body>
+
+{% include 'user/navbar.html' %}
+
+
+<main class="requests-page">
+
+    <section class="requests-container">
+
+        <!-- =================================================
+             INTRO
+        ================================================== -->
+
+        <div class="requests-intro">
+
+            <span class="requests-label">
+                CONNECTIONS
+            </span>
+
+            <h1>Learning Requests</h1>
+
+            <p>
+                Manage your learning connections, requests,
+                and accepted sessions.
+            </p>
+
+        </div>
+
+
+        <!-- =================================================
+             FLASH MESSAGES
+        ================================================== -->
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+
+            {% if messages %}
+
+                <div class="flash-messages">
+
+                    {% for category, message in messages %}
+
+                        <div class="flash-message {{ category }}">
+                            {{ message }}
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% endif %}
+
+        {% endwith %}
+
+
+        <!-- =================================================
+             SUMMARY
+        ================================================== -->
+
+        <div class="request-summary-grid">
+
+            <div class="summary-card">
+                <span class="summary-label">PENDING</span>
+
+                <strong>
+                    {{ incoming_pending_count + sent_pending_count }}
+                </strong>
+
+                <p>Requests waiting for action</p>
+            </div>
+
+
+            <div class="summary-card">
+                <span class="summary-label">ACCEPTED</span>
+
+                <strong>
+                    {{ accepted_count }}
+                </strong>
+
+                <p>Active learning connections</p>
+            </div>
+
+
+            <div class="summary-card">
+                <span class="summary-label">REJECTED</span>
+
+                <strong>
+                    {{ rejected_count }}
+                </strong>
+
+                <p>Requests that were rejected</p>
+            </div>
+
+
+            <div class="summary-card">
+                <span class="summary-label">CANCELLED</span>
+
+                <strong>
+                    {{ cancelled_count }}
+                </strong>
+
+                <p>Requests cancelled by you</p>
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             PENDING REQUESTS
+        ================================================== -->
+
+        <section class="requests-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="section-label">PENDING</span>
+
+                    <h2>Pending Requests</h2>
+
+                    <p>
+                        Requests that are waiting for a response.
+                    </p>
+                </div>
+
+                {% set pending_total =
+                    incoming_pending_count + sent_pending_count
+                %}
+
+                {% if pending_total > 0 %}
+                    <span class="pending-badge">
+                        {{ pending_total }} pending
+                    </span>
+                {% endif %}
+
+            </div>
+
+
+            <!-- INCOMING PENDING -->
+
+            <div class="request-subsection">
+
+                <h3>Requests to learn from you</h3>
+
+                <p class="subsection-description">
+                    People waiting for you to accept or reject their request.
+                </p>
+
+
+                {% if pending_incoming %}
+
+                    <div class="request-list">
+
+                        {% for item in pending_incoming %}
+
+                            <article class="request-card">
+
+                                <div class="request-card-top">
+
+                                    <div class="person-avatar">
+                                        {{ item.learner_name[0]|upper }}
+                                    </div>
+
+                                    <div class="person-details">
+
+                                        <span class="person-label">
+                                            LEARNER
+                                        </span>
+
+                                        <h3>
+                                            {{ item.learner_name }}
+                                        </h3>
+
+                                        <p>
+                                            Wants to learn
+                                            <strong>
+                                                {{ item.skill_name }}
+                                            </strong>
+                                        </p>
+
+                                    </div>
+
+                                    <span class="status-badge status-pending">
+                                        Pending
+                                    </span>
+
+                                </div>
+
+
+                                <div class="request-info-grid">
+
+                                    <div class="request-info-item">
+                                        <span>CATEGORY</span>
+                                        <strong>{{ item.category }}</strong>
+                                    </div>
+
+                                    <div class="request-info-item">
+                                        <span>PREFERRED MODE</span>
+                                        <strong>{{ item.preferred_mode }}</strong>
+                                    </div>
+
+                                    <div class="request-info-item">
+                                        <span>REQUESTED</span>
+                                        <strong>
+                                            {{ item.created_at.strftime('%d %b %Y') }}
+                                        </strong>
+                                    </div>
+
+                                </div>
+
+
+                                {% if item.message %}
+
+                                    <div class="request-message">
+                                        <span>MESSAGE</span>
+                                        <p>{{ item.message }}</p>
+                                    </div>
+
+                                {% endif %}
+
+
+                                <div class="request-actions">
+
+                                    <form method="POST"
+                                          action="{{ url_for('learning_requests') }}">
+
+                                        <input type="hidden"
+                                               name="request_id"
+                                               value="{{ item.id }}">
+
+                                        <input type="hidden"
+                                               name="action"
+                                               value="reject">
+
+                                        <button type="submit"
+                                                class="reject-button">
+                                            Reject
+                                        </button>
+
+                                    </form>
+
+
+                                    <form method="POST"
+                                          action="{{ url_for('learning_requests') }}">
+
+                                        <input type="hidden"
+                                               name="request_id"
+                                               value="{{ item.id }}">
+
+                                        <input type="hidden"
+                                               name="action"
+                                               value="accept">
+
+                                        <button type="submit"
+                                                class="accept-button">
+                                            Accept Request
+                                        </button>
+
+                                    </form>
+
+                                </div>
+
+                            </article>
+
+                        {% endfor %}
+
+                    </div>
+
+                {% else %}
+
+                    <div class="empty-state compact-empty">
+                        <h3>No incoming pending requests</h3>
+                        <p>
+                            New requests from learners will appear here.
+                        </p>
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- SENT PENDING -->
+
+            <div class="request-subsection">
+
+                <h3>Requests you have sent</h3>
+
+                <p class="subsection-description">
+                    Requests waiting for another person to respond.
+                </p>
+
+
+                {% if pending_sent %}
+
+                    <div class="request-list">
+
+                        {% for item in pending_sent %}
+
+                            <article class="request-card">
+
+                                <div class="request-card-top">
+
+                                    <div class="person-avatar">
+                                        {{ item.teacher_name[0]|upper }}
+                                    </div>
+
+                                    <div class="person-details">
+
+                                        <span class="person-label">
+                                            TEACHER
+                                        </span>
+
+                                        <h3>
+                                            {{ item.teacher_name }}
+                                        </h3>
+
+                                        <p>
+                                            You requested to learn
+                                            <strong>
+                                                {{ item.skill_name }}
+                                            </strong>
+                                        </p>
+
+                                    </div>
+
+                                    <span class="status-badge status-pending">
+                                        Pending
+                                    </span>
+
+                                </div>
+
+
+                                <div class="request-info-grid">
+
+                                    <div class="request-info-item">
+                                        <span>CATEGORY</span>
+                                        <strong>{{ item.category }}</strong>
+                                    </div>
+
+                                    <div class="request-info-item">
+                                        <span>PREFERRED MODE</span>
+                                        <strong>{{ item.preferred_mode }}</strong>
+                                    </div>
+
+                                    <div class="request-info-item">
+                                        <span>REQUESTED</span>
+                                        <strong>
+                                            {{ item.created_at.strftime('%d %b %Y') }}
+                                        </strong>
+                                    </div>
+
+                                </div>
+
+
+                                {% if item.message %}
+
+                                    <div class="request-message">
+                                        <span>YOUR MESSAGE</span>
+                                        <p>{{ item.message }}</p>
+                                    </div>
+
+                                {% endif %}
+
+
+                                <div class="request-actions">
+
+                                    <form method="POST"
+                                          action="{{ url_for('learning_requests') }}">
+
+                                        <input type="hidden"
+                                               name="request_id"
+                                               value="{{ item.id }}">
+
+                                        <input type="hidden"
+                                               name="action"
+                                               value="cancel">
+
+                                        <button type="submit"
+                                                class="cancel-button">
+                                            Cancel Request
+                                        </button>
+
+                                    </form>
+
+                                </div>
+
+                            </article>
+
+                        {% endfor %}
+
+                    </div>
+
+                {% else %}
+
+                    <div class="empty-state compact-empty">
+                        <h3>No pending sent requests</h3>
+                        <p>
+                            Requests you send to teachers will appear here.
+                        </p>
+
+                        <a href="{{ url_for('community') }}"
+                           class="empty-button">
+                            Find a Skill
+                        </a>
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             ACCEPTED REQUESTS
+        ================================================== -->
+
+        <section class="requests-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="section-label">ACTIVE</span>
+
+                    <h2>Accepted Requests</h2>
+
+                    <p>
+                        Your active learning connections.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <!-- ACCEPTED INCOMING -->
+
+            <div class="request-subsection">
+
+                <h3>People learning from you</h3>
+
+                <p class="subsection-description">
+                    Learners whose requests you accepted.
+                </p>
+
+
+                {% if accepted_incoming %}
+
+                    <div class="request-list">
+
+                        {% for item in accepted_incoming %}
+
+                            <article class="request-card">
+
+                                <div class="request-card-top">
+
+                                    <div class="person-avatar">
+                                        {{ item.learner_name[0]|upper }}
+                                    </div>
+
+                                    <div class="person-details">
+
+                                        <span class="person-label">
+                                            LEARNER
+                                        </span>
+
+                                        <h3>{{ item.learner_name }}</h3>
+
+                                        <p>
+                                            Wants to learn
+                                            <strong>{{ item.skill_name }}</strong>
+                                        </p>
+
+                                    </div>
+
+                                    <span class="status-badge status-accepted">
+                                        Accepted
+                                    </span>
+
+                                </div>
+
+
+                                <div class="request-info-grid">
+
+                                    <div class="request-info-item">
+                                        <span>CATEGORY</span>
+                                        <strong>{{ item.category }}</strong>
+                                    </div>
+
+                                    <div class="request-info-item">
+                                        <span>MODE</span>
+                                        <strong>{{ item.preferred_mode }}</strong>
+                                    </div>
+
+                                    <div class="request-info-item">
+                                        <span>ACCEPTED</span>
+                                        <strong>
+                                            {{ item.responded_at.strftime('%d %b %Y') }}
+                                        </strong>
+                                    </div>
+
+                                </div>
+
+
+                                {% if item.message %}
+
+                                    <div class="request-message">
+                                        <span>MESSAGE</span>
+                                        <p>{{ item.message }}</p>
+                                    </div>
+
+                                {% endif %}
+
+
+                                <div class="request-actions">
+
+                                    {% if item.scheduled_session_id %}
+
+                                        <button type="button"
+                                                class="session-button disabled-session-button"
+                                                disabled
+                                                title="A session is already scheduled for this request">
+                                            Session Scheduled
+                                        </button>
+
+                                        <a href="{{ url_for('learning_sessions') }}"
+                                           class="view-session-link">
+                                            View Session
+                                        </a>
+
+                                    {% else %}
+
+                                        <a href="{{ url_for(
+                                            'schedule_session',
+                                            request_id=item.id
+                                        ) }}"
+                                           class="session-button">
+                                            Schedule Session
+                                        </a>
+
+                                    {% endif %}
+
+
+                                    {% if item.whatsapp_available %}
+
+                                        <a href="{{ url_for(
+                                            'learning_request_whatsapp',
+                                            request_id=item.id
+                                        ) }}"
+                                           class="whatsapp-button">
+                                            Chat on WhatsApp
+                                        </a>
+
+                                    {% else %}
+
+                                        <span class="whatsapp-unavailable">
+                                            WhatsApp not available
+                                        </span>
+
+                                    {% endif %}
+
+                                </div>
+
+                            </article>
+
+                        {% endfor %}
+
+                    </div>
+
+                {% else %}
+
+                    <div class="empty-state compact-empty">
+                        <h3>No active learners</h3>
+                        <p>
+                            Accepted requests from learners will appear here.
+                        </p>
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- ACCEPTED SENT -->
+
+            <div class="request-subsection">
+
+                <h3>Skills you are learning</h3>
+
+                <p class="subsection-description">
+                    Teachers who accepted your learning requests.
+                </p>
+
+
+                {% if accepted_sent %}
+
+                    <div class="request-list">
+
+                        {% for item in accepted_sent %}
+
+                            <article class="request-card">
+
+                                <div class="request-card-top">
+
+                                    <div class="person-avatar">
+                                        {{ item.teacher_name[0]|upper }}
+                                    </div>
+
+                                    <div class="person-details">
+
+                                        <span class="person-label">
+                                            TEACHER
+                                        </span>
+
+                                        <h3>{{ item.teacher_name }}</h3>
+
+                                        <p>
+                                            You are learning
+                                            <strong>{{ item.skill_name }}</strong>
+                                        </p>
+
+                                    </div>
+
+                                    <span class="status-badge status-accepted">
+                                        Accepted
+                                    </span>
+
+                                </div>
+
+
+                                <div class="request-info-grid">
+
+                                    <div class="request-info-item">
+                                        <span>CATEGORY</span>
+                                        <strong>{{ item.category }}</strong>
+                                    </div>
+
+                                    <div class="request-info-item">
+                                        <span>MODE</span>
+                                        <strong>{{ item.preferred_mode }}</strong>
+                                    </div>
+
+                                    <div class="request-info-item">
+                                        <span>ACCEPTED</span>
+                                        <strong>
+                                            {{ item.responded_at.strftime('%d %b %Y') }}
+                                        </strong>
+                                    </div>
+
+                                </div>
+
+
+                                {% if item.message %}
+
+                                    <div class="request-message">
+                                        <span>YOUR MESSAGE</span>
+                                        <p>{{ item.message }}</p>
+                                    </div>
+
+                                {% endif %}
+
+
+                                <div class="request-actions">
+
+                                    {% if item.scheduled_session_id %}
+
+                                        <button type="button"
+                                                class="session-button disabled-session-button"
+                                                disabled
+                                                title="A session is already scheduled for this request">
+                                            Session Scheduled
+                                        </button>
+
+                                        <a href="{{ url_for('learning_sessions') }}"
+                                           class="view-session-link">
+                                            View Session
+                                        </a>
+
+                                    {% else %}
+
+                                        <a href="{{ url_for(
+                                            'schedule_session',
+                                            request_id=item.id
+                                        ) }}"
+                                           class="session-button">
+                                            Schedule Session
+                                        </a>
+
+                                    {% endif %}
+
+
+                                    {% if item.whatsapp_available %}
+
+                                        <a href="{{ url_for(
+                                            'learning_request_whatsapp',
+                                            request_id=item.id
+                                        ) }}"
+                                           class="whatsapp-button">
+                                            Chat on WhatsApp
+                                        </a>
+
+                                    {% else %}
+
+                                        <span class="whatsapp-unavailable">
+                                            WhatsApp not available
+                                        </span>
+
+                                    {% endif %}
+
+                                </div>
+
+                            </article>
+
+                        {% endfor %}
+
+                    </div>
+
+                {% else %}
+
+                    <div class="empty-state compact-empty">
+                        <h3>No active learning requests</h3>
+                        <p>
+                            Accepted requests you send will appear here.
+                        </p>
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             REJECTED REQUESTS
+        ================================================== -->
+
+        <section class="requests-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="section-label">HISTORY</span>
+
+                    <h2>Rejected Requests</h2>
+
+                    <p>
+                        Requests that were rejected.
+                    </p>
+                </div>
+
+            </div>
+
+
+            {% if rejected_incoming or rejected_sent %}
+
+                <div class="request-list">
+
+                    {% for item in rejected_incoming %}
+
+                        <article class="request-card">
+
+                            <div class="request-card-top">
+
+                                <div class="person-avatar">
+                                    {{ item.learner_name[0]|upper }}
+                                </div>
+
+                                <div class="person-details">
+
+                                    <span class="person-label">
+                                        LEARNER
+                                    </span>
+
+                                    <h3>{{ item.learner_name }}</h3>
+
+                                    <p>
+                                        Wanted to learn
+                                        <strong>{{ item.skill_name }}</strong>
+                                    </p>
+
+                                </div>
+
+                                <span class="status-badge status-rejected">
+                                    Rejected
+                                </span>
+
+                            </div>
+
+
+                            <div class="request-info-grid">
+
+                                <div class="request-info-item">
+                                    <span>CATEGORY</span>
+                                    <strong>{{ item.category }}</strong>
+                                </div>
+
+                                <div class="request-info-item">
+                                    <span>REQUESTED</span>
+                                    <strong>
+                                        {{ item.created_at.strftime('%d %b %Y') }}
+                                    </strong>
+                                </div>
+
+                                <div class="request-info-item">
+                                    <span>REJECTED</span>
+                                    <strong>
+                                        {{ item.responded_at.strftime('%d %b %Y') }}
+                                    </strong>
+                                </div>
+
+                            </div>
+
+                        </article>
+
+                    {% endfor %}
+
+
+                    {% for item in rejected_sent %}
+
+                        <article class="request-card">
+
+                            <div class="request-card-top">
+
+                                <div class="person-avatar">
+                                    {{ item.teacher_name[0]|upper }}
+                                </div>
+
+                                <div class="person-details">
+
+                                    <span class="person-label">
+                                        TEACHER
+                                    </span>
+
+                                    <h3>{{ item.teacher_name }}</h3>
+
+                                    <p>
+                                        You requested to learn
+                                        <strong>{{ item.skill_name }}</strong>
+                                    </p>
+
+                                </div>
+
+                                <span class="status-badge status-rejected">
+                                    Rejected
+                                </span>
+
+                            </div>
+
+
+                            <div class="request-info-grid">
+
+                                <div class="request-info-item">
+                                    <span>CATEGORY</span>
+                                    <strong>{{ item.category }}</strong>
+                                </div>
+
+                                <div class="request-info-item">
+                                    <span>REQUESTED</span>
+                                    <strong>
+                                        {{ item.created_at.strftime('%d %b %Y') }}
+                                    </strong>
+                                </div>
+
+                                <div class="request-info-item">
+                                    <span>REJECTED</span>
+                                    <strong>
+                                        {{ item.responded_at.strftime('%d %b %Y') }}
+                                    </strong>
+                                </div>
+
+                            </div>
+
+                        </article>
+
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <div class="empty-state compact-empty">
+                    <h3>No rejected requests</h3>
+                    <p>
+                        Rejected learning requests will appear here.
+                    </p>
+                </div>
+
+            {% endif %}
+
+        </section>
+
+
+        <!-- =================================================
+             CANCELLED REQUESTS
+        ================================================== -->
+
+        <section class="requests-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="section-label">HISTORY</span>
+
+                    <h2>Cancelled Requests</h2>
+
+                    <p>
+                        Requests that you cancelled before they were accepted.
+                    </p>
+                </div>
+
+            </div>
+
+
+            {% if cancelled_sent %}
+
+                <div class="request-list">
+
+                    {% for item in cancelled_sent %}
+
+                        <article class="request-card">
+
+                            <div class="request-card-top">
+
+                                <div class="person-avatar">
+                                    {{ item.teacher_name[0]|upper }}
+                                </div>
+
+                                <div class="person-details">
+
+                                    <span class="person-label">
+                                        TEACHER
+                                    </span>
+
+                                    <h3>{{ item.teacher_name }}</h3>
+
+                                    <p>
+                                        You requested to learn
+                                        <strong>{{ item.skill_name }}</strong>
+                                    </p>
+
+                                </div>
+
+                                <span class="status-badge status-cancelled">
+                                    Cancelled
+                                </span>
+
+                            </div>
+
+
+                            <div class="request-info-grid">
+
+                                <div class="request-info-item">
+                                    <span>CATEGORY</span>
+                                    <strong>{{ item.category }}</strong>
+                                </div>
+
+                                <div class="request-info-item">
+                                    <span>REQUESTED</span>
+                                    <strong>
+                                        {{ item.created_at.strftime('%d %b %Y') }}
+                                    </strong>
+                                </div>
+
+                                <div class="request-info-item">
+                                    <span>CANCELLED</span>
+                                    <strong>
+                                        {{ item.responded_at.strftime('%d %b %Y') }}
+                                    </strong>
+                                </div>
+
+                            </div>
+
+
+                            {% if item.message %}
+
+                                <div class="request-message">
+                                    <span>YOUR MESSAGE</span>
+                                    <p>{{ item.message }}</p>
+                                </div>
+
+                            {% endif %}
+
+                        </article>
+
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <div class="empty-state compact-empty">
+                    <h3>No cancelled requests</h3>
+                    <p>
+                        Requests you cancel will appear here.
+                    </p>
+                </div>
+
+            {% endif %}
+
+        </section>
+
+    </section>
+
+</main>
+
+
+<footer class="requests-footer">
+    <p>
+        SkillCircle · Learn together. Grow together.
+    </p>
+</footer>
+
+</body>
+</html>

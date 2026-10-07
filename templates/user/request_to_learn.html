@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Request to Learn | SkillCircle
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='user/request_to_learn.css') }}"
+    >
+
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    {% include 'user/navbar.html' %}
+
+
+    <!-- MAIN -->
+
+    <main class="request-page">
+
+        <section class="request-container">
+
+            <div class="request-intro">
+
+                <span class="request-label">
+                    LEARNING REQUEST
+                </span>
+
+                <h1>
+                    Request to learn
+                </h1>
+
+                <p>
+                    Send a learning request to connect with
+                    someone who can teach you this skill.
+                </p>
+
+            </div>
+
+
+            <!-- TEACHER / SKILL CARD -->
+
+            <div class="teacher-card">
+
+                <div class="teacher-avatar">
+                    {{ teacher.teacher_name[0]|upper }}
+                </div>
+
+                <div class="teacher-info">
+
+                    <span>
+                        LEARNING FROM
+                    </span>
+
+                    <h2>
+                        {{ teacher.teacher_name }}
+                    </h2>
+
+                    <p>
+                        {{ teacher.skill_name }}
+                    </p>
+
+                    <small>
+                        {{ teacher.category }}
+                        ·
+                        {{ teacher.skill_level }}
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- REQUEST FORM -->
+
+            <form
+                method="POST"
+                class="request-form"
+            >
+
+                <div class="form-section">
+
+                    <label for="preferred_mode">
+                        Preferred learning mode
+                    </label>
+
+                    <p class="field-help">
+                        Choose how you would prefer to learn.
+                    </p>
+
+                    <select
+                        id="preferred_mode"
+                        name="preferred_mode"
+                        required
+                    >
+
+                        <option value="Both">
+                            Online or Offline
+                        </option>
+
+                        <option value="Online">
+                            Online
+                        </option>
+
+                        <option value="Offline">
+                            Offline
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-section">
+
+                    <label for="message">
+                        Message
+                    </label>
+
+                    <p class="field-help">
+                        Introduce yourself and tell the teacher
+                        what you would like to learn.
+                    </p>
+
+                    <textarea
+                        id="message"
+                        name="message"
+                        rows="6"
+                        maxlength="1000"
+                        placeholder="Example: Hi, I am interested in learning this skill. I am currently a beginner and would like to improve my practical knowledge."
+                    ></textarea>
+
+                    <div class="character-note">
+                        Maximum 1000 characters
+                    </div>
+
+                </div>
+
+
+                <div class="request-actions">
+
+                    <a
+                        href="{{ url_for('public_profile', user_id=teacher.teacher_id) }}"
+                        class="cancel-button"
+                    >
+                        Cancel
+                    </a>
+
+                    <button
+                        type="submit"
+                        class="send-request-button"
+                    >
+                        Send Learning Request
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer class="request-footer">
+
+        <p>
+            SkillCircle · Learn together. Grow together.
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

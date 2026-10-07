@@ -1,0 +1,1261 @@
+/* =========================================================
+   SKILLCIRCLE PROFILE
+   Uses the global design system from style.css
+   ========================================================= */
+
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+.profile-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 27px;
+    margin-left: auto;
+}
+
+.profile-nav-links a {
+    color: #56645d;
+    font-size: .9rem;
+    font-weight: 600;
+    transition: color .2s;
+}
+
+.profile-nav-links a:hover {
+    color: var(--green-700);
+}
+
+.profile-nav-links .profile-nav-active {
+    color: var(--green-700);
+}
+
+.profile-nav-links .profile-nav-logout {
+    color: #8b5148;
+}
+
+
+/* =========================================================
+   PROFILE HERO
+   ========================================================= */
+
+.profile-hero-section {
+    padding: 72px 0 65px;
+
+    background:
+        radial-gradient(
+            circle at 85% 40%,
+            #eaf3e5 0,
+            transparent 34%
+        ),
+        var(--cream);
+
+    overflow: hidden;
+}
+
+.profile-hero {
+    display: grid;
+
+    grid-template-columns: 1.15fr .85fr;
+
+    align-items: center;
+
+    gap: 70px;
+}
+
+
+.profile-hero-content h1 {
+    max-width: 680px;
+
+    margin: 0;
+
+    color: var(--green-950);
+
+    font-size: clamp(2.7rem, 5vw, 4.2rem);
+
+    line-height: 1.08;
+
+    letter-spacing: -2.5px;
+}
+
+
+.profile-hero-content h1 span {
+    color: var(--green-700);
+}
+
+
+.profile-hero-description {
+    max-width: 590px;
+
+    margin: 23px 0 28px;
+
+    color: var(--muted);
+
+    font-size: 1.05rem;
+
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   USER ROW
+   ========================================================= */
+
+.profile-user-row {
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+}
+
+
+.profile-avatar {
+    display: grid;
+
+    place-items: center;
+
+    width: 48px;
+    height: 48px;
+
+    border-radius: 15px 15px 15px 5px;
+
+    background: var(--green-900);
+
+    color: white;
+
+    font-size: 1.1rem;
+
+    font-weight: 800;
+}
+
+
+.profile-user-row strong,
+.profile-user-row span {
+    display: block;
+}
+
+
+.profile-user-row strong {
+    color: var(--green-950);
+
+    font-size: .92rem;
+}
+
+
+.profile-user-row span {
+    margin-top: 2px;
+
+    color: var(--muted);
+
+    font-size: .76rem;
+}
+
+
+/* =========================================================
+   HERO CARD
+   ========================================================= */
+
+.profile-hero-card {
+    padding: 31px;
+
+    border: 1px solid #dce7db;
+
+    border-radius: 20px;
+
+    background: white;
+
+    box-shadow: var(--shadow);
+}
+
+
+.profile-hero-card-icon {
+    display: grid;
+
+    place-items: center;
+
+    width: 52px;
+    height: 52px;
+
+    margin-bottom: 22px;
+
+    border-radius: 15px;
+
+    background: var(--green-100);
+
+    color: var(--green-700);
+
+    font-size: 1.4rem;
+}
+
+
+.profile-hero-card > strong {
+    display: block;
+
+    color: var(--green-950);
+
+    font-size: 1.1rem;
+}
+
+
+.profile-hero-card > p {
+    margin: 7px 0 24px;
+
+    color: var(--muted);
+
+    font-size: .85rem;
+
+    line-height: 1.6;
+}
+
+
+.profile-hero-stats {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    border-top: 1px solid var(--line);
+
+    padding-top: 20px;
+}
+
+
+.profile-hero-stats div {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 2px;
+}
+
+
+.profile-hero-stats div + div {
+    padding-left: 20px;
+
+    border-left: 1px solid var(--line);
+}
+
+
+.profile-hero-stats strong {
+    color: var(--green-700);
+
+    font-size: 1.5rem;
+}
+
+
+.profile-hero-stats span {
+    color: var(--muted);
+
+    font-size: .72rem;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   FLASH
+   ========================================================= */
+
+.profile-flash-container {
+    padding-top: 22px;
+}
+
+
+.profile-flash {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 13px 16px;
+
+    border: 1px solid var(--line);
+
+    border-radius: 10px;
+
+    font-size: .84rem;
+
+    font-weight: 600;
+}
+
+
+.profile-flash span {
+    display: grid;
+
+    place-items: center;
+
+    width: 23px;
+    height: 23px;
+
+    border-radius: 50%;
+
+    font-size: .75rem;
+}
+
+
+.profile-flash.success {
+    background: #eef7ed;
+
+    border-color: #d3e8d0;
+
+    color: #326044;
+}
+
+
+.profile-flash.success span {
+    background: #d8ecd5;
+
+    color: #326044;
+}
+
+
+.profile-flash.error {
+    background: #fbefed;
+
+    border-color: #efd5d1;
+
+    color: #934a42;
+}
+
+
+.profile-flash.error span {
+    background: #f2dcd8;
+
+    color: #934a42;
+}
+
+
+/* =========================================================
+   SECTION
+   ========================================================= */
+
+.profile-section {
+    padding-top: 82px;
+
+    padding-bottom: 82px;
+}
+
+
+.profile-section-heading {
+    display: flex;
+
+    align-items: end;
+
+    justify-content: space-between;
+
+    gap: 40px;
+
+    margin-bottom: 42px;
+}
+
+
+.profile-section-heading > div {
+    max-width: 680px;
+}
+
+
+.profile-section-heading .eyebrow {
+    margin-bottom: 12px;
+}
+
+
+.profile-section-heading h2 {
+    margin: 0;
+
+    color: var(--green-950);
+
+    font-size: clamp(2rem, 3.2vw, 2.7rem);
+
+    line-height: 1.18;
+
+    letter-spacing: -1.2px;
+}
+
+
+.profile-section-heading > p {
+    max-width: 390px;
+
+    margin: 0;
+
+    color: var(--muted);
+
+    font-size: .88rem;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   BASIC PROFILE GRID
+   ========================================================= */
+
+.profile-basic-grid {
+    display: grid;
+
+    grid-template-columns: 1.35fr .65fr;
+
+    gap: 22px;
+
+    align-items: stretch;
+}
+
+
+/* =========================================================
+   PANELS
+   ========================================================= */
+
+.profile-panel {
+    padding: 31px;
+
+    border: 1px solid var(--line);
+
+    border-radius: var(--radius);
+
+    background: white;
+
+    box-shadow: 0 10px 30px rgba(24, 56, 44, .055);
+}
+
+
+.profile-panel-heading {
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    margin-bottom: 26px;
+}
+
+
+.profile-panel-heading h3 {
+    margin: 0;
+
+    color: var(--green-950);
+
+    font-size: 1.08rem;
+}
+
+
+.profile-panel-heading p {
+    margin: 3px 0 0;
+
+    color: var(--muted);
+
+    font-size: .76rem;
+}
+
+
+.profile-panel-icon {
+    display: grid;
+
+    place-items: center;
+
+    flex: 0 0 48px;
+
+    width: 48px;
+    height: 48px;
+
+    border-radius: 13px;
+
+    background: var(--green-100);
+
+    color: var(--green-700);
+
+    font-size: 1.25rem;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+.profile-form {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 18px;
+}
+
+
+.profile-form-row {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 16px;
+}
+
+
+.profile-form-group {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+
+.profile-form-group label {
+    color: var(--ink);
+
+    font-size: .78rem;
+
+    font-weight: 800;
+}
+
+
+.profile-form-group input,
+.profile-form-group textarea,
+.profile-form-group select {
+    width: 100%;
+
+    min-height: 45px;
+
+    padding: 11px 13px;
+
+    border: 1px solid #dce5dd;
+
+    border-radius: 10px;
+
+    background: #fcfdfb;
+
+    color: var(--ink);
+
+    font-family: inherit;
+
+    font-size: .84rem;
+
+    outline: none;
+
+    transition:
+        border-color .2s,
+        box-shadow .2s,
+        background .2s;
+}
+
+
+.profile-form-group textarea {
+    min-height: 125px;
+
+    resize: vertical;
+
+    line-height: 1.6;
+}
+
+
+.profile-form-group input::placeholder,
+.profile-form-group textarea::placeholder {
+    color: #929c96;
+}
+
+
+.profile-form-group input:focus,
+.profile-form-group textarea:focus,
+.profile-form-group select:focus {
+    border-color: var(--green-700);
+
+    background: white;
+
+    box-shadow: 0 0 0 3px rgba(47, 114, 89, .10);
+}
+
+
+.profile-form-group small {
+    color: #7b857f;
+
+    font-size: .68rem;
+
+    line-height: 1.4;
+}
+
+
+.profile-submit-button {
+    align-self: flex-start;
+
+    min-height: 45px;
+
+    margin-top: 2px;
+
+    padding-inline: 19px;
+}
+
+
+/* =========================================================
+   SUMMARY PANEL
+   ========================================================= */
+
+.profile-summary-panel {
+    padding: 31px;
+
+    border-radius: var(--radius);
+
+    background: var(--green-900);
+
+    color: white;
+
+    box-shadow: var(--shadow);
+}
+
+
+.profile-summary-panel .eyebrow {
+    color: #b8d8bb;
+}
+
+
+.profile-summary-panel h3 {
+    margin: 0;
+
+    font-size: 1.45rem;
+
+    line-height: 1.2;
+}
+
+
+.profile-summary-description {
+    margin: 13px 0 27px;
+
+    color: #cbdcd0;
+
+    font-size: .8rem;
+
+    line-height: 1.7;
+}
+
+
+.profile-summary-list {
+    display: grid;
+
+    gap: 13px;
+}
+
+
+.profile-summary-list > div {
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    padding: 12px;
+
+    border: 1px solid rgba(255,255,255,.11);
+
+    border-radius: 10px;
+
+    background: rgba(255,255,255,.055);
+}
+
+
+.summary-icon {
+    display: grid;
+
+    place-items: center;
+
+    flex: 0 0 32px;
+
+    width: 32px;
+    height: 32px;
+
+    border-radius: 9px;
+
+    background: rgba(255,255,255,.10);
+
+    color: #d1e7d3;
+
+    font-size: .8rem;
+
+    font-weight: 700;
+}
+
+
+.profile-summary-list small,
+.profile-summary-list strong {
+    display: block;
+}
+
+
+.profile-summary-list small {
+    color: #9fb9a6;
+
+    font-size: .64rem;
+}
+
+
+.profile-summary-list strong {
+    margin-top: 2px;
+
+    color: white;
+
+    font-size: .74rem;
+
+    word-break: break-word;
+}
+
+
+/* =========================================================
+   SKILLS SECTION
+   ========================================================= */
+
+.profile-skills-section {
+    padding-top: 82px;
+
+    padding-bottom: 82px;
+
+    background: var(--green-50);
+}
+
+
+.skills-profile-grid {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 22px;
+}
+
+
+.skill-panel {
+    min-width: 0;
+}
+
+
+.icon-teach {
+    background: #e1efdf;
+
+    color: #32634b;
+}
+
+
+.icon-learn {
+    background: #e8e5f8;
+
+    color: #5d5699;
+}
+
+
+.skill-form {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 12px;
+
+    margin-bottom: 22px;
+}
+
+
+.skill-form .profile-form-group:first-child {
+    grid-column: 1 / -1;
+}
+
+
+.profile-skill-button {
+    grid-column: 1 / -1;
+
+    min-height: 43px;
+
+    margin-top: 2px;
+}
+
+
+.profile-skill-list {
+    display: grid;
+
+    gap: 10px;
+}
+
+
+.profile-skill-item {
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    padding: 13px;
+
+    border: 1px solid #e1e8e1;
+
+    border-radius: 11px;
+
+    background: #fcfdfb;
+
+    transition:
+        transform .2s,
+        box-shadow .2s,
+        border-color .2s;
+}
+
+
+.profile-skill-item:hover {
+    transform: translateY(-2px);
+
+    border-color: #cbdccc;
+
+    box-shadow: 0 8px 20px rgba(24,56,44,.06);
+}
+
+
+.profile-skill-art {
+    display: grid;
+
+    place-items: center;
+
+    flex: 0 0 42px;
+
+    width: 42px;
+    height: 42px;
+
+    border-radius: 11px;
+
+    background: #e1efdf;
+
+    color: var(--green-700);
+
+    font-size: .95rem;
+
+    font-weight: 800;
+}
+
+
+.learning-art {
+    background: #e8e5f8;
+
+    color: #5d5699;
+}
+
+
+.profile-skill-info {
+    min-width: 0;
+
+    flex: 1;
+}
+
+
+.profile-skill-info strong,
+.profile-skill-info span {
+    display: block;
+}
+
+
+.profile-skill-info strong {
+    color: var(--green-950);
+
+    font-size: .82rem;
+}
+
+
+.profile-skill-info span {
+    margin-top: 2px;
+
+    color: var(--muted);
+
+    font-size: .67rem;
+}
+
+
+.skill-level-badge {
+    flex-shrink: 0;
+
+    padding: 6px 9px;
+
+    border-radius: 20px;
+
+    background: var(--green-100);
+
+    color: var(--green-800);
+
+    font-size: .61rem;
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+
+.profile-empty-state {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    min-height: 82px;
+
+    padding: 15px;
+
+    border: 1px dashed #ccd9ce;
+
+    border-radius: 11px;
+
+    color: var(--muted);
+
+    text-align: center;
+}
+
+
+.profile-empty-state > span {
+    display: grid;
+
+    place-items: center;
+
+    width: 29px;
+    height: 29px;
+
+    border-radius: 50%;
+
+    background: var(--green-100);
+
+    color: var(--green-700);
+
+    font-weight: 700;
+}
+
+
+.profile-empty-state p {
+    margin: 0;
+
+    font-size: .75rem;
+}
+
+
+/* =========================================================
+   PROFILE TIP
+   ========================================================= */
+
+.profile-tip-section {
+    padding: 55px 0;
+
+    background: white;
+}
+
+
+.profile-tip {
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    padding: 23px 27px;
+
+    border: 1px solid #dce7db;
+
+    border-radius: 15px;
+
+    background: var(--cream);
+}
+
+
+.profile-tip-icon {
+    display: grid;
+
+    place-items: center;
+
+    flex: 0 0 45px;
+
+    width: 45px;
+    height: 45px;
+
+    border-radius: 13px;
+
+    background: var(--green-900);
+
+    color: white;
+
+    font-size: 1rem;
+}
+
+
+.profile-tip strong {
+    display: block;
+
+    color: var(--green-950);
+
+    font-size: .9rem;
+}
+
+
+.profile-tip p {
+    margin: 4px 0 0;
+
+    color: var(--muted);
+
+    font-size: .76rem;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.profile-footer {
+    padding-top: 0;
+}
+
+
+.profile-footer .footer-bottom {
+    border-top: 0;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .profile-hero {
+        grid-template-columns: 1fr;
+
+        gap: 35px;
+    }
+
+
+    .profile-hero-card {
+        max-width: 550px;
+    }
+
+
+    .profile-basic-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .skills-profile-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .profile-nav-links {
+        gap: 13px;
+    }
+
+
+    .profile-nav-links a {
+        font-size: .78rem;
+    }
+
+
+    .profile-hero-section {
+        padding: 50px 0;
+    }
+
+
+    .profile-hero-content h1 {
+        font-size: 2.7rem;
+
+        letter-spacing: -1.7px;
+    }
+
+
+    .profile-section-heading {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+
+    .profile-section-heading > p {
+        max-width: 600px;
+    }
+
+
+    .profile-form-row {
+        grid-template-columns: 1fr;
+    }
+
+
+    .skill-form {
+        grid-template-columns: 1fr;
+    }
+
+
+    .skill-form .profile-form-group:first-child {
+        grid-column: auto;
+    }
+
+
+    .profile-skill-button {
+        grid-column: auto;
+    }
+
+}
+
+
+@media (max-width: 560px) {
+
+    .profile-nav-links a:first-child {
+        display: none;
+    }
+
+
+    .profile-nav-links {
+        gap: 10px;
+    }
+
+
+    .profile-hero-content h1 {
+        font-size: 2.35rem;
+    }
+
+
+    .profile-hero-description {
+        font-size: .92rem;
+    }
+
+
+    .profile-panel,
+    .profile-summary-panel {
+        padding: 22px;
+    }
+
+
+    .profile-hero-card {
+        padding: 23px;
+    }
+
+
+    .profile-skill-item {
+        align-items: flex-start;
+    }
+
+
+    .skill-level-badge {
+        margin-left: auto;
+    }
+
+
+    .profile-tip {
+        align-items: flex-start;
+
+        padding: 20px;
+    }
+
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+    .profile-skill-item {
+        transition: none;
+    }
+
+}
+
+
+/* =========================================================
+   DELETE SKILL BUTTON
+   ========================================================= */
+
+.profile-skill-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+.delete-skill-form {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+
+.delete-skill-btn {
+    background: #fff0f0;
+    border: 1px solid #fecaca;
+    color: #dc2626;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.delete-skill-btn:hover {
+    background: #dc2626;
+    color: #ffffff;
+    border-color: #dc2626;
+}
+
+/* =========================================================
+   PROFILE COMPLETION REQUIREMENTS & NOTICES
+   ========================================================= */
+
+.profile-required-alert {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    border-left: 5px solid #d97706;
+    padding: 18px 22px;
+    border-radius: 14px;
+    box-shadow: 0 4px 16px rgba(217, 119, 6, 0.08);
+}
+
+.profile-required-alert-icon {
+    font-size: 26px;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.profile-required-alert-content h3 {
+    margin: 0 0 6px 0;
+    font-size: 1.05rem;
+    font-weight: 750;
+    color: #92400e;
+}
+
+.profile-required-alert-content p {
+    margin: 0;
+    font-size: 0.92rem;
+    color: #78350f;
+    line-height: 1.55;
+}
+
+.required-asterisk {
+    color: #dc2626;
+    font-weight: 800;
+    margin-left: 4px;
+}
+
+.skills-locked-notice {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-left: 4px solid #ef4444;
+    color: #991b1b;
+    padding: 14px 18px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.profile-skill-button:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    background: #94a3b8 !important;
+    border-color: #94a3b8 !important;
+    box-shadow: none !important;
+    transform: none !important;
+}

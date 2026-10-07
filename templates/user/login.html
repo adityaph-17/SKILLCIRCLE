@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | SkillCircle</title>
+
+    <!-- Global SkillCircle theme -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- Login page styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='user/login.css') }}">
+</head>
+
+<body>
+
+    <main class="login-page">
+
+        <!-- Left section -->
+
+        <section class="login-intro">
+
+            <div class="login-intro-content">
+
+                <a href="{{ url_for('home') }}" class="login-logo">
+                    SkillCircle
+                </a>
+
+                <div class="login-intro-text">
+
+                    <p class="login-eyebrow">
+                        WELCOME BACK
+                    </p>
+
+                    <h1>
+                        Continue your
+                        <span>learning journey.</span>
+                    </h1>
+
+                    <p class="login-description">
+                        Connect with people around you, learn useful skills,
+                        and share what you know with your community.
+                    </p>
+
+                </div>
+
+                <div class="login-highlight">
+
+                    <div class="highlight-icon">
+                        ✓
+                    </div>
+
+                    <div>
+                        <strong>Learn. Share. Grow.</strong>
+
+                        <p>
+                            One community, many skills.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Right section -->
+
+        <section class="login-form-section">
+
+            <div class="login-form-card">
+
+                <div class="login-heading">
+
+                    <p class="form-step">
+                        ACCOUNT LOGIN
+                    </p>
+
+                    <h2>
+                        Welcome back
+                    </h2>
+
+                    <p>
+                        Enter your account details to continue.
+                    </p>
+
+                </div>
+
+
+                <!-- Flash messages -->
+
+                {% with messages = get_flashed_messages(with_categories=true) %}
+
+                {% if messages %}
+
+                <div class="flash-messages">
+
+                    {% for category, message in messages %}
+
+                    <div class="flash-message {{ category }}">
+                        {{ message }}
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+                {% endif %}
+
+                {% endwith %}
+
+
+                <!-- Login form -->
+
+                <form method="POST" class="login-form">
+
+                    <!-- Email -->
+
+                    <div class="login-form-group">
+
+                        <label for="email">
+                            Email Address
+                        </label>
+
+                        <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email"
+                            required>
+
+                    </div>
+
+
+                    <!-- Password -->
+
+                    <div class="login-form-group">
+
+                        <div class="password-label-row">
+
+                            <label for="password">
+                                Password
+                            </label>
+
+                            <a href="{{ url_for('forgot_password') }}" class="forgot-password">
+                                Forgot password?
+                            </a>
+
+                        </div>
+
+                        <input type="password" id="password" name="password" placeholder="Enter your password"
+                            autocomplete="current-password" required>
+
+                    </div>
+
+
+                    <!-- Login button -->
+
+                    <button type="submit" class="login-submit">
+
+                        <span>
+                            Login to SkillCircle
+                        </span>
+
+                        <span class="login-arrow">
+                            →
+                        </span>
+
+                    </button>
+
+                </form>
+
+
+                <!-- Register link -->
+
+                <div class="register-prompt">
+
+                    <span>
+                        Don't have an account?
+                    </span>
+
+                    <a href="{{ url_for('register') }}">
+                        Create an account
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>

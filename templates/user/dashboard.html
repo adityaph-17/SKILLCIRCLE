@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Your SkillCircle community learning dashboard.">
+
+    <title>Dashboard | SkillCircle</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='user/dashboard.css') }}">
+
+</head>
+
+
+<body>
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    {% include 'user/navbar.html' %}
+
+
+    <main>
+
+
+        <!-- =================================================
+             WELCOME
+        ================================================== -->
+
+        <section class="dashboard-hero" id="overview">
+
+            <div class="container dashboard-hero-grid">
+
+                <div>
+
+                    <p class="eyebrow">
+
+                        <span class="eyebrow-dot"></span>
+
+                        YOUR SKILLCIRCLE
+
+                    </p>
+
+
+                    <h1>
+                        Welcome back,
+                        <span>{{ session.get("user_name") }}</span>.
+                    </h1>
+
+
+                    <p class="dashboard-intro">
+
+                        Keep building your learning journey.
+                        Share what you know and discover what
+                        you want to learn next.
+
+                    </p>
+
+
+                    <div class="dashboard-actions">
+
+                        <a class="button" href="{{ url_for('profile') }}">
+                            Edit profile
+                            <span aria-hidden="true">→</span>
+                        </a>
+
+                        <a class="secondary-button" href="#learning">
+                            View learning goals
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <div class="welcome-card">
+
+                    <div class="welcome-card-top">
+
+                        <span class="welcome-icon">
+                            ✦
+                        </span>
+
+                        <span class="welcome-label">
+                            COMMUNITY LEARNING
+                        </span>
+
+                    </div>
+
+
+                    <h2>
+                        Teach what you know.
+                        Learn what you want.
+                    </h2>
+
+
+                    <p>
+                        Your profile can be both a place to
+                        share knowledge and a starting point
+                        for learning from others.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             PROFILE STATUS
+        ================================================== -->
+
+        <section class="dashboard-section">
+
+            <div class="container">
+
+                <div class="section-heading dashboard-heading">
+
+                    <div>
+
+                        <p class="eyebrow">
+                            YOUR PROFILE
+                        </p>
+
+                        <h2>
+                            Your community profile
+                        </h2>
+
+                    </div>
+
+                    <a class="text-link" href="{{ url_for('profile') }}">
+                        Manage profile
+                        <span aria-hidden="true">→</span>
+                    </a>
+
+                </div>
+
+
+                <div class="dashboard-grid">
+
+
+                    <!-- Profile status -->
+
+                    <article class="dashboard-card profile-status-card">
+
+                        <div class="card-icon green-icon">
+                            ☺
+                        </div>
+
+
+                        <div class="card-content">
+
+                            <span class="card-label">
+                                PROFILE STATUS
+                            </span>
+
+
+                            {% if profile_complete %}
+
+                            <h3>
+                                Profile is ready
+                            </h3>
+
+                            <p>
+                                Your basic information and
+                                skills are available to the
+                                community.
+                            </p>
+
+                            <span class="status-badge status-complete">
+                                ✓ Complete
+                            </span>
+
+                            {% else %}
+
+                            <h3>
+                                Complete your profile
+                            </h3>
+
+                            <p>
+                                Add your basic information
+                                and at least one teaching or
+                                learning skill.
+                            </p>
+
+                            <span class="status-badge status-pending">
+                                Finish setup
+                            </span>
+
+                            {% endif %}
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- Teaching count -->
+
+                    <article class="dashboard-card stat-card">
+
+                        <div class="card-icon orange-icon">
+                            ↗
+                        </div>
+
+
+                        <div>
+
+                            <span class="card-label">
+                                SKILLS I TEACH
+                            </span>
+
+                            <strong class="stat-number">
+                                {{ teaching_skills|length }}
+                            </strong>
+
+                            <p>
+                                Skills you can share
+                            </p>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- Learning count -->
+
+                    <article class="dashboard-card stat-card">
+
+                        <div class="card-icon purple-icon">
+                            ↘
+                        </div>
+
+
+                        <div>
+
+                            <span class="card-label">
+                                SKILLS I WANT TO LEARN
+                            </span>
+
+                            <strong class="stat-number">
+                                {{ learning_skills|length }}
+                            </strong>
+
+                            <p>
+                                Your current learning goals
+                            </p>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             TEACHING SKILLS
+        ================================================== -->
+
+        <section class="dashboard-section section-soft" id="teaching">
+
+            <div class="container">
+
+                <div class="section-heading dashboard-heading">
+
+                    <div>
+
+                        <p class="eyebrow">
+                            SHARE YOUR KNOWLEDGE
+                        </p>
+
+                        <h2>
+                            Skills I teach
+                        </h2>
+
+                        <p>
+                            These are the skills you have chosen
+                            to share with other people.
+                        </p>
+
+                    </div>
+
+                    <a class="text-link" href="{{ url_for('profile') }}">
+                        Add a skill
+                        <span aria-hidden="true">+</span>
+                    </a>
+
+                </div>
+
+
+                {% if teaching_skills %}
+
+                <div class="skill-dashboard-grid">
+
+                    {% for skill in teaching_skills %}
+
+                    <article class="dashboard-skill-card">
+
+                        <div class="skill-card-icon">
+                            ↗
+                        </div>
+
+
+                        <div class="skill-card-content">
+
+                            <span class="skill-category">
+                                {{ skill.category }}
+                            </span>
+
+                            <h3>
+                                {{ skill.skill_name }}
+                            </h3>
+
+                            <span class="level-badge">
+                                {{ skill.skill_level }}
+                            </span>
+
+                        </div>
+
+
+                        <span class="skill-card-arrow">
+                            →
+                        </span>
+
+                    </article>
+
+                    {% endfor %}
+
+                </div>
+
+                {% else %}
+
+                <div class="empty-dashboard-card">
+
+                    <div class="empty-icon">
+                        +
+                    </div>
+
+                    <h3>
+                        No teaching skills yet
+                    </h3>
+
+                    <p>
+                        Add a skill that you know and would
+                        like to share with your community.
+                    </p>
+
+                    <a class="button" href="{{ url_for('profile') }}">
+                        Add your first skill
+                    </a>
+
+                </div>
+
+                {% endif %}
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             LEARNING SKILLS
+        ================================================== -->
+
+        <section class="dashboard-section" id="learning">
+
+            <div class="container">
+
+                <div class="section-heading dashboard-heading">
+
+                    <div>
+
+                        <p class="eyebrow">
+                            KEEP LEARNING
+                        </p>
+
+                        <h2>
+                            Skills I want to learn
+                        </h2>
+
+                        <p>
+                            These are the skills you want to
+                            develop through the community.
+                        </p>
+
+                    </div>
+
+                    <a class="text-link" href="{{ url_for('profile') }}">
+                        Add a learning goal
+                        <span aria-hidden="true">+</span>
+                    </a>
+
+                </div>
+
+
+                {% if learning_skills %}
+
+                <div class="skill-dashboard-grid">
+
+                    {% for skill in learning_skills %}
+
+                    <article class="dashboard-skill-card learning-card">
+
+                        <div class="skill-card-icon learning-icon">
+                            ✦
+                        </div>
+
+
+                        <div class="skill-card-content">
+
+                            <span class="skill-category">
+                                {{ skill.category }}
+                            </span>
+
+                            <h3>
+                                {{ skill.skill_name }}
+                            </h3>
+
+                            <span class="level-badge">
+                                {{ skill.skill_level }}
+                            </span>
+
+                        </div>
+
+
+                        <span class="skill-card-arrow">
+                            →
+                        </span>
+
+                    </article>
+
+                    {% endfor %}
+
+                </div>
+
+                {% else %}
+
+                <div class="empty-dashboard-card">
+
+                    <div class="empty-icon">
+                        +
+                    </div>
+
+                    <h3>
+                        No learning goals yet
+                    </h3>
+
+                    <p>
+                        Add something you would like to
+                        learn from another member.
+                    </p>
+
+                    <a class="button" href="{{ url_for('profile') }}">
+                        Add your first goal
+                    </a>
+
+                </div>
+
+                {% endif %}
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             DISCOVER
+        ================================================== -->
+
+        <section class="dashboard-discover">
+
+            <div class="container">
+
+                <div class="discover-panel">
+
+                    <div>
+
+                        <p class="eyebrow eyebrow-light">
+                            NEXT STEP
+                        </p>
+
+                        <h2>
+                            Ready to discover your
+                            next learning connection?
+                        </h2>
+
+                        <p>
+                            Explore skills shared by people in
+                            the SkillCircle community.
+                        </p>
+
+                    </div>
+
+
+                    <a class="button button-light" href="#">
+                        Explore skills
+                        <span aria-hidden="true">→</span>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="dashboard-footer">
+
+        <div class="container dashboard-footer-inner">
+
+            <a class="brand brand-footer" href="{{ url_for('dashboard') }}">
+
+                <span class="brand-mark" aria-hidden="true">
+                    S
+                </span>
+
+                <span>
+                    Skill<span class="brand-accent">Circle</span>
+                </span>
+
+            </a>
+
+
+            <p>
+                Learn locally. Share freely.
+            </p>
+
+
+            <a href="{{ url_for('logout') }}">
+                Log out
+            </a>
+
+        </div>
+
+    </footer>
+
+
+    <script>
+
+        const menuButton =
+            document.querySelector(".menu-toggle");
+
+        const navLinks =
+            document.querySelector(".nav-links");
+
+
+        if (menuButton && navLinks) {
+
+            menuButton.addEventListener("click", () => {
+
+                const expanded =
+                    menuButton.getAttribute(
+                        "aria-expanded"
+                    ) === "true";
+
+                menuButton.setAttribute(
+                    "aria-expanded",
+                    String(!expanded)
+                );
+
+                navLinks.classList.toggle(
+                    "is-open",
+                    !expanded
+                );
+
+            });
+
+
+            document
+                .querySelectorAll(".nav-links a")
+                .forEach(link => {
+
+                    link.addEventListener("click", () => {
+
+                        navLinks.classList.remove(
+                            "is-open"
+                        );
+
+                        menuButton.setAttribute(
+                            "aria-expanded",
+                            "false"
+                        );
+
+                    });
+
+                });
+
+        }
+
+    </script>
+
+</body>
+
+</html>

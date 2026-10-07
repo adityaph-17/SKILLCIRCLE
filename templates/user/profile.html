@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="Manage your SkillCircle profile, teaching skills, and learning goals.">
+
+    <meta name="theme-color" content="#173f35">
+
+    <title>My Profile — SkillCircle</title>
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='user/profile.css') }}">
+
+</head>
+
+
+<body>
+
+    <a class="skip-link" href="#main">
+        Skip to content
+    </a>
+
+
+    <!-- =====================================================
+         NAVIGATION
+         ===================================================== -->
+
+    {% include 'user/navbar.html' %}
+
+
+
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
+
+    <main id="main">
+
+
+        <!-- =================================================
+             PROFILE HERO
+             ================================================= -->
+
+        <section class="profile-hero-section">
+
+            <div class="container">
+
+                <div class="profile-hero">
+
+                    <div class="profile-hero-content">
+
+                        <p class="eyebrow">
+
+                            <span class="eyebrow-dot"></span>
+
+                            MY PROFILE
+
+                        </p>
+
+
+                        <h1>
+
+                            Build your
+                            <span>SkillCircle profile.</span>
+
+                        </h1>
+
+
+                        <p class="profile-hero-description">
+
+                            Tell the community what you know,
+                            what you want to learn, and how you
+                            would like to connect.
+
+                        </p>
+
+
+                        <div class="profile-user-row">
+
+                            <div class="profile-avatar">
+
+                                {{ session.get("user_name", "U")[0]|upper }}
+
+                            </div>
+
+
+                            <div>
+
+                                <strong>
+                                    {{ session.get("user_name") }}
+                                </strong>
+
+                                <span>
+                                    {{ session.get("user_email") }}
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="profile-hero-card">
+
+                        <div class="profile-hero-card-icon">
+                            ✦
+                        </div>
+
+
+                        <strong>
+                            Your learning identity
+                        </strong>
+
+
+                        <p>
+                            One profile lets you both teach
+                            and learn.
+                        </p>
+
+
+                        <div class="profile-hero-stats">
+
+                            <div>
+
+                                <strong>
+                                    {{ teaching_skills|length }}
+                                </strong>
+
+                                <span>
+                                    Teaching
+                                </span>
+
+                            </div>
+
+
+                            <div>
+
+                                <strong>
+                                    {{ learning_skills|length }}
+                                </strong>
+
+                                <span>
+                                    Learning
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             FLASH MESSAGES
+             ================================================= -->
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+
+        {% if messages %}
+
+        <div class="container profile-flash-container">
+
+            {% for category, message in messages %}
+
+            <div class="profile-flash {{ category }}">
+
+                <span>
+
+                    {% if category == "success" %}
+                        ✓
+                    {% else %}
+                        !
+                    {% endif %}
+
+                </span>
+
+                {{ message }}
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% endif %}
+
+        {% endwith %}
+
+
+
+        {% if not profile_complete %}
+        <div class="container profile-alert-container" style="margin-top: 24px;">
+            <div class="profile-required-alert">
+                <div class="profile-required-alert-icon">⚠️</div>
+                <div class="profile-required-alert-content">
+                    <h3>All Profile Details Are Required</h3>
+                    <p>To teach or learn skills, you must fill out and save all required profile details below: <strong>About you</strong>, <strong>Location / Area</strong>, <strong>Availability</strong>, and <strong>WhatsApp number</strong>.</p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- =================================================
+             BASIC PROFILE
+             ================================================= -->
+
+        <section class="section profile-section" id="profile-details">
+
+            <div class="container">
+
+
+                <div class="profile-section-heading">
+
+                    <div>
+
+                        <p class="eyebrow">
+                            ABOUT YOU
+                        </p>
+
+                        <h2>
+                            Tell people a little about yourself.
+                        </h2>
+
+                    </div>
+
+
+                    <p>
+                        Your profile helps other members understand
+                        who you are and how you prefer to learn.
+                    </p>
+
+                </div>
+
+
+
+                <div class="profile-basic-grid">
+
+
+                    <!-- Profile form -->
+
+                    <div class="profile-panel">
+
+
+                        <div class="profile-panel-heading">
+
+                            <div class="profile-panel-icon">
+                                ☺
+                            </div>
+
+                            <div>
+
+                                <h3>
+                                    Profile details
+                                </h3>
+
+                                <p>
+                                    All details below are required to teach and learn skills.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <form method="POST"
+                            class="profile-form">
+
+
+                            <!-- ABOUT -->
+
+                            <div class="profile-form-group">
+
+                                <label for="bio">
+                                    About you <span class="required-asterisk" title="Required">*</span>
+                                </label>
+
+                                <textarea
+                                    id="bio"
+                                    name="bio"
+                                    rows="5"
+                                    maxlength="1000"
+                                    required
+                                    placeholder="Tell others about yourself, your interests, or your experience...">{{ profile.bio if profile else '' }}</textarea>
+
+                            </div>
+
+
+
+                            <!-- LOCATION + LEARNING MODE -->
+
+                            <div class="profile-form-row">
+
+
+                                <div class="profile-form-group">
+
+                                    <label for="location_area">
+                                        Location / Area <span class="required-asterisk" title="Required">*</span>
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        id="location_area"
+                                        name="location_area"
+                                        maxlength="150"
+                                        required
+                                        value="{{ profile.location_area if profile else '' }}"
+                                        placeholder="Example: Kothrud, Pune">
+
+                                    <small>
+                                        Use an approximate area, not your home address.
+                                    </small>
+
+                                </div>
+
+
+                                <div class="profile-form-group">
+
+                                    <label for="learning_mode">
+                                        Learning mode <span class="required-asterisk" title="Required">*</span>
+                                    </label>
+
+                                    <select
+                                        id="learning_mode"
+                                        name="learning_mode"
+                                        required>
+
+                                        <option value="Both"
+                                            {% if not profile or profile.learning_mode == 'Both' %}
+                                                selected
+                                            {% endif %}>
+                                            Online & Offline
+                                        </option>
+
+                                        <option value="Online"
+                                            {% if profile and profile.learning_mode == 'Online' %}
+                                                selected
+                                            {% endif %}>
+                                            Online only
+                                        </option>
+
+                                        <option value="Offline"
+                                            {% if profile and profile.learning_mode == 'Offline' %}
+                                                selected
+                                            {% endif %}>
+                                            Offline only
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <!-- AVAILABILITY -->
+
+                            <div class="profile-form-group">
+
+                                <label for="availability">
+                                    Availability <span class="required-asterisk" title="Required">*</span>
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="availability"
+                                    name="availability"
+                                    maxlength="255"
+                                    required
+                                    value="{{ profile.availability if profile else '' }}"
+                                    placeholder="Example: Weekdays 6 PM – 9 PM">
+
+                            </div>
+
+
+
+                            <!-- WHATSAPP -->
+
+                            <div class="profile-form-group">
+
+                                <label for="whatsapp_number">
+                                    WhatsApp number <span class="required-asterisk" title="Required">*</span>
+                                </label>
+
+                                <input
+                                    type="tel"
+                                    id="whatsapp_number"
+                                    name="whatsapp_number"
+                                    maxlength="20"
+                                    required
+                                    value="{{ profile.whatsapp_number if profile and profile.whatsapp_number else '' }}"
+                                    placeholder="Example: +91 9876543210"
+                                    autocomplete="tel">
+
+                                <small>
+                                    Add your number with country code. It will not be shown on your public profile.
+                                </small>
+
+                            </div>
+
+
+
+                            <!-- SAVE -->
+
+                            <button
+                                type="submit"
+                                name="action"
+                                value="save_profile"
+                                class="button profile-submit-button">
+
+                                Save profile
+
+                                <span aria-hidden="true">
+                                    →
+                                </span>
+
+                            </button>
+
+                        </form>
+
+                    </div>
+
+
+
+                    <!-- PROFILE SUMMARY -->
+
+                    <aside class="profile-summary-panel">
+
+                        <p class="eyebrow">
+                            PROFILE SUMMARY
+                        </p>
+
+
+                        <h3>
+                            Your community profile
+                        </h3>
+
+
+                        <p class="profile-summary-description">
+
+                            This is the information other members
+                            can use when deciding whether your skills
+                            or learning goals are a good match.
+
+                        </p>
+
+
+                        <div class="profile-summary-list">
+
+
+                            <div>
+
+                                <span class="summary-icon">
+                                    @
+                                </span>
+
+                                <span>
+
+                                    <small>
+                                        Email
+                                    </small>
+
+                                    <strong>
+                                        {{ session.get("user_email") }}
+                                    </strong>
+
+                                </span>
+
+                            </div>
+
+
+                            <div>
+
+                                <span class="summary-icon">
+                                    ◎
+                                </span>
+
+                                <span>
+
+                                    <small>
+                                        Location
+                                    </small>
+
+                                    <strong>
+
+                                        {% if profile and profile.location_area %}
+
+                                            {{ profile.location_area }}
+
+                                        {% else %}
+
+                                            Not added yet
+
+                                        {% endif %}
+
+                                    </strong>
+
+                                </span>
+
+                            </div>
+
+
+                            <div>
+
+                                <span class="summary-icon">
+                                    ↔
+                                </span>
+
+                                <span>
+
+                                    <small>
+                                        Learning mode
+                                    </small>
+
+                                    <strong>
+
+                                        {% if profile %}
+
+                                            {{ profile.learning_mode }}
+
+                                        {% else %}
+
+                                            Online & Offline
+
+                                        {% endif %}
+
+                                    </strong>
+
+                                </span>
+
+                            </div>
+
+
+                            <div>
+
+                                <span class="summary-icon">
+                                    ◷
+                                </span>
+
+                                <span>
+
+                                    <small>
+                                        Availability
+                                    </small>
+
+                                    <strong>
+
+                                        {% if profile and profile.availability %}
+
+                                            {{ profile.availability }}
+
+                                        {% else %}
+
+                                            Not added yet
+
+                                        {% endif %}
+
+                                    </strong>
+
+                                </span>
+
+                            </div>
+
+
+                            <div>
+
+                                <span class="summary-icon">
+                                    W
+                                </span>
+
+                                <span>
+
+                                    <small>
+                                        WhatsApp
+                                    </small>
+
+                                    <strong>
+
+                                        {% if profile and profile.whatsapp_number %}
+
+                                            Added
+
+                                        {% else %}
+
+                                            Not added yet
+
+                                        {% endif %}
+
+                                    </strong>
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </aside>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             SKILLS
+             ================================================= -->
+
+        <section class="section profile-skills-section">
+
+            <div class="container">
+
+
+                <div class="profile-section-heading">
+
+                    <div>
+
+                        <p class="eyebrow">
+                            YOUR SKILLS
+                        </p>
+
+                        <h2>
+                            Give and receive knowledge.
+                        </h2>
+
+                    </div>
+
+
+                    <p>
+                        Add the skills you can teach and the skills
+                        you want to learn.
+                    </p>
+
+                </div>
+
+
+
+                <div class="skills-profile-grid">
+
+
+                    <!-- TEACHING SKILLS -->
+
+                    <div class="profile-panel skill-panel">
+
+
+                        <div class="profile-panel-heading">
+
+                            <div class="profile-panel-icon icon-teach">
+                                ↗
+                            </div>
+
+                            <div>
+
+                                <h3>
+                                    Skills I Teach
+                                </h3>
+
+                                <p>
+                                    What can you share with others?
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        {% if not profile_complete %}
+                        <div class="skills-locked-notice">
+                            🔒 <strong>Profile details required:</strong> Please fill in and save all required profile details above (About you, Location, Availability, and WhatsApp number) to add teaching skills.
+                        </div>
+                        {% endif %}
+
+                        <form
+                            method="POST"
+                            class="skill-form">
+
+
+                            <div class="profile-form-group">
+
+                                <label for="teaching_skill">
+                                    Skill
+                                </label>
+
+
+                                <select
+                                    id="teaching_skill"
+                                    name="teaching_skill"
+                                    required>
+
+                                    <option value="">
+                                        Select a skill
+                                    </option>
+
+
+                                    {% for skill in skills %}
+
+                                    <option
+                                        value="{{ skill.id }}"
+                                        data-description="{{ skill.description or '' }}">
+
+                                        {{ skill.skill_name }}
+
+                                    </option>
+
+                                    {% endfor %}
+
+                                </select>
+
+
+                                <div
+                                    id="teaching-skill-description"
+                                    class="skill-description"
+                                    aria-live="polite">
+
+                                    Select a skill to see its description.
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="profile-form-group">
+
+                                <label for="teaching_level">
+                                    Your level
+                                </label>
+
+
+                                <select
+                                    id="teaching_level"
+                                    name="teaching_level"
+                                    required>
+
+                                    <option value="Beginner">
+                                        Beginner
+                                    </option>
+
+                                    <option value="Intermediate">
+                                        Intermediate
+                                    </option>
+
+                                    <option value="Advanced">
+                                        Advanced
+                                    </option>
+
+                                    <option value="Expert">
+                                        Expert
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <button
+                                type="submit"
+                                name="action"
+                                value="add_teaching_skill"
+                                class="button profile-skill-button"
+                                {% if not profile_complete %}disabled title="Please complete your profile details first"{% endif %}>
+
+                                + Add teaching skill
+
+                            </button>
+
+                        </form>
+
+
+
+                        <div class="profile-skill-list">
+
+
+                            {% if teaching_skills %}
+
+                                {% for skill in teaching_skills %}
+
+                                <div class="profile-skill-item">
+
+
+                                    <div class="profile-skill-art">
+                                        ⌘
+                                    </div>
+
+
+                                    <div class="profile-skill-info">
+
+                                        <strong>
+                                            {{ skill.skill_name }}
+                                        </strong>
+
+                                        <span>
+                                            {{ skill.category }}
+                                        </span>
+
+
+                                        {% if skill.description %}
+
+                                        <p class="profile-skill-description">
+
+                                            {{ skill.description }}
+
+                                        </p>
+
+                                        {% endif %}
+
+                                    </div>
+
+
+                                    <div class="profile-skill-actions">
+
+                                        <span class="skill-level-badge">
+
+                                            {{ skill.skill_level }}
+
+                                        </span>
+
+                                        <form method="POST"
+                                              class="delete-skill-form"
+                                              onsubmit="return confirm('Are you sure you want to remove this teaching skill?');">
+
+                                            <input type="hidden"
+                                                   name="skill_id"
+                                                   value="{{ skill.id }}">
+
+                                            <button type="submit"
+                                                    name="action"
+                                                    value="delete_teaching_skill"
+                                                    class="delete-skill-btn"
+                                                    title="Remove skill">
+                                                ✕ Delete
+                                            </button>
+
+                                        </form>
+
+                                    </div>
+
+                                </div>
+
+                                {% endfor %}
+
+
+                            {% else %}
+
+                                <div class="profile-empty-state">
+
+                                    <span>+</span>
+
+                                    <p>
+                                        No teaching skills added yet.
+                                    </p>
+
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- LEARNING SKILLS -->
+
+                    <div class="profile-panel skill-panel">
+
+
+                        <div class="profile-panel-heading">
+
+                            <div class="profile-panel-icon icon-learn">
+                                ✦
+                            </div>
+
+                            <div>
+
+                                <h3>
+                                    Skills I Want to Learn
+                                </h3>
+
+                                <p>
+                                    What would you like to learn?
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        {% if not profile_complete %}
+                        <div class="skills-locked-notice">
+                            🔒 <strong>Profile details required:</strong> Please fill in and save all required profile details above (About you, Location, Availability, and WhatsApp number) to add learning skills.
+                        </div>
+                        {% endif %}
+
+                        <form
+                            method="POST"
+                            class="skill-form">
+
+
+                            <div class="profile-form-group">
+
+                                <label for="learning_skill">
+                                    Skill
+                                </label>
+
+
+                                <select
+                                    id="learning_skill"
+                                    name="learning_skill"
+                                    required>
+
+                                    <option value="">
+                                        Select a skill
+                                    </option>
+
+
+                                    {% for skill in skills %}
+
+                                    <option
+                                        value="{{ skill.id }}"
+                                        data-description="{{ skill.description or '' }}">
+
+                                        {{ skill.skill_name }}
+
+                                    </option>
+
+                                    {% endfor %}
+
+                                </select>
+
+
+                                <div
+                                    id="learning-skill-description"
+                                    class="skill-description"
+                                    aria-live="polite">
+
+                                    Select a skill to see its description.
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="profile-form-group">
+
+                                <label for="learning_level">
+                                    Current level
+                                </label>
+
+
+                                <select
+                                    id="learning_level"
+                                    name="learning_level"
+                                    required>
+
+                                    <option value="Beginner">
+                                        Beginner
+                                    </option>
+
+                                    <option value="Intermediate">
+                                        Intermediate
+                                    </option>
+
+                                    <option value="Advanced">
+                                        Advanced
+                                    </option>
+
+                                    <option value="Expert">
+                                        Expert
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <button
+                                type="submit"
+                                name="action"
+                                value="add_learning_skill"
+                                class="button profile-skill-button"
+                                {% if not profile_complete %}disabled title="Please complete your profile details first"{% endif %}>
+
+                                + Add learning skill
+
+                            </button>
+
+                        </form>
+
+
+
+                        <div class="profile-skill-list">
+
+
+                            {% if learning_skills %}
+
+                                {% for skill in learning_skills %}
+
+                                <div class="profile-skill-item">
+
+
+                                    <div class="profile-skill-art learning-art">
+                                        Aa
+                                    </div>
+
+
+                                    <div class="profile-skill-info">
+
+                                        <strong>
+                                            {{ skill.skill_name }}
+                                        </strong>
+
+                                        <span>
+                                            {{ skill.category }}
+                                        </span>
+
+
+                                        {% if skill.description %}
+
+                                        <p class="profile-skill-description">
+
+                                            {{ skill.description }}
+
+                                        </p>
+
+                                        {% endif %}
+
+                                    </div>
+
+
+                                    <div class="profile-skill-actions">
+
+                                        <span class="skill-level-badge">
+
+                                            {{ skill.skill_level }}
+
+                                        </span>
+
+                                        <form method="POST"
+                                              class="delete-skill-form"
+                                              onsubmit="return confirm('Are you sure you want to remove this learning skill?');">
+
+                                            <input type="hidden"
+                                                   name="skill_id"
+                                                   value="{{ skill.id }}">
+
+                                            <button type="submit"
+                                                    name="action"
+                                                    value="delete_learning_skill"
+                                                    class="delete-skill-btn"
+                                                    title="Remove skill">
+                                                ✕ Delete
+                                            </button>
+
+                                        </form>
+
+                                    </div>
+
+                                </div>
+
+                                {% endfor %}
+
+
+                            {% else %}
+
+                                <div class="profile-empty-state">
+
+                                    <span>+</span>
+
+                                    <p>
+                                        No learning skills added yet.
+                                    </p>
+
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             ADD NEW SKILL
+             ================================================= -->
+
+        <section class="section profile-new-skill-section">
+
+            <div class="container">
+
+
+                <div class="profile-section-heading">
+
+                    <div>
+
+                        <p class="eyebrow">
+                            EXPAND THE SKILL LIBRARY
+                        </p>
+
+                        <h2>
+                            Can't find your skill?
+                        </h2>
+
+                    </div>
+
+
+                    <p>
+                        Add a new skill to SkillCircle so it becomes
+                        available to everyone in the community.
+                    </p>
+
+                </div>
+
+
+
+                <div class="profile-new-skill-panel">
+
+
+                    <div class="profile-new-skill-intro">
+
+                        <div class="profile-new-skill-icon">
+                            +
+                        </div>
+
+
+                        <div>
+
+                            <h3>
+                                Add a new skill
+                            </h3>
+
+                            <p>
+                                Describe the skill clearly so other
+                                members know what it means.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <form
+                        method="POST"
+                        class="new-skill-form">
+
+
+                        <div class="profile-form-row">
+
+
+                            <div class="profile-form-group">
+
+                                <label for="new_skill_name">
+                                    Skill name
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="new_skill_name"
+                                    name="new_skill_name"
+                                    maxlength="100"
+                                    required
+                                    placeholder="Example: Video Editing">
+
+                            </div>
+
+
+                            <div class="profile-form-group">
+
+                                <label for="new_skill_category">
+                                    Category
+                                </label>
+
+                                <select
+                                    id="new_skill_category"
+                                    name="new_skill_category"
+                                    required>
+
+                                    <option value="">
+                                        Select a category
+                                    </option>
+
+
+                                    {% for category in skill_categories %}
+
+                                    <option value="{{ category }}">
+                                        {{ category }}
+                                    </option>
+
+                                    {% endfor %}
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="profile-form-group">
+
+                            <label for="new_skill_description">
+                                Skill description
+                            </label>
+
+                            <textarea
+                                id="new_skill_description"
+                                name="new_skill_description"
+                                rows="4"
+                                maxlength="1000"
+                                required
+                                placeholder="Example: Video editing involves creating and improving videos using cuts, transitions, audio, effects, and other editing techniques."></textarea>
+
+                            <small>
+                                Maximum 1000 characters. Keep the description
+                                clear and useful for other users.
+                            </small>
+
+                        </div>
+
+
+
+                        <button
+                            type="submit"
+                            name="action"
+                            value="add_new_skill"
+                            class="button new-skill-submit-button">
+
+                            + Add skill to SkillCircle
+
+                            <span aria-hidden="true">
+                                →
+                            </span>
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             PROFILE TIP
+             ================================================= -->
+
+        <section class="profile-tip-section">
+
+            <div class="container">
+
+                <div class="profile-tip">
+
+                    <div class="profile-tip-icon">
+                        ✦
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            A good profile makes matching easier.
+                        </strong>
+
+                        <p>
+                            Add a few clear skills, your approximate
+                            area, and when you are usually available.
+                            You can update these details later.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             FOOTER
+             ================================================= -->
+
+        <footer class="site-footer profile-footer">
+
+            <

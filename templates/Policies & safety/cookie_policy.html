@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cookie Policy - SkillCircle</title>
+<style>
+    :root {
+        --green-950: #14382f;
+        --green-900: #173f35;
+        --green-800: #205646;
+        --green-700: #2f7259;
+        --green-50: #f4f8f3;
+        --cream: #fbfaf5;
+        --text: #26352f;
+        --muted: #68756f;
+        --border: #dce5df;
+        --radius: 18px;
+    }
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    body {
+        font-family: Arial, sans-serif;
+        background: var(--cream);
+        color: var(--text);
+        line-height: 1.7;
+    }
+    .container {
+        width: 90%;
+        max-width: 1000px;
+        margin: auto;
+    }
+    header {
+        background: var(--green-900);
+        color: white;
+        padding: 22px 0;
+    }
+    .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+    }
+    .logo {
+        font-size: 24px;
+        font-weight: bold;
+    }
+    .back-link {
+        color: white;
+        text-decoration: none;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        padding: 8px 16px;
+        border-radius: 8px;
+    }
+    .back-link:hover {
+        background: var(--green-800);
+    }
+    main {
+        padding: 50px 0;
+    }
+    .page-header {
+        margin-bottom: 35px;
+    }
+    .page-header h1 {
+        color: var(--green-950);
+        font-size: 36px;
+        margin-bottom: 10px;
+    }
+    .page-header p {
+        color: var(--muted);
+    }
+    .updated {
+        font-size: 14px;
+        margin-top: 5px;
+    }
+    .content {
+        background: white;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 35px;
+        box-shadow: 0 4px 15px rgba(20, 56, 47, 0.05);
+    }
+    section {
+        margin-bottom: 32px;
+    }
+    section:last-child {
+        margin-bottom: 0;
+    }
+    h2 {
+        color: var(--green-800);
+        font-size: 21px;
+        margin-bottom: 10px;
+    }
+    h3 {
+        color: var(--green-900);
+        font-size: 17px;
+        margin: 18px 0 8px;
+    }
+    p {
+        margin-bottom: 10px;
+    }
+    ul {
+        margin: 10px 0 10px 25px;
+    }
+    li {
+        margin-bottom: 7px;
+    }
+    .notice {
+        background: var(--green-50);
+        border-left: 4px solid var(--green-700);
+        padding: 15px 18px;
+        margin: 20px 0;
+        border-radius: 8px;
+    }
+    footer {
+        background: var(--green-950);
+        color: white;
+        padding: 25px 0;
+        margin-top: 20px;
+        text-align: center;
+    }
+    footer a {
+        color: white;
+        text-decoration: none;
+        margin: 0 8px;
+    }
+    footer a:hover {
+        text-decoration: underline;
+    }
+    .copyright {
+        margin-top: 12px;
+        font-size: 14px;
+        opacity: 0.8;
+    }
+    @media (max-width: 700px) {
+        .header-content {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .page-header h1 {
+            font-size: 30px;
+        }
+        .content {
+            padding: 22px;
+        }
+        main {
+            padding: 35px 0;
+        }
+    }
+</style>
+</head>
+<body>
+<header>
+    <div class="container header-content">
+        <div class="logo">
+            SkillCircle
+        </div>
+        <a href="{{ url_for('home') }}" class="back-link">
+            Back to Home
+        </a>
+    </div>
+</header>
+<main>
+    <div class="container">
+        <div class="page-header">
+            <h1>Cookie Policy</h1>
+            <p>
+                This policy explains how SkillCircle uses cookies and
+                similar technologies.
+            </p>
+            <p class="updated">
+                Last updated: October 2026
+            </p>
+        </div>
+        <div class="content">
+            <section>
+                <h2>1. What Are Cookies?</h2>
+                <p>
+                    Cookies are small text files that a website can store
+                    on your device when you visit the website.
+                </p>
+                <p>
+                    They help websites remember information and provide
+                    certain features.
+                </p>
+            </section>
+            <section>
+                <h2>2. Why SkillCircle Uses Cookies</h2>
+                <p>
+                    SkillCircle may use cookies and similar technologies
+                    for purposes such as:
+                </p>
+                <ul>
+                    <li>Keeping users logged in.</li>
+                    <li>Maintaining secure sessions.</li>
+                    <li>Remembering selected preferences.</li>
+                    <li>Improving website functionality.</li>
+                    <li>Understanding basic website usage.</li>
+                    <li>Detecting security problems or misuse.</li>
+                </ul>
+            </section>
+            <section>
+                <h2>3. Types of Cookies</h2>
+                <h3>Essential Cookies</h3>
+                <p>
+                    These cookies may be required for important website
+                    functions such as login sessions, authentication,
+                    security, and navigation.
+                </p>
+                <h3>Preference Cookies</h3>
+                <p>
+                    These cookies may remember choices or settings made
+                    by the user so the website can provide a more
+                    convenient experience.
+                </p>
+                <h3>Analytics Cookies</h3>
+                <p>
+                    If analytics services are used, these cookies may
+                    help understand how visitors use the website,
+                    such as which pages are visited or whether errors
+                    occur.
+                </p>
+                <h3>Third-Party Cookies</h3>
+                <p>
+                    Some third-party services integrated into SkillCircle
+                    may use their own cookies or similar technologies.
+                </p>
+            </section>
+            <section>
+                <h2>4. Session Cookies</h2>
+                <p>
+                    SkillCircle may use session cookies to maintain your
+                    login session while you use the platform.
+                </p>
+                <p>
+                    These cookies may expire when your session ends or
+                    after a defined period of inactivity.
+                </p>
+            </section>
+            <section>
+                <h2>5. How We Use Cookie Information</h2>
+                <p>
+                    Cookie-related information may be used to:
+                </p>
+                <ul>
+                    <li>Authenticate users.</li>
+                    <li>Protect accounts and sessions.</li>
+                    <li>Maintain website functionality.</li>
+                    <li>Remember preferences.</li>
+                    <li>Improve website performance.</li>
+                    <li>Understand general usage patterns.</li>
+                </ul>
+            </section>
+            <section>
+                <h2>6. Managing Cookies</h2>
+                <p>
+                    Most modern web browsers allow you to control or
+                    delete cookies through their settings.
+                </p>
+                <p>
+                    You can usually choose to block cookies, delete
+                    existing cookies, or receive a notification before
+                    cookies are stored.
+                </p>
+                <div class="notice">
+                    Blocking essential cookies may cause some SkillCircle
+                    features, such as login or account sessions, to
+                    stop working correctly.
+                </div>
+            </section>
+            <section>
+                <h2>7. Browser Settings</h2>
+                <p>
+                    Cookie controls are different for each browser.
+                    You can find cookie and privacy settings in the
+                    browser's settings or privacy section.
+                </p>
+                <p>
+                    Changing browser settings may affect other websites
+                    you use as well.
+                </p>
+            </section>
+            <section>
+                <h2>8. Third-Party Services</h2>
+                <p>
+                    SkillCircle may use external services for functions
+                    such as hosting, analytics, email, maps, or security.
+                </p>
+                <p>
+                    These services may use cookies or similar technologies
+                    according to their own policies.
+                </p>
+            </section>
+            <section>
+                <h2>9. Cookies and Personal Information</h2>
+                <p>
+                    Cookies may be associated with information related to
+                    your use of SkillCircle.
+                </p>
+                <p>
+                    SkillCircle will handle information collected through
+                    cookies according to the applicable <a href="{{ url_for('privacy') }}">Privacy Policy</a>.
+                </p>
+            </section>
+            <section>
+                <h2>10. Changes to This Cookie Policy</h2>
+                <p>
+                    This Cookie Policy may be updated when SkillCircle
+                    changes its features, technologies, or cookie usage.
+                </p>
+                <p>
+                    The latest version will be published on this page
+                    with the updated date.
+                </p>
+            </section>
+            <section>
+                <h2>11. Contact</h2>
+                <p>
+                    If you have questions about how SkillCircle uses
+                    cookies, contact the SkillCircle administration
+                    through the contact method provided on the platform.
+                </p>
+            </section>
+        </div>
+    </div>
+</main>
+<footer>
+    <div class="container">
+        <div>
+            <a href="{{ url_for('terms') }}">
+                Terms & Conditions
+            </a>
+            <a href="{{ url_for('privacy') }}">
+                Privacy Policy
+            </a>
+            <a href="{{ url_for('community_guidelines') }}">
+                Community Guidelines
+            </a>
+            <a href="{{ url_for('safety_tips') }}">
+                Safety Tips
+            </a>
+            <a href="{{ url_for('cookie_policy') }}">
+                Cookie Policy
+            </a>
+            <a href="{{ url_for('accessibility') }}">
+                Accessibility
+            </a>
+        </div>
+        <div class="copyright">
+            © 2026 SkillCircle. All rights reserved.
+        </div>
+    </div>
+</footer>
+</body>
+</html>

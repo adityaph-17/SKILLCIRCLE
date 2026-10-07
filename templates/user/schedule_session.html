@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Schedule Session | SkillCircle</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='user/schedule_session.css'
+        ) }}"
+    >
+
+</head>
+
+
+<body>
+
+    <!-- =====================================================
+         NAVBAR
+    ====================================================== -->
+
+    {% include 'user/navbar.html' %}
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="schedule-page">
+
+        <section class="schedule-container">
+
+
+            <!-- =================================================
+                 INTRO
+            ================================================== -->
+
+            <div class="schedule-intro">
+
+                <span class="schedule-label">
+                    LEARNING SESSION
+                </span>
+
+                <h1>
+                    Schedule a Session
+                </h1>
+
+                <p>
+                    Choose a suitable time and mode for your
+                    learning session.
+                </p>
+
+            </div>
+
+
+            <!-- =================================================
+                 FLASH MESSAGES
+            ================================================== -->
+
+            {% with messages = get_flashed_messages(
+                with_categories=true
+            ) %}
+
+                {% if messages %}
+
+                    <div class="flash-messages">
+
+                        {% for category, message in messages %}
+
+                            <div
+                                class="flash-message {{ category }}"
+                            >
+                                {{ message }}
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                {% endif %}
+
+            {% endwith %}
+
+
+            <!-- =================================================
+                 SESSION INFORMATION
+            ================================================== -->
+
+            <div class="schedule-card">
+
+
+                <div class="session-summary">
+
+                    <span class="summary-label">
+                        LEARNING WITH
+                    </span>
+
+                    <h2>
+                        {{ other_user_name }}
+                    </h2>
+
+                    <p>
+                        Skill:
+                        <strong>
+                            {{ skill_name }}
+                        </strong>
+                    </p>
+
+                    <p>
+                        Preferred mode:
+                        <strong>
+                            {{ preferred_mode }}
+                        </strong>
+                    </p>
+
+                </div>
+
+
+                <!-- =================================================
+                     FORM
+                ================================================== -->
+
+                <form
+                    method="POST"
+                    class="schedule-form"
+                >
+
+                    <!-- DATE -->
+
+                    <div class="form-group">
+
+                        <label for="session_date">
+                            Session Date
+                        </label>
+
+                        <input
+                            type="date"
+                            id="session_date"
+                            name="session_date"
+                            min="{{ today }}"
+                            required
+                        >
+
+                        <small>
+                            Select a future date for the session.
+                        </small>
+
+                    </div>
+
+
+                    <!-- TIME -->
+
+                    <div class="time-grid">
+
+                        <div class="form-group">
+
+                            <label for="start_time">
+                                Start Time
+                            </label>
+
+                            <input
+                                type="time"
+                                id="start_time"
+                                name="start_time"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="end_time">
+                                End Time
+                            </label>
+
+                            <input
+                                type="time"
+                                id="end_time"
+                                name="end_time"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- LEARNING MODE -->
+
+                    <div class="form-group">
+
+                        <label for="learning_mode">
+                            Learning Mode
+                        </label>
+
+                        <select
+                            id="learning_mode"
+                            name="learning_mode"
+                            required
+                        >
+
+                            {% if preferred_mode in ["Online", "Both"] %}
+
+                                <option value="Online">
+                                    Online
+                                </option>
+
+                            {% endif %}
+
+
+                            {% if preferred_mode in ["Offline", "Both"] %}
+
+                                <option value="Offline">
+                                    Offline
+                                </option>
+
+                            {% endif %}
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- MEETING DETAILS -->
+
+                    <div class="form-group">
+
+                        <label for="meeting_details">
+                            Meeting Details
+                        </label>
+
+                        <textarea
+                            id="meeting_details"
+                            name="meeting_details"
+                            rows="4"
+                            maxlength="500"
+                            placeholder="Add a meeting link, location, or other useful details..."
+                        ></textarea>
+
+                        <small>
+                            Example: Google Meet link for online sessions
+                            or meeting location for offline sessions.
+                        </small>
+
+                    </div>
+
+
+                    <!-- ACTIONS -->
+
+                    <div class="schedule-actions">
+
+                        <a
+                            href="{{ url_for(
+                                'learning_requests'
+                            ) }}"
+                            class="back-button"
+                        >
+                            Back
+                        </a>
+
+
+                        <button
+                            type="submit"
+                            class="schedule-submit-button"
+                        >
+                            Schedule Session
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="schedule-footer">
+
+        <p>
+            SkillCircle · Learn together. Grow together.
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>

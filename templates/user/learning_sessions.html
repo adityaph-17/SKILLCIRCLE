@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>My Learning Sessions | SkillCircle</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='user/learning_sessions.css'
+        ) }}"
+    >
+
+</head>
+
+
+<body>
+
+    <!-- =====================================================
+         NAVBAR
+    ====================================================== -->
+
+    {% include 'user/navbar.html' %}
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="sessions-page">
+
+        <section class="sessions-container">
+
+
+            <!-- INTRO -->
+
+            <div class="sessions-intro">
+
+                <span class="sessions-label">
+                    MY LEARNING
+                </span>
+
+                <h1>
+                    Learning Sessions
+                </h1>
+
+                <p>
+                    Manage your upcoming teaching and learning
+                    sessions in one place.
+                </p>
+
+            </div>
+
+
+            <!-- FLASH MESSAGES -->
+
+            {% with messages = get_flashed_messages(
+                with_categories=true
+            ) %}
+
+                {% if messages %}
+
+                    <div class="flash-messages">
+
+                        {% for category, message in messages %}
+
+                            <div
+                                class="flash-message {{ category }}"
+                            >
+                                {{ message }}
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                {% endif %}
+
+            {% endwith %}
+
+
+            <!-- =================================================
+                 UPCOMING SESSIONS
+            ================================================== -->
+
+            <section class="sessions-section">
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <span class="section-label">
+                            UPCOMING
+                        </span>
+
+                        <h2>
+                            Upcoming Sessions
+                        </h2>
+
+                    </div>
+
+                    <span class="session-count">
+                        {{ upcoming_sessions|length }}
+                    </span>
+
+                </div>
+
+
+                {% if upcoming_sessions %}
+
+                    <div class="session-list">
+
+                        {% for item in upcoming_sessions %}
+
+                            <article class="session-card">
+
+                                <!-- HEADER -->
+
+                                <div class="session-card-top">
+
+                                    <div class="session-icon">
+                                        S
+                                    </div>
+
+
+                                    <div class="session-title">
+
+                                        <span class="session-role">
+                                            {{ item.user_role }}
+                                        </span>
+
+                                        <h3>
+                                            {{ item.skill_name }}
+                                        </h3>
+
+                                        <p>
+                                            {% if item.user_role
+                                                  == "Teaching" %}
+
+                                                Teaching
+                                                <strong>
+                                                    {{ item.other_user_name }}
+                                                </strong>
+
+                                            {% else %}
+
+                                                Learning from
+                                                <strong>
+                                                    {{ item.other_user_name }}
+                                                </strong>
+
+                                            {% endif %}
+                                        </p>
+
+                                    </div>
+
+
+                                    <span class="session-status">
+                                        Scheduled
+                                    </span>
+
+                                </div>
+
+
+                                <!-- SESSION INFO -->
+
+                                <div class="session-info-grid">
+
+                                    <div class="session-info-item">
+
+                                        <span>
+                                            DATE
+                                        </span>
+
+                                        <strong>
+                                            {{ item.session_date.strftime(
+                                                '%d %b %Y'
+                                            ) }}
+                                        </strong>
+
+                                    </div>
+
+
+                                    <div class="session-info-item">
+
+                                        <span>
+                                            TIME
+                                        </span>
+
+                                        <strong>
+                                            {{ item.start_time.strftime(
+                                                '%I:%M %p'
+                                            ) }}
+
+                                            –
+
+                                            {{ item.end_time.strftime(
+                                                '%I:%M %p'
+                                            ) }}
+                                        </strong>
+
+                                    </div>
+
+
+                                    <div class="session-info-item">
+
+                                        <span>
+                                            MODE
+                                        </span>
+
+                                        <strong>
+                                            {{ item.learning_mode }}
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- MEETING DETAILS -->
+
+                                {% if item.meeting_details %}
+
+                                    <div class="meeting-details">
+
+                                        <span>
+                                            MEETING DETAILS
+                                        </span>
+
+                                        <p>
+                                            {{ item.meeting_details }}
+                                        </p>
+
+                                    </div>
+
+                                {% endif %}
+
+
+                                <!-- ACTIONS -->
+
+                                <div class="session-actions">
+
+                                    <form
+                                        method="POST"
+                                        action="{{ url_for(
+                                            'learning_sessions'
+                                        ) }}"
+                                    >
+
+                                        <input
+                                            type="hidden"
+                                            name="session_id"
+                                            value="{{ item.id }}"
+                                        >
+
+                                        <input
+                                            type="hidden"
+                                            name="action"
+                                            value="cancel"
+                                        >
+
+                                        <button
+                                            type="submit"
+                                            class="cancel-button"
+                                            onclick="
+                                                return confirm(
+                                                    'Are you sure you want to cancel this session?'
+                                                );
+                                            "
+                                        >
+                                            Cancel Session
+                                        </button>
+
+                                    </form>
+
+
+                                    <form
+                                        method="POST"
+                                        action="{{ url_for(
+                                            'learning_sessions'
+                                        ) }}"
+                                    >
+
+                                        <input
+                                            type="hidden"
+                                            name="session_id"
+                                            value="{{ item.id }}"
+                                        >
+
+                                        <input
+                                            type="hidden"
+                                            name="action"
+                                            value="complete"
+                                        >
+
+                                        <button
+                                            type="submit"
+                                            class="complete-button"
+                                        >
+                                            Mark as Completed
+                                        </button>
+
+                                    </form>
+
+                                </div>
+
+
+                                <p class="completion-note">
+                                    You can mark this session as completed
+                                    after its scheduled end time.
+                                </p>
+
+                            </article>
+
+                        {% endfor %}
+
+                    </div>
+
+                {% else %}
+
+                    <div class="empty-session-state">
+
+                        <div class="empty-session-icon">
+                            S
+                        </div>
+
+                        <h3>
+                            No upcoming sessions
+                        </h3>
+
+                        <p>
+                            Your scheduled sessions will appear here.
+                        </p>
+
+                    </div>
+
+                {% endif %}
+
+            </section>
+
+
+            <!-- =================================================
+                 PREVIOUS SESSIONS
+            ================================================== -->
+
+            <section class="sessions-section previous-section">
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <span class="section-label">
+                            HISTORY
+                        </span>
+
+                        <h2>
+                            Previous Sessions
+                        </h2>
+
+                    </div>
+
+                    <span class="session-count">
+                        {{ previous_sessions|length }}
+                    </span>
+
+                </div>
+
+
+                {% if previous_sessions %}
+
+                    <div class="session-list">
+
+                        {% for item in previous_sessions %}
+
+                            <article class="session-card previous-card">
+
+                                <div class="session-card-top">
+
+                                    <div class="session-icon">
+                                        S
+                                    </div>
+
+
+                                    <div class="session-title">
+
+                                        <span class="session-role">
+                                            {{ item.user_role }}
+                                        </span>
+
+                                        <h3>
+                                            {{ item.skill_name }}
+                                        </h3>
+
+                                        <p>
+                                            With
+                                            <strong>
+                                                {{ item.other_user_name }}
+                                            </strong>
+                                        </p>
+
+                                    </div>
+
+
+                                    <span
+                                        class="
+                                            session-status
+                                            status-{{ item.status|lower }}
+                                        "
+                                    >
+                                        {{ item.status }}
+                                    </span>
+
+                                </div>
+
+
+                                <div class="session-info-grid">
+
+                                    <div class="session-info-item">
+
+                                        <span>
+                                            DATE
+                                        </span>
+
+                                        <strong>
+                                            {{ item.session_date.strftime(
+                                                '%d %b %Y'
+                                            ) }}
+                                        </strong>
+
+                                    </div>
+
+
+                                    <div class="session-info-item">
+
+                                        <span>
+                                            TIME
+                                        </span>
+
+                                        <strong>
+                                            {{ item.start_time.strftime(
+                                                '%I:%M %p'
+                                            ) }}
+
+                                            –
+
+                                            {{ item.end_time.strftime(
+                                                '%I:%M %p'
+                                            ) }}
+                                        </strong>
+
+                                    </div>
+
+
+                                    <div class="session-info-item">
+
+                                        <span>
+                                            MODE
+                                        </span>
+
+                                        <strong>
+                                            {{ item.learning_mode }}
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+
+                                {% if item.meeting_details %}
+
+                                    <div class="meeting-details">
+
+                                        <span>
+                                            MEETING DETAILS
+                                        </span>
+
+                                        <p>
+                                            {{ item.meeting_details }}
+                                        </p>
+
+                                    </div>
+
+                                {% endif %}
+
+                            </article>
+
+                        {% endfor %}
+
+                    </div>
+
+                {% else %}
+
+                    <div class="empty-history">
+                        No previous sessions yet.
+                    </div>
+
+                {% endif %}
+
+            </section>
+
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer class="sessions-footer">
+
+        <p>
+            SkillCircle · Learn together. Grow together.
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>

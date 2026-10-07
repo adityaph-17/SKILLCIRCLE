@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms & Conditions - SkillCircle</title>
+<style>
+    :root {
+        --green-950: #14382f;
+        --green-900: #173f35;
+        --green-800: #205646;
+        --green-700: #2f7259;
+        --green-50: #f4f8f3;
+        --cream: #fbfaf5;
+        --orange: #e9a65d;
+        --text: #26352f;
+        --muted: #68756f;
+        --border: #dce5df;
+        --radius: 18px;
+    }
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    body {
+        font-family: Arial, sans-serif;
+        background: var(--cream);
+        color: var(--text);
+        line-height: 1.7;
+    }
+    .container {
+        width: 90%;
+        max-width: 1000px;
+        margin: auto;
+    }
+    header {
+        background: var(--green-900);
+        color: white;
+        padding: 22px 0;
+    }
+    .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+    }
+    .logo {
+        font-size: 24px;
+        font-weight: bold;
+    }
+    .back-link {
+        color: white;
+        text-decoration: none;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        padding: 8px 16px;
+        border-radius: 8px;
+    }
+    .back-link:hover {
+        background: var(--green-800);
+    }
+    main {
+        padding: 50px 0;
+    }
+    .page-header {
+        margin-bottom: 35px;
+    }
+    .page-header h1 {
+        color: var(--green-950);
+        font-size: 36px;
+        margin-bottom: 10px;
+    }
+    .page-header p {
+        color: var(--muted);
+    }
+    .content {
+        background: white;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 35px;
+        box-shadow: 0 4px 15px rgba(20, 56, 47, 0.05);
+    }
+    section {
+        margin-bottom: 32px;
+    }
+    section:last-child {
+        margin-bottom: 0;
+    }
+    h2 {
+        color: var(--green-800);
+        font-size: 21px;
+        margin-bottom: 10px;
+    }
+    h3 {
+        color: var(--green-900);
+        font-size: 17px;
+        margin: 18px 0 8px;
+    }
+    p {
+        margin-bottom: 10px;
+    }
+    ul {
+        margin: 10px 0 10px 25px;
+    }
+    li {
+        margin-bottom: 7px;
+    }
+    .notice {
+        background: var(--green-50);
+        border-left: 4px solid var(--green-700);
+        padding: 15px 18px;
+        margin: 20px 0;
+        border-radius: 8px;
+    }
+    .updated {
+        font-size: 14px;
+        color: var(--muted);
+        margin-top: 5px;
+    }
+    footer {
+        background: var(--green-950);
+        color: white;
+        padding: 25px 0;
+        margin-top: 20px;
+        text-align: center;
+    }
+    footer a {
+        color: white;
+        text-decoration: none;
+        margin: 0 8px;
+    }
+    footer a:hover {
+        text-decoration: underline;
+    }
+    .copyright {
+        margin-top: 12px;
+        font-size: 14px;
+        opacity: 0.8;
+    }
+    @media (max-width: 700px) {
+        .header-content {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .page-header h1 {
+            font-size: 30px;
+        }
+        .content {
+            padding: 22px;
+        }
+        main {
+            padding: 35px 0;
+        }
+    }
+</style>
+</head>
+<body>
+<header>
+    <div class="container header-content">
+        <div class="logo">SkillCircle</div>
+        <a href="{{ url_for('home') }}" class="back-link">
+            Back to Home
+        </a>
+    </div>
+</header>
+<main>
+    <div class="container">
+        <div class="page-header">
+            <h1>Terms & Conditions</h1>
+            <p>
+                These terms explain the rules for using the SkillCircle platform.
+            </p>
+            <p class="updated">
+                Last updated: October 2026
+            </p>
+        </div>
+        <div class="content">
+            <section>
+                <h2>1. Acceptance of Terms</h2>
+                <p>
+                    By creating an account or using SkillCircle, you agree to follow
+                    these Terms & Conditions and all applicable laws.
+                </p>
+                <p>
+                    If you do not agree with these terms, please do not use the
+                    SkillCircle platform.
+                </p>
+            </section>
+            <section>
+                <h2>2. About SkillCircle</h2>
+                <p>
+                    SkillCircle is a community-based skill-sharing platform that
+                    allows users to discover skills, learn from other members,
+                    share their knowledge, and connect with people in their
+                    community.
+                </p>
+                <p>
+                    SkillCircle does not guarantee the quality, accuracy, experience,
+                    qualifications, or behaviour of any user.
+                </p>
+            </section>
+            <section>
+                <h2>3. Account Registration</h2>
+                <p>
+                    To use certain features, you may need to create an account.
+                </p>
+                <p>You agree to:</p>
+                <ul>
+                    <li>Provide accurate and current information.</li>
+                    <li>Keep your login credentials secure.</li>
+                    <li>Not share your account with another person.</li>
+                    <li>Update your information when it changes.</li>
+                    <li>Notify SkillCircle if you believe your account has been compromised.</li>
+                </ul>
+                <p>
+                    You are responsible for activity performed through your account.
+                </p>
+            </section>
+            <section>
+                <h2>4. User Responsibilities</h2>
+                <p>
+                    Users are expected to use SkillCircle respectfully and responsibly.
+                </p>
+                <p>You must not:</p>
+                <ul>
+                    <li>Provide false or misleading information.</li>
+                    <li>Impersonate another person.</li>
+                    <li>Harass, threaten, or abuse another user.</li>
+                    <li>Post illegal, harmful, hateful, or inappropriate content.</li>
+                    <li>Use SkillCircle for scams or fraudulent activities.</li>
+                    <li>Attempt to access another user's account.</li>
+                    <li>Upload malicious files or harmful software.</li>
+                    <li>Use the platform to distribute spam.</li>
+                    <li>Collect another user's personal information without permission.</li>
+                    <li>Use the platform for activities that violate applicable laws.</li>
+                </ul>
+            </section>
+            <section>
+                <h2>5. Skill Sharing and User Content</h2>
+                <p>
+                    Users may create profiles, describe their skills, publish
+                    learning interests, and communicate with other members.
+                </p>
+                <p>
+                    You are responsible for the content you post on SkillCircle.
+                    You must have the right to share any content that you upload.
+                </p>
+                <p>
+                    SkillCircle may remove content that violates these terms,
+                    community guidelines, or applicable laws.
+                </p>
+            </section>
+            <section>
+                <h2>6. Learning and Teaching Disclaimer</h2>
+                <div class="notice">
+                    SkillCircle is a platform for connecting people. It does not
+                    guarantee that a user is professionally qualified to teach
+                    a particular skill.
+                </div>
+                <p>
+                    Users should independently verify another person's experience
+                    and qualifications before relying on their advice or instruction.
+                </p>
+                <p>
+                    SkillCircle is not responsible for loss, injury, damage, or
+                    other consequences resulting from interactions between users.
+                </p>
+            </section>
+            <section>
+                <h2>7. User Interactions and Meetings</h2>
+                <p>
+                    Users may choose to communicate or meet with other members.
+                    Any interaction, online or offline, is the responsibility of
+                    the users involved.
+                </p>
+                <p>
+                    Users should follow the safety recommendations provided by
+                    SkillCircle before meeting someone they do not know.
+                </p>
+            </section>
+            <section>
+                <h2>8. Prohibited Activities</h2>
+                <p>
+                    SkillCircle must not be used for:
+                </p>
+                <ul>
+                    <li>Fraud or scams.</li>
+                    <li>Illegal activities.</li>
+                    <li>Harassment or threats.</li>
+                    <li>Discrimination or hate-based behaviour.</li>
+                    <li>Sexual exploitation or inappropriate contact.</li>
+                    <li>Distribution of malware or harmful content.</li>
+                    <li>Unauthorized advertising or spam.</li>
+                    <li>Attempts to disrupt or damage the platform.</li>
+                </ul>
+            </section>
+            <section>
+                <h2>9. Reporting and Moderation</h2>
+                <p>
+                    Users can report content or behaviour that violates SkillCircle's
+                    rules.
+                </p>
+                <p>
+                    SkillCircle may review reports and take appropriate action,
+                    including removing content, restricting features, suspending
+                    accounts, or permanently removing accounts.
+                </p>
+            </section>
+            <section>
+                <h2>10. Account Suspension or Termination</h2>
+                <p>
+                    SkillCircle may suspend or terminate an account if the user
+                    violates these Terms & Conditions, <a href="{{ url_for('community_guidelines') }}">Community Guidelines</a>, or
+                    applicable laws.
+                </p>
+                <p>
+                    Users may also stop using the platform and request deletion
+                    of their account according to the available account controls.
+                </p>
+            </section>
+            <section>
+                <h2>11. Intellectual Property</h2>
+                <p>
+                    SkillCircle's name, design, interface, logo, original content,
+                    and platform features may be protected by applicable
+                    intellectual property laws.
+                </p>
+                <p>
+                    Users must not copy, reproduce, modify, distribute, or
+                    commercially exploit SkillCircle's protected content without
+                    appropriate permission.
+                </p>
+            </section>
+            <section>
+                <h2>12. Third-Party Services</h2>
+                <p>
+                    SkillCircle may use third-party services such as hosting,
+                    email services, analytics, maps, or other external services.
+                </p>
+                <p>
+                    Use of such services may also be subject to the terms and
+                    privacy policies of those third parties.
+                </p>
+            </section>
+            <section>
+                <h2>13. Availability of the Platform</h2>
+                <p>
+                    We aim to keep SkillCircle available and working correctly,
+                    but we cannot guarantee uninterrupted or error-free service.
+                </p>
+                <p>
+                    The platform may temporarily become unavailable because of
+                    maintenance, technical problems, security issues, or other
+                    circumstances.
+                </p>
+            </section>
+            <section>
+                <h2>14. Disclaimer of Liability</h2>
+                <p>
+                    SkillCircle is provided on an "as available" basis.
+                </p>
+                <p>
+                    To the extent permitted by applicable law, SkillCircle is
+                    not responsible for losses, damages, disputes, injuries, or
+                    other consequences resulting from user interactions,
+                    user-generated content, or use of the platform.
+                </p>
+            </section>
+            <section>
+                <h2>15. Changes to These Terms</h2>
+                <p>
+                    These Terms & Conditions may be updated when the platform,
+                    features, or legal requirements change.
+                </p>
+                <p>
+                    Updated terms will be published on this page with a revised
+                    "Last updated" date.
+                </p>
+            </section>
+            <section>
+                <h2>16. Governing Law</h2>
+                <p>
+                    These terms are intended to be governed by the applicable
+                    laws of India. Any disputes will be subject to the applicable
+                    courts and legal authorities having jurisdiction.
+                </p>
+            </section>
+            <section>
+                <h2>17. Contact</h2>
+                <p>
+                    If you have questions about these Terms & Conditions or want
+                    to report a serious issue, please contact the SkillCircle
+                    administration through the contact method provided on the
+                    platform.
+                </p>
+            </section>
+        </div>
+    </div>
+</main>
+<footer>
+    <div class="container">
+        <div>
+            <a href="{{ url_for('terms') }}">Terms & Conditions</a>
+            <a href="{{ url_for('privacy') }}">Privacy Policy</a>
+            <a href="{{ url_for('community_guidelines') }}">Community Guidelines</a>
+            <a href="{{ url_for('safety_tips') }}">Safety Tips</a>
+            <a href="{{ url_for('cookie_policy') }}">Cookie Policy</a>
+            <a href="{{ url_for('accessibility') }}">Accessibility</a>
+        </div>
+        <div class="copyright">
+            © 2026 SkillCircle. All rights reserved.
+        </div>
+    </div>
+</footer>
+</body>
+</html>

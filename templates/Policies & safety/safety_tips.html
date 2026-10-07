@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Safety Tips - SkillCircle</title>
+<style>
+    :root {
+        --green-950: #14382f;
+        --green-900: #173f35;
+        --green-800: #205646;
+        --green-700: #2f7259;
+        --green-50: #f4f8f3;
+        --cream: #fbfaf5;
+        --text: #26352f;
+        --muted: #68756f;
+        --border: #dce5df;
+        --radius: 18px;
+    }
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    body {
+        font-family: Arial, sans-serif;
+        background: var(--cream);
+        color: var(--text);
+        line-height: 1.7;
+    }
+    .container {
+        width: 90%;
+        max-width: 1000px;
+        margin: auto;
+    }
+    header {
+        background: var(--green-900);
+        color: white;
+        padding: 22px 0;
+    }
+    .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+    }
+    .logo {
+        font-size: 24px;
+        font-weight: bold;
+    }
+    .back-link {
+        color: white;
+        text-decoration: none;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        padding: 8px 16px;
+        border-radius: 8px;
+    }
+    .back-link:hover {
+        background: var(--green-800);
+    }
+    main {
+        padding: 50px 0;
+    }
+    .page-header {
+        margin-bottom: 35px;
+    }
+    .page-header h1 {
+        color: var(--green-950);
+        font-size: 36px;
+        margin-bottom: 10px;
+    }
+    .page-header p {
+        color: var(--muted);
+    }
+    .updated {
+        font-size: 14px;
+        margin-top: 5px;
+    }
+    .content {
+        background: white;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 35px;
+        box-shadow: 0 4px 15px rgba(20, 56, 47, 0.05);
+    }
+    section {
+        margin-bottom: 32px;
+    }
+    section:last-child {
+        margin-bottom: 0;
+    }
+    h2 {
+        color: var(--green-800);
+        font-size: 21px;
+        margin-bottom: 10px;
+    }
+    p {
+        margin-bottom: 10px;
+    }
+    ul {
+        margin: 10px 0 10px 25px;
+    }
+    li {
+        margin-bottom: 7px;
+    }
+    .notice {
+        background: var(--green-50);
+        border-left: 4px solid var(--green-700);
+        padding: 15px 18px;
+        margin: 20px 0;
+        border-radius: 8px;
+    }
+    .warning {
+        background: #fff7ed;
+        border-left: 4px solid #e9a65d;
+        padding: 15px 18px;
+        margin: 20px 0;
+        border-radius: 8px;
+    }
+    footer {
+        background: var(--green-950);
+        color: white;
+        padding: 25px 0;
+        margin-top: 20px;
+        text-align: center;
+    }
+    footer a {
+        color: white;
+        text-decoration: none;
+        margin: 0 8px;
+    }
+    footer a:hover {
+        text-decoration: underline;
+    }
+    .copyright {
+        margin-top: 12px;
+        font-size: 14px;
+        opacity: 0.8;
+    }
+    @media (max-width: 700px) {
+        .header-content {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .page-header h1 {
+            font-size: 30px;
+        }
+        .content {
+            padding: 22px;
+        }
+        main {
+            padding: 35px 0;
+        }
+    }
+</style>
+</head>
+<body>
+<header>
+    <div class="container header-content">
+        <div class="logo">
+            SkillCircle
+        </div>
+        <a href="{{ url_for('home') }}" class="back-link">
+            Back to Home
+        </a>
+    </div>
+</header>
+<main>
+    <div class="container">
+        <div class="page-header">
+            <h1>Safety Tips</h1>
+            <p>
+                Simple steps to help you stay safe while using SkillCircle.
+            </p>
+            <p class="updated">
+                Last updated: October 2026
+            </p>
+        </div>
+        <div class="content">
+            <section>
+                <h2>1. Protect Your Account</h2>
+                <p>
+                    Keep your SkillCircle account secure at all times.
+                </p>
+                <ul>
+                    <li>Use a strong and unique password.</li>
+                    <li>Never share your password with another person.</li>
+                    <li>Do not use the same password on multiple websites.</li>
+                    <li>Log out when using a shared or public computer.</li>
+                    <li>Contact SkillCircle if you notice suspicious account activity.</li>
+                </ul>
+            </section>
+            <section>
+                <h2>2. Protect Personal Information</h2>
+                <p>
+                    Be careful about the information you share with other users.
+                </p>
+                <ul>
+                    <li>Do not share your password.</li>
+                    <li>Do not share bank or payment details unnecessarily.</li>
+                    <li>Do not publish government identification numbers.</li>
+                    <li>Avoid sharing your exact home address publicly.</li>
+                    <li>Do not share private information about other people.</li>
+                </ul>
+            </section>
+            <section>
+                <h2>3. Check User Profiles</h2>
+                <p>
+                    Before interacting with someone, review the information
+                    available on their SkillCircle profile.
+                </p>
+                <ul>
+                    <li>Check their listed skills and experience.</li>
+                    <li>Look for consistent and reasonable profile information.</li>
+                    <li>Be careful if someone provides suspicious or contradictory information.</li>
+                    <li>Do not assume that a profile automatically proves professional qualifications.</li>
+                </ul>
+            </section>
+            <section>
+                <h2>4. Be Careful With Links and Files</h2>
+                <p>
+                    Do not open links or download files from unknown users
+                    unless you trust the source.
+                </p>
+                <ul>
+                    <li>Do not provide your password through an unknown link.</li>
+                    <li>Do not download suspicious files.</li>
+                    <li>Be careful with links asking for money or personal information.</li>
+                    <li>Report suspicious messages or content.</li>
+                </ul>
+            </section>
+            <section>
+                <h2>5. Avoid Scams</h2>
+                <p>
+                    Be cautious if someone asks you for money or makes
+                    unrealistic promises.
+                </p>
+                <div class="warning">
+                    Never send money, passwords, verification codes, or
+                    sensitive information to someone simply because they
+                    contacted you through SkillCircle.
+                </div>
+                <ul>
+                    <li>Be careful with urgent payment requests.</li>
+                    <li>Do not trust guaranteed income or unrealistic offers.</li>
+                    <li>Verify information before making any payment.</li>
+                    <li>Report suspected scams.</li>
+                </ul>
+            </section>
+            <section>
+                <h2>6. Meeting Someone Offline</h2>
+                <p>
+                    If you decide to meet another SkillCircle user in person,
+                    take reasonable precautions.
+                </p>
+                <ul>
+                    <li>Meet in a public and familiar place.</li>
+                    <li>Meet during reasonable daytime or public hours.</li>
+                    <li>Tell a trusted person where you are going.</li>
+                    <li>Share the person's name and meeting location with someone you trust.</li>
+                    <li>Keep your phone available.</li>
+                    <li>Arrange your own transportation when possible.</li>
+                    <li>Leave immediately if you feel uncomfortable or unsafe.</li>
+                </ul>
+            </section>
+            <section>
+                <h2>7. Do Not Share Your Exact Home Address</h2>
+                <p>
+                    Avoid giving your exact home address to someone you have
+                    only recently met online.
+                </p>
+                <p>
+                    If an offline skill session is necessary, consider using
+                    a public or appropriate location instead.
+                </p>
+            </section>
+            <section>
+                <h2>8. Trust Your Instincts</h2>
+                <p>
+                    You do not have to continue an interaction that makes
+                    you uncomfortable.
+                </p>
+                <p>
+                    You can stop communicating, decline a request, block a
+                    user where the feature is available, or report the user.
+                </p>
+            </section>
+            <section>
+                <h2>9. Keep Learning Activities Safe</h2>
+                <p>
+                    Some skills may involve tools, equipment, physical
+                    activities, chemicals, electrical systems, or other risks.
+                </p>
+                <p>
+                    Before participating in such activities:
+                </p>
+                <ul>
+                    <li>Understand the possible risks.</li>
+                    <li>Use appropriate safety equipment.</li>
+                    <li>Follow proper instructions.</li>
+                    <li>Do not attempt activities beyond your ability.</li>
+                    <li>Seek qualified professional guidance when necessary.</li>
+                </ul>
+            </section>
+            <section>
+                <h2>10. Protect Minors and Vulnerable People</h2>
+                <p>
+                    Take additional care when an interaction involves
+                    children or vulnerable individuals.
+                </p>
+                <p>
+                    Do not arrange unsafe private meetings or inappropriate
+                    interactions with minors.
+                </p>
+            </section>
+            <section>
+                <h2>11. Report Suspicious Behaviour</h2>
+                <p>
+                    Report users or content that appear to violate SkillCircle's
+                    rules or create a safety concern.
+                </p>
+                <p>
+                    Examples include:
+                </p>
+                <ul>
+                    <li>Threats or harassment.</li>
+                    <li>Scams or fraudulent requests.</li>
+                    <li>Suspicious links or files.</li>
+                    <li>Requests for sensitive information.</li>
+                    <li>Impersonation.</li>
+                    <li>Inappropriate or illegal content.</li>
+                </ul>
+            </section>
+            <section>
+                <h2>12. If You Feel Unsafe</h2>
+                <p>
+                    If you feel that you are in immediate danger, move to
+                    a safe location and contact local emergency services
+                    or a trusted person.
+                </p>
+                <p>
+                    SkillCircle is an online platform and cannot replace
+                    emergency services or professional assistance.
+                </p>
+            </section>
+            <section>
+                <h2>13. SkillCircle's Role</h2>
+                <p>
+                    SkillCircle provides tools for people to connect and
+                    share skills. We cannot guarantee the identity,
+                    qualifications, intentions, or behaviour of every user.
+                </p>
+                <div class="notice">
+                    Stay cautious, protect your personal information,
+                    and use your own judgment when interacting with other
+                    members.
+                </div>
+            </section>
+            <section>
+                <h2>14. Report Serious Issues</h2>
+                <p>
+                    For serious safety concerns, abuse, threats, scams,
+                    or other violations, contact the SkillCircle
+                    administration through the reporting or contact
+                    feature provided on the platform.
+                </p>
+            </section>
+        </div>
+    </div>
+</main>
+<footer>
+    <div class="container">
+        <div>
+            <a href="{{ url_for('terms') }}">
+                Terms & Conditions
+            </a>
+            <a href="{{ url_for('privacy') }}">
+                Privacy Policy
+            </a>
+            <a href="{{ url_for('community_guidelines') }}">
+                Community Guidelines
+            </a>
+            <a href="{{ url_for('safety_tips') }}">
+                Safety Tips
+            </a>
+            <a href="{{ url_for('cookie_policy') }}">
+                Cookie Policy
+            </a>
+            <a href="{{ url_for('accessibility') }}">
+                Accessibility
+            </a>
+        </div>
+        <div class="copyright">
+            © 2026 SkillCircle. All rights reserved.
+        </div>
+    </div>
+</footer>
+</body>
+</html>
