@@ -303,68 +303,209 @@
 
 
 
-                            <!-- LOCATION + LEARNING MODE -->
+                            <!-- LOCATION & COMMUNITY IN INDIA -->
 
-                            <div class="profile-form-row">
+                            <div class="profile-location-box">
 
+                                <div class="profile-location-box-header">
 
-                                <div class="profile-form-group">
+                                    <div>
+                                        <label class="profile-section-label" for="pincode_input">
+                                            📍 Location & Community in India <span class="required-asterisk" title="Required">*</span>
+                                        </label>
+                                        <p class="profile-location-subtext">
+                                            Enter your 6-digit PIN code to pick your verified locality from the list. Standardizing locations helps members easily find each other in <strong>My Community</strong>.
+                                        </p>
+                                    </div>
 
-                                    <label for="location_area">
-                                        Location / Area <span class="required-asterisk" title="Required">*</span>
-                                    </label>
-
-                                    <input
-                                        type="text"
-                                        id="location_area"
-                                        name="location_area"
-                                        maxlength="150"
-                                        required
-                                        value="{{ profile.location_area if profile else '' }}"
-                                        placeholder="Example: Kothrud, Pune">
-
-                                    <small>
-                                        Use an approximate area, not your home address.
-                                    </small>
+                                    {% if profile and profile.location_area %}
+                                    <div class="current-location-chip" id="current_location_chip">
+                                        <span class="chip-dot"></span>
+                                        <span>Current: <strong>{{ profile.location_area }}</strong>{% if profile.city and profile.city != profile.location_area %}, {{ profile.city }}{% endif %}{% if profile.pincode %} ({{ profile.pincode }}){% endif %}</span>
+                                    </div>
+                                    {% endif %}
 
                                 </div>
 
+                                <div class="location-inputs-row">
 
-                                <div class="profile-form-group">
+                                    <!-- PIN CODE -->
+                                    <div class="profile-form-group pincode-group">
 
-                                    <label for="learning_mode">
-                                        Learning mode <span class="required-asterisk" title="Required">*</span>
-                                    </label>
+                                        <label for="pincode_input">
+                                            PIN Code (India) <span class="required-asterisk" title="Required">*</span>
+                                        </label>
 
-                                    <select
-                                        id="learning_mode"
-                                        name="learning_mode"
-                                        required>
+                                        <div class="pincode-input-wrap">
+                                            <input
+                                                type="text"
+                                                id="pincode_input"
+                                                maxlength="6"
+                                                pattern="[0-9]{6}"
+                                                inputmode="numeric"
+                                                placeholder="e.g. 411038"
+                                                value="{{ profile.pincode if profile and profile.pincode else '' }}">
 
-                                        <option value="Both"
-                                            {% if not profile or profile.learning_mode == 'Both' %}
-                                                selected
-                                            {% endif %}>
-                                            Online & Offline
-                                        </option>
+                                            <button
+                                                type="button"
+                                                id="btn_lookup_pincode"
+                                                class="pincode-lookup-btn"
+                                                title="Find localities for this PIN">
+                                                Find Area
+                                            </button>
+                                        </div>
 
-                                        <option value="Online"
-                                            {% if profile and profile.learning_mode == 'Online' %}
-                                                selected
-                                            {% endif %}>
-                                            Online only
-                                        </option>
+                                        <div id="pincode_status" class="pincode-status-text">
+                                            Enter 6 digits to view verified localities.
+                                        </div>
 
-                                        <option value="Offline"
-                                            {% if profile and profile.learning_mode == 'Offline' %}
-                                                selected
-                                            {% endif %}>
-                                            Offline only
-                                        </option>
+                                    </div>
 
-                                    </select>
+                                    <!-- LOCALITY DROPDOWN (PRIORITY) -->
+                                    <div class="profile-form-group location-dropdown-group">
+
+                                        <label for="pincode_location_select">
+                                            Locality / Area (Select from list) <span class="required-asterisk" title="Required">*</span>
+                                        </label>
+
+                                        <select id="pincode_location_select" class="location-select">
+                                            <option value="">
+                                                -- Enter 6-digit PIN code to see localities --
+                                            </option>
+                                        </select>
+
+                                        <small class="location-hint">
+                                            Priority is given to this verified list so you can be easily discovered in your community.
+                                        </small>
+
+                                    </div>
 
                                 </div>
+
+                                <!-- MANUAL LOCATION FALLBACK (IF NOT PRESENT IN LIST) -->
+                                <div id="manual_location_wrapper" class="manual-location-wrapper" style="display: none;">
+
+                                    <div class="manual-location-banner">
+                                        <span>Can't find your exact area in the list? You can add it manually below:</span>
+                                        <button type="button" id="btn_back_to_list" class="link-button">
+                                            ← Back to official list
+                                        </button>
+                                    </div>
+
+                                    <div class="profile-form-row">
+
+                                        <div class="profile-form-group">
+                                            <label for="manual_area">
+                                                Custom Locality / Area <span class="required-asterisk" title="Required">*</span>
+                                            </label>
+                                            <input
+                                                type="text"
+                                                id="manual_area"
+                                                maxlength="150"
+                                                placeholder="Example: Kothrud, Mayur Colony">
+                                            <small>Your neighborhood or approximate area.</small>
+                                        </div>
+
+                                        <div class="profile-form-group">
+                                            <label for="manual_city">
+                                                City / District <span class="required-asterisk" title="Required">*</span>
+                                            </label>
+                                            <input
+                                                type="text"
+                                                id="manual_city"
+                                                maxlength="100"
+                                                placeholder="Example: Pune">
+                                            <small>Used to connect you with your city community.</small>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <!-- SELECTED LOCATION CONFIRMATION CARD -->
+                                <div id="selected_location_preview" class="selected-location-preview" style="display: none;">
+
+                                    <div class="preview-content-wrap">
+                                        <span class="preview-icon">📍</span>
+                                        <div>
+                                            <div class="preview-title" id="preview_title">
+                                                Selected Locality
+                                            </div>
+                                            <div class="preview-community" id="preview_community">
+                                                Community City
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button
+                                        type="button"
+                                        id="btn_change_locality"
+                                        class="btn-change-locality"
+                                        title="Enter a custom area if not in the list">
+                                        Not in list? Add custom
+                                    </button>
+
+                                </div>
+
+                                <!-- Hidden fields submitted with the profile form -->
+                                <input
+                                    type="hidden"
+                                    id="location_area"
+                                    name="location_area"
+                                    required
+                                    value="{{ profile.location_area if profile else '' }}">
+
+                                <input
+                                    type="hidden"
+                                    id="city"
+                                    name="city"
+                                    value="{{ profile.city if profile and profile.city else '' }}">
+
+                                <input
+                                    type="hidden"
+                                    id="pincode_hidden"
+                                    name="pincode"
+                                    value="{{ profile.pincode if profile and profile.pincode else '' }}">
+
+                            </div>
+
+
+
+                            <!-- LEARNING MODE -->
+
+                            <div class="profile-form-group">
+
+                                <label for="learning_mode">
+                                    Learning mode <span class="required-asterisk" title="Required">*</span>
+                                </label>
+
+                                <select
+                                    id="learning_mode"
+                                    name="learning_mode"
+                                    required>
+
+                                    <option value="Both"
+                                        {% if not profile or profile.learning_mode == 'Both' %}
+                                            selected
+                                        {% endif %}>
+                                        Online & Offline
+                                    </option>
+
+                                    <option value="Online"
+                                        {% if profile and profile.learning_mode == 'Online' %}
+                                            selected
+                                        {% endif %}>
+                                        Online only
+                                    </option>
+
+                                    <option value="Offline"
+                                        {% if profile and profile.learning_mode == 'Offline' %}
+                                            selected
+                                        {% endif %}>
+                                        Offline only
+                                    </option>
+
+                                </select>
 
                             </div>
 
@@ -502,7 +643,7 @@
 
                                         {% if profile and profile.location_area %}
 
-                                            {{ profile.location_area }}
+                                            {{ profile.location_area }}{% if profile.city and profile.city != profile.location_area %}, {{ profile.city }}{% endif %}{% if profile.pincode %} ({{ profile.pincode }}){% endif %}
 
                                         {% else %}
 
@@ -1309,4 +1450,309 @@
 
         <footer class="site-footer profile-footer">
 
-            <
+            <p>
+                SkillCircle · Learn together. Grow together.
+            </p>
+
+        </footer>
+
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const pincodeInput = document.getElementById("pincode_input");
+            const lookupBtn = document.getElementById("btn_lookup_pincode");
+            const pincodeStatus = document.getElementById("pincode_status");
+            const locationSelect = document.getElementById("pincode_location_select");
+            const manualLocationWrap = document.getElementById("manual_location_wrapper");
+            const manualAreaInput = document.getElementById("manual_area");
+            const manualCityInput = document.getElementById("manual_city");
+            const btnBackToList = document.getElementById("btn_back_to_list");
+            const previewWrap = document.getElementById("selected_location_preview");
+            const previewTitle = document.getElementById("preview_title");
+            const previewCommunity = document.getElementById("preview_community");
+            const btnChangeLocality = document.getElementById("btn_change_locality");
+
+            const hiddenLocationArea = document.getElementById("location_area");
+            const hiddenCity = document.getElementById("city");
+            const hiddenPincode = document.getElementById("pincode_hidden");
+            const profileForm = document.querySelector('form[action*="profile"]') || document.querySelector('.profile-form');
+
+            let currentDistrict = "";
+            let currentState = "";
+            let lastFetchedPincode = "";
+            let fetchedLocations = [];
+
+            function updateLocationPreview(area, city, state, pin) {
+                if (!area) {
+                    previewWrap.style.display = "none";
+                    return;
+                }
+                previewWrap.style.display = "flex";
+                previewTitle.textContent = area;
+                let communityText = "Community: " + (city || "Your City");
+                if (state) {
+                    communityText += ", " + state;
+                }
+                if (pin) {
+                    communityText += " (PIN " + pin + ")";
+                }
+                previewCommunity.textContent = communityText;
+            }
+
+            function setLocationValues(area, city, pin) {
+                hiddenLocationArea.value = area || "";
+                hiddenCity.value = city || "";
+                hiddenPincode.value = pin || "";
+            }
+
+            function showManualMode(prefillDistrict) {
+                manualLocationWrap.style.display = "block";
+                if (prefillDistrict && !manualCityInput.value.trim()) {
+                    manualCityInput.value = prefillDistrict;
+                }
+                if (hiddenLocationArea.value && hiddenLocationArea.value !== "__custom__") {
+                    manualAreaInput.value = hiddenLocationArea.value;
+                }
+                manualAreaInput.focus();
+            }
+
+            function hideManualMode() {
+                manualLocationWrap.style.display = "none";
+            }
+
+            function syncManualInputs() {
+                const area = manualAreaInput.value.trim();
+                const city = manualCityInput.value.trim() || currentDistrict || "";
+                const pin = pincodeInput.value.trim();
+                if (area) {
+                    setLocationValues(area, city, pin);
+                    updateLocationPreview(area, city, currentState, pin);
+                }
+            }
+
+            manualAreaInput.addEventListener("input", syncManualInputs);
+            manualCityInput.addEventListener("input", syncManualInputs);
+
+            btnBackToList.addEventListener("click", function () {
+                hideManualMode();
+                if (locationSelect.options.length > 2) {
+                    locationSelect.selectedIndex = 1;
+                    locationSelect.dispatchEvent(new Event("change"));
+                } else {
+                    locationSelect.focus();
+                }
+            });
+
+            if (btnChangeLocality) {
+                btnChangeLocality.addEventListener("click", function () {
+                    showManualMode(currentDistrict);
+                });
+            }
+
+            async function fetchPincodeLocations(pin, autoSelectValue) {
+                pin = (pin || "").trim();
+                if (pin.length !== 6 || !/^\d{6}$/.test(pin)) {
+                    pincodeStatus.className = "pincode-status-text status-error";
+                    pincodeStatus.textContent = "Please enter a valid 6-digit PIN code.";
+                    return;
+                }
+
+                if (pin === lastFetchedPincode && fetchedLocations.length > 0) {
+                    return;
+                }
+
+                pincodeStatus.className = "pincode-status-text status-loading";
+                pincodeStatus.textContent = "⏳ Fetching localities in India for " + pin + "...";
+                locationSelect.innerHTML = '<option value="">Loading localities...</option>';
+                locationSelect.disabled = true;
+
+                try {
+                    let response = await fetch("/api/pincode/" + encodeURIComponent(pin));
+                    let data = null;
+
+                    if (response.ok) {
+                        data = await response.json();
+                    } else {
+                        try {
+                            const fallbackRes = await fetch("https://api.postalpincode.in/pincode/" + encodeURIComponent(pin));
+                            const rawData = await fallbackRes.json();
+                            if (rawData && rawData[0] && rawData[0].Status === "Success" && rawData[0].PostOffice) {
+                                const poList = rawData[0].PostOffice;
+                                const dist = poList[0].District || "";
+                                const st = poList[0].State || "";
+                                const locs = [];
+                                const seen = new Set();
+                                poList.forEach(function (p) {
+                                    const nm = (p.Name || "").trim();
+                                    if (nm && !seen.has(nm.toLowerCase())) {
+                                        seen.add(nm.toLowerCase());
+                                        locs.push({ name: nm, district: dist, state: st });
+                                    }
+                                });
+                                locs.sort(function (a, b) { return a.name.localeCompare(b.name); });
+                                data = { success: true, pincode: pin, district: dist, state: st, localities: locs };
+                            }
+                        } catch (fallbackErr) {
+                            console.warn("Direct postal API fallback error:", fallbackErr);
+                        }
+                    }
+
+                    if (data && data.success && data.localities && data.localities.length > 0) {
+                        lastFetchedPincode = pin;
+                        fetchedLocations = data.localities;
+                        currentDistrict = data.district || "";
+                        currentState = data.state || "";
+
+                        pincodeStatus.className = "pincode-status-text status-success";
+                        pincodeStatus.textContent = "✓ Found " + data.localities.length + " localities in " + currentDistrict + ", " + currentState;
+
+                        locationSelect.innerHTML = "";
+                        const defaultOpt = document.createElement("option");
+                        defaultOpt.value = "";
+                        defaultOpt.textContent = "-- Select your Area / Locality (Priority) --";
+                        locationSelect.appendChild(defaultOpt);
+
+                        let matchedIndex = -1;
+                        data.localities.forEach(function (loc, idx) {
+                            const opt = document.createElement("option");
+                            opt.value = loc.name;
+                            opt.dataset.city = loc.district || currentDistrict;
+                            opt.dataset.state = loc.state || currentState;
+                            opt.textContent = "📍 " + loc.name + " (" + (loc.district || currentDistrict) + ", " + (loc.state || currentState) + ")";
+                            locationSelect.appendChild(opt);
+
+                            if (autoSelectValue && (autoSelectValue.toLowerCase() === loc.name.toLowerCase() || autoSelectValue.toLowerCase().startsWith(loc.name.toLowerCase()))) {
+                                matchedIndex = idx + 1;
+                            }
+                        });
+
+                        const customOpt = document.createElement("option");
+                        customOpt.value = "__custom__";
+                        customOpt.textContent = "➕ My locality is not in this list (Add custom location)";
+                        locationSelect.appendChild(customOpt);
+
+                        locationSelect.disabled = false;
+                        locationSelect.classList.add("is-populated");
+
+                        if (matchedIndex > 0) {
+                            locationSelect.selectedIndex = matchedIndex;
+                            const selectedLoc = data.localities[matchedIndex - 1];
+                            setLocationValues(selectedLoc.name, selectedLoc.district || currentDistrict, pin);
+                            updateLocationPreview(selectedLoc.name, selectedLoc.district || currentDistrict, selectedLoc.state || currentState, pin);
+                            hideManualMode();
+                        } else if (!hiddenLocationArea.value) {
+                            locationSelect.focus();
+                        }
+                    } else {
+                        pincodeStatus.className = "pincode-status-text status-error";
+                        pincodeStatus.textContent = (data && data.message) ? data.message : "No locations found for this PIN code. Please enter manually.";
+                        locationSelect.innerHTML = '<option value="__custom__">No list available — Enter custom location</option>';
+                        locationSelect.disabled = false;
+                        locationSelect.selectedIndex = 0;
+                        showManualMode("");
+                    }
+                } catch (err) {
+                    console.error("Pincode lookup error:", err);
+                    pincodeStatus.className = "pincode-status-text status-error";
+                    pincodeStatus.textContent = "Network error fetching PIN locations. You can enter manually below.";
+                    showManualMode("");
+                }
+            }
+
+            locationSelect.addEventListener("change", function () {
+                const val = this.value;
+                const pin = pincodeInput.value.trim();
+
+                if (val === "__custom__") {
+                    showManualMode(currentDistrict);
+                    if (manualAreaInput.value.trim()) {
+                        syncManualInputs();
+                    } else {
+                        setLocationValues("", manualCityInput.value.trim() || currentDistrict, pin);
+                        updateLocationPreview("", "", "", "");
+                    }
+                } else if (val) {
+                    hideManualMode();
+                    const selectedOption = this.options[this.selectedIndex];
+                    const city = selectedOption.dataset.city || currentDistrict;
+                    const state = selectedOption.dataset.state || currentState;
+                    setLocationValues(val, city, pin);
+                    updateLocationPreview(val, city, state, pin);
+                } else {
+                    if (!hiddenLocationArea.value) {
+                        updateLocationPreview("", "", "", "");
+                    }
+                }
+            });
+
+            pincodeInput.addEventListener("input", function () {
+                this.value = this.value.replace(/\D/g, "").slice(0, 6);
+                hiddenPincode.value = this.value;
+
+                if (this.value.length === 6) {
+                    fetchPincodeLocations(this.value);
+                } else {
+                    pincodeStatus.className = "pincode-status-text";
+                    pincodeStatus.textContent = "Enter 6 digits to view verified localities.";
+                }
+            });
+
+            pincodeInput.addEventListener("keydown", function (e) {
+                if (e.key === "Enter") {
+                    e.preventDefault();
+                    if (this.value.trim().length === 6) {
+                        fetchPincodeLocations(this.value.trim());
+                    }
+                }
+            });
+
+            lookupBtn.addEventListener("click", function () {
+                if (pincodeInput.value.trim().length === 6) {
+                    fetchPincodeLocations(pincodeInput.value.trim());
+                } else {
+                    pincodeStatus.className = "pincode-status-text status-error";
+                    pincodeStatus.textContent = "Please enter a 6-digit Indian PIN code.";
+                    pincodeInput.focus();
+                }
+            });
+
+            if (profileForm) {
+                profileForm.addEventListener("submit", function (e) {
+                    const locVal = hiddenLocationArea.value.trim();
+                    if (!locVal) {
+                        e.preventDefault();
+                        pincodeStatus.className = "pincode-status-text status-error";
+                        pincodeStatus.textContent = "Please select or enter your Locality / Area.";
+                        const locationBox = document.querySelector(".profile-location-box");
+                        if (locationBox) {
+                            locationBox.scrollIntoView({ behavior: "smooth", block: "center" });
+                            locationBox.style.boxShadow = "0 0 0 3px rgba(220, 38, 38, 0.25)";
+                            setTimeout(function () {
+                                locationBox.style.boxShadow = "";
+                            }, 2500);
+                        }
+                        if (pincodeInput.value.length === 6 && locationSelect.options.length > 1) {
+                            locationSelect.focus();
+                        } else {
+                            pincodeInput.focus();
+                        }
+                    }
+                });
+            }
+
+            const initialPin = pincodeInput.value.trim();
+            const initialArea = hiddenLocationArea.value.trim();
+            const initialCity = hiddenCity.value.trim();
+
+            if (initialArea) {
+                updateLocationPreview(initialArea, initialCity, "", initialPin);
+            }
+
+            if (initialPin && initialPin.length === 6) {
+                fetchPincodeLocations(initialPin, initialArea);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,10 +1,13 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
 from db import get_db_connection
 from mail import send_verification_email, send_password_reset_email
 from dotenv import load_dotenv
 import os
 import re
+import json
+import ssl
+import urllib.request
 import secrets
 from datetime import datetime, timedelta, time
 from urllib.parse import quote
@@ -527,12 +530,11 @@ def verify_email():
         session.pop("verification_email", None)
 
         flash(
-            "Your email has been verified successfully.",
+            "Your email has been verified successfully. Please log in.",
             "success"
         )
 
-        # Temporary response until login is created
-        return "Email verified successfully!"
+        return redirect(url_for("login"))
 
     return render_template("user/verify_email.html")
 
@@ -1183,6 +1185,94 @@ def logout():
     return redirect(url_for("login"))
 
 # =========================================================
+# PINCODE LOOKUP API FOR INDIA
+# =========================================================
+
+PINCODE_CACHE = {}
+
+@app.route("/api/pincode/<pincode>")
+def api_pincode_lookup(pincode):
+    """
+    Returns verified postal localities, district, and state for a 6-digit Indian PIN code.
+    Results are cached in memory for high performance and reliability.
+    """
+    pincode = (pincode or "").strip()
+
+    if not pincode.isdigit() or len(pincode) != 6:
+        return jsonify({
+            "success": False,
+            "message": "Please enter a valid 6-digit PIN code."
+        }), 400
+
+    if pincode in PINCODE_CACHE:
+        return jsonify(PINCODE_CACHE[pincode])
+
+    try:
+        ctx = ssl._create_unverified_context()
+        url = f"https://api.postalpincode.in/pincode/{pincode}"
+        req = urllib.request.Request(
+            url,
+            headers={"User-Agent": "Mozilla/5.0 SkillCircle-Location-Directory"}
+        )
+
+        with urllib.request.urlopen(req, context=ctx, timeout=4) as response:
+            data = json.loads(response.read().decode("utf-8"))
+
+        if data and isinstance(data, list) and len(data) > 0:
+            result_item = data[0]
+
+            if result_item.get("Status") == "Success" and result_item.get("PostOffice"):
+                post_offices = result_item["PostOffice"]
+                district = ""
+                state = ""
+                localities = []
+                seen_names = set()
+
+                for po in post_offices:
+                    name = (po.get("Name") or "").strip()
+                    dist = (po.get("District") or "").strip()
+                    st = (po.get("State") or "").strip()
+
+                    if dist and not district:
+                        district = dist
+                    if st and not state:
+                        state = st
+
+                    if name and name.lower() not in seen_names:
+                        seen_names.add(name.lower())
+                        localities.append({
+                            "name": name,
+                            "district": dist or district,
+                            "state": st or state
+                        })
+
+                localities.sort(key=lambda item: item["name"])
+
+                payload = {
+                    "success": True,
+                    "pincode": pincode,
+                    "district": district,
+                    "state": state,
+                    "localities": localities
+                }
+
+                PINCODE_CACHE[pincode] = payload
+                return jsonify(payload)
+
+        return jsonify({
+            "success": False,
+            "message": "No official postal locations found for this PIN code in India."
+        }), 404
+
+    except Exception as error:
+        print(f"PIN code lookup error for {pincode}:", error)
+        return jsonify({
+            "success": False,
+            "message": "Postal directory temporarily unreachable. You can add your location manually."
+        }), 502
+
+
+# =========================================================
 # PROFILE
 # =========================================================
 
@@ -1252,6 +1342,16 @@ def profile():
 
                     location_area = request.form.get(
                         "location_area",
+                        ""
+                    ).strip()
+
+                    city = request.form.get(
+                        "city",
+                        ""
+                    ).strip()
+
+                    pincode = request.form.get(
+                        "pincode",
                         ""
                     ).strip()
 
@@ -1372,7 +1472,16 @@ def profile():
                     # Store without + because wa.me uses
                     # the international number without +.
                     whatsapp_number = number_without_plus
-                    city = location_area
+
+                    if not city:
+                        if "," in location_area:
+                            parts = [p.strip() for p in location_area.split(",") if p.strip()]
+                            city = parts[-1]
+                        else:
+                            city = location_area
+
+                    if city and "," in city:
+                        city = city.split(",")[0].strip()
 
                     # -------------------------------------------------
                     # Check whether profile already exists
@@ -1401,6 +1510,7 @@ def profile():
                             SET bio = %s,
                                 location_area = %s,
                                 city = %s,
+                                pincode = %s,
                                 learning_mode = %s,
                                 availability = %s,
                                 whatsapp_number = %s
@@ -1410,6 +1520,7 @@ def profile():
                                 bio,
                                 location_area,
                                 city,
+                                pincode,
                                 learning_mode,
                                 availability,
                                 whatsapp_number,
@@ -1431,18 +1542,20 @@ def profile():
                                 bio,
                                 location_area,
                                 city,
+                                pincode,
                                 learning_mode,
                                 availability,
                                 whatsapp_number
                             )
                             VALUES
-                            (%s, %s, %s, %s, %s, %s, %s)
+                            (%s, %s, %s, %s, %s, %s, %s, %s)
                             """,
                             (
                                 user_id,
                                 bio,
                                 location_area,
                                 city,
+                                pincode,
                                 learning_mode,
                                 availability,
                                 whatsapp_number
@@ -1988,6 +2101,8 @@ def profile():
                     id,
                     bio,
                     location_area,
+                    city,
+                    pincode,
                     learning_mode,
                     availability,
                     whatsapp_number,
@@ -2411,16 +2526,24 @@ def community():
                 if current_city:
 
                     people_query += """
-                        AND LOWER(
-                            TRIM(user_profiles.city)
-                        ) = LOWER(
-                            TRIM(%s)
+                        AND (
+                            LOWER(
+                                TRIM(user_profiles.city)
+                            ) = LOWER(
+                                TRIM(%s)
+                            )
+                            OR LOWER(
+                                TRIM(user_profiles.location_area)
+                            ) LIKE LOWER(
+                                CONCAT('%%', %s, '%%')
+                            )
                         )
                     """
 
-                    people_parameters.append(
+                    people_parameters.extend([
+                        current_city,
                         current_city
-                    )
+                    ])
 
                 else:
 
@@ -2555,16 +2678,24 @@ def community():
                 if current_city:
 
                     skills_query += """
-                        AND LOWER(
-                            TRIM(user_profiles.city)
-                        ) = LOWER(
-                            TRIM(%s)
+                        AND (
+                            LOWER(
+                                TRIM(user_profiles.city)
+                            ) = LOWER(
+                                TRIM(%s)
+                            )
+                            OR LOWER(
+                                TRIM(user_profiles.location_area)
+                            ) LIKE LOWER(
+                                CONCAT('%%', %s, '%%')
+                            )
                         )
                     """
 
-                    skill_parameters.append(
+                    skill_parameters.extend([
+                        current_city,
                         current_city
-                    )
+                    ])
 
                 else:
 
@@ -2706,16 +2837,24 @@ def community():
                 if current_city:
 
                     available_skills_query += """
-                        AND LOWER(
-                            TRIM(user_profiles.city)
-                        ) = LOWER(
-                            TRIM(%s)
+                        AND (
+                            LOWER(
+                                TRIM(user_profiles.city)
+                            ) = LOWER(
+                                TRIM(%s)
+                            )
+                            OR LOWER(
+                                TRIM(user_profiles.location_area)
+                            ) LIKE LOWER(
+                                CONCAT('%%', %s, '%%')
+                            )
                         )
                     """
 
-                    available_skill_parameters.append(
+                    available_skill_parameters.extend([
+                        current_city,
                         current_city
-                    )
+                    ])
 
                 else:
 
@@ -2865,6 +3004,8 @@ def public_profile(user_id):
                     users.full_name,
                     user_profiles.bio,
                     user_profiles.location_area,
+                    user_profiles.city,
+                    user_profiles.pincode,
                     user_profiles.learning_mode,
                     user_profiles.availability
                 FROM users

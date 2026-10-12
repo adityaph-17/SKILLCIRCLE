@@ -51,7 +51,7 @@
                 {% if user.location_area %}
 
                 <p class="public-profile-location">
-                    {{ user.location_area }}
+                    📍 {{ user.location_area }}{% if user.city and user.city != user.location_area %}, {{ user.city }}{% endif %}{% if user.pincode %} (PIN: {{ user.pincode }}){% endif %}
                 </p>
 
                 {% endif %}

@@ -1259,3 +1259,297 @@
     box-shadow: none !important;
     transform: none !important;
 }
+
+/* =========================================================
+   LOCATION & PINCODE SELECTOR (INDIA COMMUNITY MATCHING)
+   ========================================================= */
+
+.profile-location-box {
+    background: linear-gradient(180deg, #fbfdfa 0%, #f4f8f4 100%);
+    border: 1px solid #dce8de;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 28px;
+    box-shadow: 0 4px 14px rgba(24, 56, 44, 0.03);
+    transition: border-color .2s, box-shadow .2s;
+}
+
+.profile-location-box:focus-within {
+    border-color: #b0d2b7;
+}
+
+.profile-location-box-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #e5ede6;
+}
+
+.profile-location-box-header .profile-section-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: var(--green-950);
+    margin-bottom: 4px;
+}
+
+.profile-location-subtext {
+    font-size: 0.83rem;
+    color: var(--muted);
+    margin: 0;
+    line-height: 1.5;
+    max-width: 580px;
+}
+
+.current-location-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #eef6f0;
+    border: 1px solid #c7e3ce;
+    color: var(--green-800);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.current-location-chip .chip-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--green-700);
+    box-shadow: 0 0 0 2px rgba(47, 114, 89, 0.2);
+}
+
+.location-inputs-row {
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+}
+
+.pincode-group {
+    flex: 0 0 200px;
+}
+
+.pincode-input-wrap {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.pincode-input-wrap input {
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    font-size: 0.92rem;
+    text-align: center;
+}
+
+.pincode-lookup-btn {
+    min-height: 45px;
+    padding: 0 14px;
+    background: var(--green-800);
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background .2s, transform .1s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pincode-lookup-btn:hover {
+    background: var(--green-700);
+}
+
+.pincode-lookup-btn:active {
+    transform: scale(0.98);
+}
+
+.pincode-status-text {
+    font-size: 0.76rem;
+    margin-top: 6px;
+    min-height: 18px;
+    line-height: 1.35;
+    color: var(--muted);
+}
+
+.pincode-status-text.status-loading {
+    color: var(--green-700);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: 600;
+}
+
+.pincode-status-text.status-success {
+    color: #166534;
+    font-weight: 600;
+}
+
+.pincode-status-text.status-error {
+    color: #b91c1c;
+    font-weight: 600;
+}
+
+.location-dropdown-group {
+    flex: 1 1 auto;
+}
+
+.location-select {
+    width: 100%;
+    min-height: 45px;
+    font-weight: 600;
+    border-color: #cbe0ce !important;
+    background-color: #ffffff !important;
+}
+
+.location-select.is-populated {
+    border-color: var(--green-700) !important;
+    box-shadow: 0 0 0 2px rgba(47, 114, 89, 0.08);
+}
+
+.location-hint {
+    display: block;
+    font-size: 0.76rem;
+    color: #64746b;
+    margin-top: 6px;
+}
+
+/* Manual Location Fallback */
+.manual-location-wrapper {
+    background: #ffffff;
+    border: 1px dashed #b5d5be;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-top: 18px;
+    animation: fadeInSlide .25s ease-out;
+}
+
+.manual-location-banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 14px;
+    font-size: 0.82rem;
+    color: #385547;
+    font-weight: 600;
+}
+
+.manual-location-banner .link-button {
+    background: none;
+    border: none;
+    color: var(--green-700);
+    font-weight: 700;
+    font-size: 0.8rem;
+    cursor: pointer;
+    padding: 0;
+    text-decoration: underline;
+}
+
+.manual-location-banner .link-button:hover {
+    color: var(--green-950);
+}
+
+/* Location Preview / Confirmation Badge */
+.selected-location-preview {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    background: #edf7ef;
+    border: 1px solid #bce1c3;
+    border-radius: 12px;
+    padding: 12px 18px;
+    margin-top: 18px;
+    animation: fadeInSlide .25s ease-out;
+}
+
+.selected-location-preview .preview-content-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.selected-location-preview .preview-icon {
+    font-size: 1.3rem;
+    line-height: 1;
+}
+
+.selected-location-preview .preview-title {
+    font-size: 0.88rem;
+    font-weight: 750;
+    color: var(--green-950);
+}
+
+.selected-location-preview .preview-community {
+    font-size: 0.76rem;
+    color: #1e6b47;
+    font-weight: 600;
+    margin-top: 2px;
+}
+
+.btn-change-locality {
+    background: #ffffff;
+    border: 1px solid #b7dfbf;
+    color: var(--green-800);
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all .2s;
+}
+
+.btn-change-locality:hover {
+    background: var(--green-800);
+    color: #ffffff;
+    border-color: var(--green-800);
+}
+
+@keyframes fadeInSlide {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .location-inputs-row {
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .pincode-group {
+        flex: 1 1 100%;
+        width: 100%;
+    }
+
+    .selected-location-preview {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .btn-change-locality {
+        align-self: flex-start;
+    }
+}
